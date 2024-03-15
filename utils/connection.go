@@ -1,7 +1,7 @@
 package utils
 
 import (
-	g "github.com/FACorreiaa/ink-me-backend-grpc/protocol/grpc"
+	g "github.com/FACorreiaa/ink-app-backend-grpc/protocol/grpc"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )
