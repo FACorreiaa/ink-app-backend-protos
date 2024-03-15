@@ -17,8 +17,8 @@ func NewConnection(serverAddress string) (*grpc.ClientConn, error) {
 	conn, err := g.BootstrapClient(
 		serverAddress,
 		tu.Logger,
-		tu.Prometheus,
 		tu.TraceProvider,
+		tu.Prometheus,
 	)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to connect to upstream host")
