@@ -1,1 +1,1 @@
-# ink-app-backend-protos
+Ink app backend protos
