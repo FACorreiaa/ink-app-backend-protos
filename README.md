@@ -1,1 +1,1 @@
-Ink app backend protos
+InkMe app backend protos
