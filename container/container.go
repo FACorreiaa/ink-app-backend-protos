@@ -1,7 +1,8 @@
 package container
 
 import (
-	customer "github.com/highly-regarded/grpc/modules/customer/generated"
+	customer "github.com/FACorreiaa/ink-app-backend-protos/modules/customer/generated"
+	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 )
 
 // Brokers is the encapsulation for all grpc clients. We use it this way so
@@ -13,7 +14,8 @@ import (
 //
 // Ensure that you're using the interface type here and not the implementation
 type Brokers struct {
-	Customer customer.CustomerClient
+	Customer       customer.CustomerClient
+	TransportUtils *utils.TransportUtils
 }
 
 // NewBrokers creates a common container instance for use with all cluster sevices

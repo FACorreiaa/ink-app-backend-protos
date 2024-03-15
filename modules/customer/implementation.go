@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	"github.com/highly-regarded/grpc/core"
-	"github.com/highly-regarded/grpc/modules/customer/generated"
-	"github.com/highly-regarded/grpc/utils"
+	core "github.com/FACorreiaa/ink-app-backend-protos/core"
+	"github.com/FACorreiaa/ink-app-backend-protos/modules/customer/generated"
+	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 	"google.golang.org/grpc"
 )
 

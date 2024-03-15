@@ -1,4 +1,4 @@
-module ink-app-backend-protos
+module github.com/FACorreiaa/ink-app-backend-protos
 
 go 1.22.1
 
