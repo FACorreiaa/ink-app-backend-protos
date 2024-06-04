@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	core "github.com/FACorreiaa/ink-app-backend-protos/core"
+	"github.com/FACorreiaa/ink-app-backend-protos/core"
 	"github.com/FACorreiaa/ink-app-backend-protos/modules/customer/generated"
 	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 	"google.golang.org/grpc"
