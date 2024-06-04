@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package auth;
+
+service Auth {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc Logout (NilReq) returns (NilRes);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc ChangeEmail(ChangeEmailRequest) returns (ChangeEmailResponse);
+}
+
+message RegisterRequest {
+  // The request message containing the registration details.
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+// The response message for registration.
+message RegisterResponse {
+  string message = 1;
+}
+
+// The request message containing the username and password.
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// The response message containing the JWT token.
+message LoginResponse {
+  string token = 1;
+}
+
+// The request message for logout.
+message NilReq {
+
+}
+
+// The response message for logout.
+message NilRes {
+
+}
+
+// The request message for changing the password.
+
+message ChangePasswordRequest {
+  string username = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
+
+// The response message for changing the password.
+
+message ChangePasswordResponse {
+  string message = 1;
+}
+
+// The request message for changing the email.
+
+message ChangeEmailRequest {
+  string username = 1;
+  string password = 2;
+  string new_email = 3;
+}
+
+// The response message for changing the email.
+message ChangeEmailResponse {
+  string message = 1;
+}
+
+// The user message containing the user details.
+message User {
+  string email = 1;
+  string username = 2;
+  string password_hash = 3;
+  bool is_admin = 4;
+}
