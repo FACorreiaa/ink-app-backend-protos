@@ -29,8 +29,12 @@ proto-gen: proto-lint ## Generates .pb.go files from .proto files
 			$$protofile; \
 	done
 
+#go-lint: ## Runs linter for .go files
+#	@golangci-lint run --config .config/go.yml
+#	@echo "Go lint passed successfully"
+
 go-lint: ## Runs linter for .go files
-	@golangci-lint run --config .config/go.yml
+	@golangci-lint run --config .golangci.yml
 	@echo "Go lint passed successfully"
 
 update:
