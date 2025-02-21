@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package auth;
+package inkMe.auth;
 
 service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse);
@@ -8,6 +8,7 @@ service Auth {
   rpc Logout(NilReq) returns (NilRes);
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
   rpc ChangeEmail(ChangeEmailRequest) returns (ChangeEmailResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (TokenResponse);
 
   // New user-related services
   rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
@@ -30,10 +31,12 @@ message RegisterResponse {
 message LoginRequest {
   string username = 1;
   string password = 2;
+  string email = 3;
 }
 
 message LoginResponse {
   string token = 1;
+  string message = 2;
 }
 
 message NilReq {
@@ -65,13 +68,21 @@ message ChangeEmailResponse {
 }
 
 message User {
-  string id = 1; // Assuming users have unique IDs
+  string id = 1;
   string email = 2;
   string username = 3;
   string password_hash = 4;
   bool is_admin = 5;
   string created_at = 6;
   string updated_at = 7;
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ADMIN = 1;
+    MODERATOR = 2;
+    COACH = 3;
+  }
+
+  Role role = 8;
 }
 
 // Request and response messages for new user-related services
@@ -114,3 +125,26 @@ message InsertUserRequest {
 message InsertUserResponse {
   string message = 1;
 }
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+  BaseRequest request = 100;
+}
+
+message TokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  BaseResponse response = 100;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}
+

@@ -1,6 +1,6 @@
 module github.com/FACorreiaa/ink-app-backend-protos
 
-go 1.22.1
+go 1.24
 
 require (
 	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20240322231149-49682d8f14a5

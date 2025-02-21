@@ -4,9 +4,10 @@ import (
 	"context"
 	"errors"
 
+	"google.golang.org/grpc"
+
 	"github.com/FACorreiaa/ink-app-backend-protos/modules/user/generated"
 	"github.com/FACorreiaa/ink-app-backend-protos/utils"
-	"google.golang.org/grpc"
 )
 
 type Broker struct {
@@ -86,4 +87,8 @@ func (b *Broker) UpdateUser(ctx context.Context, in *generated.UpdateUserRequest
 
 func (b *Broker) InsertUser(ctx context.Context, in *generated.InsertUserRequest, opts ...grpc.CallOption) (*generated.InsertUserResponse, error) {
 	return b.client.InsertUser(ctx, in, opts...)
+}
+
+func (b *Broker) RefreshToken(ctx context.Context, in *generated.RefreshTokenRequest, opts ...grpc.CallOption) (*generated.TokenResponse, error) {
+	return b.client.RefreshToken(ctx, in, opts...)
 }
