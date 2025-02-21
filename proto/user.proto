@@ -23,6 +23,7 @@ message RegisterRequest {
   string email = 2;
   string password = 3;
   string studio_id = 4;
+  string role = 5;
 }
 
 message RegisterResponse {
