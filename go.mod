@@ -3,7 +3,7 @@ module github.com/FACorreiaa/ink-app-backend-protos
 go 1.24
 
 require (
-	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250220205710-258373bf519c
+	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250221114335-3b9eabcf6969
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.21.0
 	go.opentelemetry.io/otel/trace v1.34.0
@@ -14,6 +14,8 @@ require (
 
 require (
 	cloud.google.com/go/compute/metadata v0.6.0 // indirect
+	github.com/FACorreiaa/fitme-grpc v0.0.0-20250221100952-55e326bfeb98 // indirect
+	github.com/FACorreiaa/fitme-protos v0.0.0-20250218122301-58600ee7869e // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -22,6 +24,7 @@ require (
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0 // indirect
@@ -70,6 +73,7 @@ require (
 	golang.org/x/sync v0.11.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/time v0.10.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250219182151-9fdb1cabc7b2 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250219182151-9fdb1cabc7b2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect

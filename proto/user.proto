@@ -78,11 +78,13 @@ message User {
   enum Role {
     ROLE_UNSPECIFIED = 0;
     ADMIN = 1;
-    MODERATOR = 2;
-    COACH = 3;
+    STAFF = 2;
+    USER = 3;
+    MODERATOR = 4;
   }
 
   Role role = 8;
+  string studio_id = 9;
 }
 
 // Request and response messages for new user-related services
