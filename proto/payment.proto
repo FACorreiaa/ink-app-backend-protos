@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package inkMe.payment;
+
+option go_package = "github.com/yourorg/inkme-grpc/inkMe/payment";
+
+// POST MVP
+
+service PaymentService {
+  rpc CreatePaymentIntent(CreatePaymentIntentRequest) returns (CreatePaymentIntentResponse);
+  rpc CapturePayment(CapturePaymentRequest) returns (CapturePaymentResponse);
+  rpc RefundPayment(RefundPaymentRequest) returns (RefundPaymentResponse);
+  // ...
+}
+
+message CreatePaymentIntentRequest {
+  string studio_id      = 1;
+  string appointment_id = 2;
+  double amount         = 3;
+  string currency       = 4; // e.g. 'USD'
+}
+
+message CreatePaymentIntentResponse {
+  string intent_id = 1;
+  string client_secret = 2;
+  // ...
+}
+
+message CapturePaymentRequest {
+  string intent_id = 1;
+}
+
+message CapturePaymentResponse {
+  string message = 1;
+}
+
+message RefundPaymentRequest {
+  string payment_id = 1;
+  double amount     = 2;
+}
+
+message RefundPaymentResponse {
+  string message = 1;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}
+

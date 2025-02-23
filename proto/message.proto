@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package inkMe.message;
+
+option go_package = "github.com/yourorg/inkme-grpc/inkMe/message";
+
+service MessageService {
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc StreamMessages(StreamMessagesRequest) returns (stream Message);
+  // ...
+}
+
+message SendMessageRequest {
+  string conversation_id = 1;
+  string sender_user_id  = 2;
+  string sender_client_id= 3;
+  string content         = 4;
+}
+
+message SendMessageResponse {
+  string message_id = 1;
+  string message    = 2;
+}
+
+message StreamMessagesRequest {
+  string conversation_id = 1;
+  // possibly a 'since' timestamp
+}
+
+message Message {
+  string id               = 1;
+  string conversation_id  = 2;
+  string sender_user_id   = 3;
+  string sender_client_id = 4;
+  string content          = 5;
+  string created_at       = 6;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}

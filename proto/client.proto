@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package inkMe.client;
+
+option go_package = "github.com/yourorg/inkme-grpc/inkMe/client";
+
+service ClientService {
+  rpc CreateClient(CreateClientRequest) returns (CreateClientResponse);
+  rpc GetClient(GetClientRequest) returns (GetClientResponse);
+  rpc ListClients(ListClientsRequest) returns (ListClientsResponse);
+  rpc UpdateClient(UpdateClientRequest) returns (UpdateClientResponse);
+}
+
+message CreateClientRequest {
+  string studio_id = 1;
+  string full_name = 2;
+  string email     = 3;
+  string phone     = 4;
+  string notes     = 5;
+}
+
+message CreateClientResponse {
+  string client_id = 1;
+  string message   = 2;
+}
+
+message GetClientRequest {
+  string client_id = 1;
+}
+
+message GetClientResponse {
+  Client client = 1;
+}
+
+message ListClientsRequest {
+  string studio_id = 1;
+}
+
+message ListClientsResponse {
+  repeated Client clients = 1;
+}
+
+message UpdateClientRequest {
+  string client_id = 1;
+  string full_name = 2;
+  string email     = 3;
+  string phone     = 4;
+  string notes     = 5;
+}
+
+message UpdateClientResponse {
+  string message = 1;
+}
+
+message Client {
+  string id         = 1;
+  string studio_id  = 2;
+  string full_name  = 3;
+  string email      = 4;
+  string phone      = 5;
+  string notes      = 6;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}

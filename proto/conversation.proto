@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package inkMe.conversation;
+
+option go_package = "github.com/yourorg/inkme-grpc/inkMe/conversation";
+
+service ConversationService {
+  rpc CreateConversation(CreateConversationRequest) returns (CreateConversationResponse);
+  rpc ListConversations(ListConversationsRequest) returns (ListConversationsResponse);
+  rpc AddParticipant(AddParticipantRequest) returns (AddParticipantResponse);
+  // ...
+}
+
+message CreateConversationRequest {
+  string studio_id = 1;
+  string client_id = 2;
+  string subject   = 3;
+  repeated string user_ids = 4; // staff participants
+}
+
+message CreateConversationResponse {
+  string conversation_id = 1;
+  string message         = 2;
+}
+
+message ListConversationsRequest {
+  string studio_id = 1;
+  // possibly filter by client, or user
+}
+
+message ListConversationsResponse {
+  repeated Conversation conversations = 1;
+}
+
+message AddParticipantRequest {
+  string conversation_id = 1;
+  string user_id         = 2;
+}
+
+message AddParticipantResponse {
+  string message = 1;
+}
+
+message Conversation {
+  string id         = 1;
+  string studio_id  = 2;
+  string client_id  = 3;
+  string subject    = 4;
+  // etc
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}

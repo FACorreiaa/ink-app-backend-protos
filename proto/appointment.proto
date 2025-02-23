@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package inkMe.appointment;
+
+option go_package = "github.com/yourorg/inkme-grpc/inkMe/appointment";
+
+service AppointmentService {
+  rpc CreateAppointment(CreateAppointmentRequest) returns (CreateAppointmentResponse);
+  rpc GetAppointment(GetAppointmentRequest) returns (GetAppointmentResponse);
+  rpc ListAppointments(ListAppointmentsRequest) returns (ListAppointmentsResponse);
+  rpc UpdateAppointment(UpdateAppointmentRequest) returns (UpdateAppointmentResponse);
+}
+
+message CreateAppointmentRequest {
+  string studio_id  = 1;
+  string client_id  = 2;
+  string artist_id  = 3;
+  string start_time = 4; // ISO8601 or RFC3339
+  string end_time   = 5; // same format
+  string notes      = 6;
+}
+
+message CreateAppointmentResponse {
+  string appointment_id = 1;
+  string message        = 2;
+}
+
+message GetAppointmentRequest {
+  string appointment_id = 1;
+}
+
+message GetAppointmentResponse {
+  Appointment appointment = 1;
+}
+
+message ListAppointmentsRequest {
+  string studio_id = 1;
+  // or optional filters like date range
+}
+
+message ListAppointmentsResponse {
+  repeated Appointment appointments = 1;
+}
+
+message UpdateAppointmentRequest {
+  string appointment_id = 1;
+  string status         = 2;
+  string notes          = 3;
+  // possibly new times or new artist
+}
+
+message UpdateAppointmentResponse {
+  string message = 1;
+}
+
+message Appointment {
+  string id         = 1;
+  string studio_id  = 2;
+  string client_id  = 3;
+  string artist_id  = 4;
+  string start_time = 5;
+  string end_time   = 6;
+  string status     = 7;
+  string notes      = 8;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}
