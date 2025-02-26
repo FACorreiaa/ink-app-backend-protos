@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/FACorreiaa/ink-app-backend-protos/modules/user/generated"
+	"github.com/FACorreiaa/ink-app-backend-protos/modules/auth/generated"
 	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 )
 

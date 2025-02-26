@@ -1,8 +1,8 @@
 package container
 
 import (
+	auth "github.com/FACorreiaa/ink-app-backend-protos/modules/auth/generated"
 	customer "github.com/FACorreiaa/ink-app-backend-protos/modules/customer/generated"
-	user "github.com/FACorreiaa/ink-app-backend-protos/modules/user/generated"
 
 	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 )
@@ -17,7 +17,7 @@ import (
 // Ensure that you're using the interface type here and not the implementation
 type Brokers struct {
 	Customer       customer.CustomerClient
-	Auth           user.AuthClient
+	Auth           auth.AuthClient
 	TransportUtils *utils.TransportUtils
 }
 
