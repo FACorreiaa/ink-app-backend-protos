@@ -12,44 +12,48 @@ service ClientService {
 }
 
 message CreateClientRequest {
-  string studio_id = 1;
-  string full_name = 2;
-  string email     = 3;
-  string phone     = 4;
-  string notes     = 5;
+  Client client = 1;
+  BaseRequest request = 100;
 }
 
 message CreateClientResponse {
   string client_id = 1;
   string message   = 2;
+  BaseResponse response = 100;
 }
 
 message GetClientRequest {
   string client_id = 1;
+  BaseRequest request = 100;
 }
 
 message GetClientResponse {
   Client client = 1;
+  BaseResponse response = 100;
 }
 
 message ListClientsRequest {
   string studio_id = 1;
+  // optionally filter by client_id
+  BaseRequest request = 100;
 }
 
 message ListClientsResponse {
   repeated Client clients = 1;
+  BaseResponse response = 100;
 }
 
 message UpdateClientRequest {
   string client_id = 1;
-  string full_name = 2;
-  string email     = 3;
-  string phone     = 4;
-  string notes     = 5;
+  repeated XDiff diffs = 2;
+  BaseRequest request = 100;
 }
 
 message UpdateClientResponse {
-  string message = 1;
+  bool success = 1;
+  string message = 2;
+  Client client = 3;
+  BaseResponse response = 100;
 }
 
 message Client {
@@ -70,4 +74,10 @@ message BaseResponse {
   string upstream = 998;
   string request_id = 999;
   string status = 1000;
+}
+
+message XDiff {
+  string field      = 1;
+  string old_value  = 2;
+  string new_value  = 3;
 }
