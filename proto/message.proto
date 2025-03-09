@@ -2,38 +2,190 @@ syntax = "proto3";
 
 package inkMe.message;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/message";
 
-service MessageService {
+service MessagingService {
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
   rpc StreamMessages(StreamMessagesRequest) returns (stream Message);
-  // ...
+  rpc GetMessage(GetMessageRequest) returns (GetMessageResponse);
+  rpc ListMessages(ListMessagesRequest) returns (ListMessagesResponse);
+  rpc MarkMessageAsRead(MarkMessageAsReadRequest) returns (MarkMessageAsReadResponse);
+  
+  // Thread management
+  rpc CreateMessageThread(CreateMessageThreadRequest) returns (CreateMessageThreadResponse);
+  rpc GetMessageThread(GetMessageThreadRequest) returns (GetMessageThreadResponse);
+  rpc ListMessageThreads(ListMessageThreadsRequest) returns (ListMessageThreadsResponse);
+  
+  // Templates for common messages
+  rpc CreateMessageTemplate(CreateMessageTemplateRequest) returns (CreateMessageTemplateResponse);
+  rpc ListMessageTemplates(ListMessageTemplatesRequest) returns (ListMessageTemplatesResponse);
+  rpc SendTemplatedMessage(SendTemplatedMessageRequest) returns (SendTemplatedMessageResponse);
 }
 
 message SendMessageRequest {
-  string conversation_id = 1;
-  string sender_user_id  = 2;
-  string sender_client_id= 3;
-  string content         = 4;
+  string thread_id = 1;
+  string sender_id = 2;
+  string recipient_id = 3;
+  string content = 4;
+  google.protobuf.Timestamp created_at = 5;
+  BaseRequest request = 100;
 }
 
 message SendMessageResponse {
   string message_id = 1;
-  string message    = 2;
+  string status = 2;
+  BaseResponse response = 100;
 }
 
 message StreamMessagesRequest {
-  string conversation_id = 1;
-  // possibly a 'since' timestamp
+  string thread_id = 1;
+  string user_id = 2;
+  BaseRequest request = 100;
 }
 
 message Message {
-  string id               = 1;
-  string conversation_id  = 2;
-  string sender_user_id   = 3;
-  string sender_client_id = 4;
-  string content          = 5;
-  string created_at       = 6;
+  string id = 1;
+  string thread_id = 2;
+  string sender_id = 3;
+  string recipient_id = 4;
+  string content = 5;
+  bool read = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp read_at = 8;
+}
+
+message GetMessageRequest {
+  string message_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetMessageResponse {
+  Message message = 1;
+  BaseResponse response = 100;
+}
+
+message ListMessagesRequest {
+  string thread_id = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+  BaseRequest request = 100;
+}
+
+message ListMessagesResponse {
+  repeated Message messages = 1;
+  int32 total_count = 2;
+  BaseResponse response = 100;
+}
+
+message MarkMessageAsReadRequest {
+  string message_id = 1;
+  google.protobuf.Timestamp read_at = 2;
+  BaseRequest request = 100;
+}
+
+message MarkMessageAsReadResponse {
+  string status = 1;
+  BaseResponse response = 100;
+}
+
+// Thread management
+message CreateMessageThreadRequest {
+  string creator_id = 1;
+  string recipient_id = 2;
+  string title = 3;
+  string initial_message = 4;
+  google.protobuf.Timestamp created_at = 5;
+  BaseRequest request = 100;
+}
+
+message CreateMessageThreadResponse {
+  string thread_id = 1;
+  string message_id = 2;
+  string status = 3;
+  BaseResponse response = 100;
+}
+
+message MessageThread {
+  string id = 1;
+  string title = 2;
+  repeated string participant_ids = 3;
+  int32 unread_count = 4;
+  Message last_message = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message GetMessageThreadRequest {
+  string thread_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetMessageThreadResponse {
+  MessageThread thread = 1;
+  BaseResponse response = 100;
+}
+
+message ListMessageThreadsRequest {
+  string user_id = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+  BaseRequest request = 100;
+}
+
+message ListMessageThreadsResponse {
+  repeated MessageThread threads = 1;
+  int32 total_count = 2;
+  BaseResponse response = 100;
+}
+
+// Templates for common messages
+message MessageTemplate {
+  string id = 1;
+  string studio_id = 2;
+  string title = 3;
+  string content = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message CreateMessageTemplateRequest {
+  string studio_id = 1;
+  string title = 2;
+  string content = 3;
+  BaseRequest request = 100;
+}
+
+message CreateMessageTemplateResponse {
+  string template_id = 1;
+  string status = 2;
+  BaseResponse response = 100;
+}
+
+message ListMessageTemplatesRequest {
+  string studio_id = 1;
+  BaseRequest request = 100;
+}
+
+message ListMessageTemplatesResponse {
+  repeated MessageTemplate templates = 1;
+  BaseResponse response = 100;
+}
+
+message SendTemplatedMessageRequest {
+  string template_id = 1;
+  string sender_id = 2;
+  string recipient_id = 3;
+  string thread_id = 4;
+  map<string, string> template_variables = 5;
+  BaseRequest request = 100;
+}
+
+message SendTemplatedMessageResponse {
+  string message_id = 1;
+  string status = 2;
+  BaseResponse response = 100;
 }
 
 message BaseRequest {

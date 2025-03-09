@@ -19,18 +19,36 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PortfolioService_UploadItem_FullMethodName = "/inkMe.portfolio.PortfolioService/UploadItem"
-	PortfolioService_ListItems_FullMethodName  = "/inkMe.portfolio.PortfolioService/ListItems"
-	PortfolioService_UpdateItem_FullMethodName = "/inkMe.portfolio.PortfolioService/UpdateItem"
+	PortfolioService_UploadDesign_FullMethodName                = "/inkMe.portfolio.PortfolioService/UploadDesign"
+	PortfolioService_GetDesign_FullMethodName                   = "/inkMe.portfolio.PortfolioService/GetDesign"
+	PortfolioService_ListDesigns_FullMethodName                 = "/inkMe.portfolio.PortfolioService/ListDesigns"
+	PortfolioService_UpdateDesign_FullMethodName                = "/inkMe.portfolio.PortfolioService/UpdateDesign"
+	PortfolioService_DeleteDesign_FullMethodName                = "/inkMe.portfolio.PortfolioService/DeleteDesign"
+	PortfolioService_CreateDesignCategory_FullMethodName        = "/inkMe.portfolio.PortfolioService/CreateDesignCategory"
+	PortfolioService_ListDesignCategories_FullMethodName        = "/inkMe.portfolio.PortfolioService/ListDesignCategories"
+	PortfolioService_AssignDesignToCategory_FullMethodName      = "/inkMe.portfolio.PortfolioService/AssignDesignToCategory"
+	PortfolioService_ShareDesignWithCustomer_FullMethodName     = "/inkMe.portfolio.PortfolioService/ShareDesignWithCustomer"
+	PortfolioService_GetSharedDesignsForCustomer_FullMethodName = "/inkMe.portfolio.PortfolioService/GetSharedDesignsForCustomer"
 )
 
 // PortfolioServiceClient is the client API for PortfolioService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Portfolio service for managing artist portfolios and designs
 type PortfolioServiceClient interface {
-	UploadItem(ctx context.Context, in *UploadItemRequest, opts ...grpc.CallOption) (*UploadItemResponse, error)
-	ListItems(ctx context.Context, in *ListItemsRequest, opts ...grpc.CallOption) (*ListItemsResponse, error)
-	UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*UpdateItemResponse, error)
+	UploadDesign(ctx context.Context, in *UploadDesignRequest, opts ...grpc.CallOption) (*UploadDesignResponse, error)
+	GetDesign(ctx context.Context, in *GetDesignRequest, opts ...grpc.CallOption) (*GetDesignResponse, error)
+	ListDesigns(ctx context.Context, in *ListDesignsRequest, opts ...grpc.CallOption) (*ListDesignsResponse, error)
+	UpdateDesign(ctx context.Context, in *UpdateDesignRequest, opts ...grpc.CallOption) (*UpdateDesignResponse, error)
+	DeleteDesign(ctx context.Context, in *DeleteDesignRequest, opts ...grpc.CallOption) (*DeleteDesignResponse, error)
+	// Categorization
+	CreateDesignCategory(ctx context.Context, in *CreateDesignCategoryRequest, opts ...grpc.CallOption) (*CreateDesignCategoryResponse, error)
+	ListDesignCategories(ctx context.Context, in *ListDesignCategoriesRequest, opts ...grpc.CallOption) (*ListDesignCategoriesResponse, error)
+	AssignDesignToCategory(ctx context.Context, in *AssignDesignToCategoryRequest, opts ...grpc.CallOption) (*AssignDesignToCategoryResponse, error)
+	// Shared portfolios
+	ShareDesignWithCustomer(ctx context.Context, in *ShareDesignWithCustomerRequest, opts ...grpc.CallOption) (*ShareDesignWithCustomerResponse, error)
+	GetSharedDesignsForCustomer(ctx context.Context, in *GetSharedDesignsForCustomerRequest, opts ...grpc.CallOption) (*GetSharedDesignsForCustomerResponse, error)
 }
 
 type portfolioServiceClient struct {
@@ -41,30 +59,100 @@ func NewPortfolioServiceClient(cc grpc.ClientConnInterface) PortfolioServiceClie
 	return &portfolioServiceClient{cc}
 }
 
-func (c *portfolioServiceClient) UploadItem(ctx context.Context, in *UploadItemRequest, opts ...grpc.CallOption) (*UploadItemResponse, error) {
+func (c *portfolioServiceClient) UploadDesign(ctx context.Context, in *UploadDesignRequest, opts ...grpc.CallOption) (*UploadDesignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UploadItemResponse)
-	err := c.cc.Invoke(ctx, PortfolioService_UploadItem_FullMethodName, in, out, cOpts...)
+	out := new(UploadDesignResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_UploadDesign_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *portfolioServiceClient) ListItems(ctx context.Context, in *ListItemsRequest, opts ...grpc.CallOption) (*ListItemsResponse, error) {
+func (c *portfolioServiceClient) GetDesign(ctx context.Context, in *GetDesignRequest, opts ...grpc.CallOption) (*GetDesignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListItemsResponse)
-	err := c.cc.Invoke(ctx, PortfolioService_ListItems_FullMethodName, in, out, cOpts...)
+	out := new(GetDesignResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_GetDesign_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *portfolioServiceClient) UpdateItem(ctx context.Context, in *UpdateItemRequest, opts ...grpc.CallOption) (*UpdateItemResponse, error) {
+func (c *portfolioServiceClient) ListDesigns(ctx context.Context, in *ListDesignsRequest, opts ...grpc.CallOption) (*ListDesignsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateItemResponse)
-	err := c.cc.Invoke(ctx, PortfolioService_UpdateItem_FullMethodName, in, out, cOpts...)
+	out := new(ListDesignsResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_ListDesigns_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) UpdateDesign(ctx context.Context, in *UpdateDesignRequest, opts ...grpc.CallOption) (*UpdateDesignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateDesignResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_UpdateDesign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) DeleteDesign(ctx context.Context, in *DeleteDesignRequest, opts ...grpc.CallOption) (*DeleteDesignResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteDesignResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_DeleteDesign_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) CreateDesignCategory(ctx context.Context, in *CreateDesignCategoryRequest, opts ...grpc.CallOption) (*CreateDesignCategoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateDesignCategoryResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_CreateDesignCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) ListDesignCategories(ctx context.Context, in *ListDesignCategoriesRequest, opts ...grpc.CallOption) (*ListDesignCategoriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDesignCategoriesResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_ListDesignCategories_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) AssignDesignToCategory(ctx context.Context, in *AssignDesignToCategoryRequest, opts ...grpc.CallOption) (*AssignDesignToCategoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssignDesignToCategoryResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_AssignDesignToCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) ShareDesignWithCustomer(ctx context.Context, in *ShareDesignWithCustomerRequest, opts ...grpc.CallOption) (*ShareDesignWithCustomerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShareDesignWithCustomerResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_ShareDesignWithCustomer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *portfolioServiceClient) GetSharedDesignsForCustomer(ctx context.Context, in *GetSharedDesignsForCustomerRequest, opts ...grpc.CallOption) (*GetSharedDesignsForCustomerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSharedDesignsForCustomerResponse)
+	err := c.cc.Invoke(ctx, PortfolioService_GetSharedDesignsForCustomer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,10 +162,21 @@ func (c *portfolioServiceClient) UpdateItem(ctx context.Context, in *UpdateItemR
 // PortfolioServiceServer is the server API for PortfolioService service.
 // All implementations must embed UnimplementedPortfolioServiceServer
 // for forward compatibility.
+//
+// Portfolio service for managing artist portfolios and designs
 type PortfolioServiceServer interface {
-	UploadItem(context.Context, *UploadItemRequest) (*UploadItemResponse, error)
-	ListItems(context.Context, *ListItemsRequest) (*ListItemsResponse, error)
-	UpdateItem(context.Context, *UpdateItemRequest) (*UpdateItemResponse, error)
+	UploadDesign(context.Context, *UploadDesignRequest) (*UploadDesignResponse, error)
+	GetDesign(context.Context, *GetDesignRequest) (*GetDesignResponse, error)
+	ListDesigns(context.Context, *ListDesignsRequest) (*ListDesignsResponse, error)
+	UpdateDesign(context.Context, *UpdateDesignRequest) (*UpdateDesignResponse, error)
+	DeleteDesign(context.Context, *DeleteDesignRequest) (*DeleteDesignResponse, error)
+	// Categorization
+	CreateDesignCategory(context.Context, *CreateDesignCategoryRequest) (*CreateDesignCategoryResponse, error)
+	ListDesignCategories(context.Context, *ListDesignCategoriesRequest) (*ListDesignCategoriesResponse, error)
+	AssignDesignToCategory(context.Context, *AssignDesignToCategoryRequest) (*AssignDesignToCategoryResponse, error)
+	// Shared portfolios
+	ShareDesignWithCustomer(context.Context, *ShareDesignWithCustomerRequest) (*ShareDesignWithCustomerResponse, error)
+	GetSharedDesignsForCustomer(context.Context, *GetSharedDesignsForCustomerRequest) (*GetSharedDesignsForCustomerResponse, error)
 	mustEmbedUnimplementedPortfolioServiceServer()
 }
 
@@ -88,14 +187,35 @@ type PortfolioServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPortfolioServiceServer struct{}
 
-func (UnimplementedPortfolioServiceServer) UploadItem(context.Context, *UploadItemRequest) (*UploadItemResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UploadItem not implemented")
+func (UnimplementedPortfolioServiceServer) UploadDesign(context.Context, *UploadDesignRequest) (*UploadDesignResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadDesign not implemented")
 }
-func (UnimplementedPortfolioServiceServer) ListItems(context.Context, *ListItemsRequest) (*ListItemsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListItems not implemented")
+func (UnimplementedPortfolioServiceServer) GetDesign(context.Context, *GetDesignRequest) (*GetDesignResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDesign not implemented")
 }
-func (UnimplementedPortfolioServiceServer) UpdateItem(context.Context, *UpdateItemRequest) (*UpdateItemResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateItem not implemented")
+func (UnimplementedPortfolioServiceServer) ListDesigns(context.Context, *ListDesignsRequest) (*ListDesignsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDesigns not implemented")
+}
+func (UnimplementedPortfolioServiceServer) UpdateDesign(context.Context, *UpdateDesignRequest) (*UpdateDesignResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDesign not implemented")
+}
+func (UnimplementedPortfolioServiceServer) DeleteDesign(context.Context, *DeleteDesignRequest) (*DeleteDesignResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDesign not implemented")
+}
+func (UnimplementedPortfolioServiceServer) CreateDesignCategory(context.Context, *CreateDesignCategoryRequest) (*CreateDesignCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDesignCategory not implemented")
+}
+func (UnimplementedPortfolioServiceServer) ListDesignCategories(context.Context, *ListDesignCategoriesRequest) (*ListDesignCategoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDesignCategories not implemented")
+}
+func (UnimplementedPortfolioServiceServer) AssignDesignToCategory(context.Context, *AssignDesignToCategoryRequest) (*AssignDesignToCategoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignDesignToCategory not implemented")
+}
+func (UnimplementedPortfolioServiceServer) ShareDesignWithCustomer(context.Context, *ShareDesignWithCustomerRequest) (*ShareDesignWithCustomerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShareDesignWithCustomer not implemented")
+}
+func (UnimplementedPortfolioServiceServer) GetSharedDesignsForCustomer(context.Context, *GetSharedDesignsForCustomerRequest) (*GetSharedDesignsForCustomerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSharedDesignsForCustomer not implemented")
 }
 func (UnimplementedPortfolioServiceServer) mustEmbedUnimplementedPortfolioServiceServer() {}
 func (UnimplementedPortfolioServiceServer) testEmbeddedByValue()                          {}
@@ -118,56 +238,182 @@ func RegisterPortfolioServiceServer(s grpc.ServiceRegistrar, srv PortfolioServic
 	s.RegisterService(&PortfolioService_ServiceDesc, srv)
 }
 
-func _PortfolioService_UploadItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadItemRequest)
+func _PortfolioService_UploadDesign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadDesignRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PortfolioServiceServer).UploadItem(ctx, in)
+		return srv.(PortfolioServiceServer).UploadDesign(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PortfolioService_UploadItem_FullMethodName,
+		FullMethod: PortfolioService_UploadDesign_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PortfolioServiceServer).UploadItem(ctx, req.(*UploadItemRequest))
+		return srv.(PortfolioServiceServer).UploadDesign(ctx, req.(*UploadDesignRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PortfolioService_ListItems_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListItemsRequest)
+func _PortfolioService_GetDesign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDesignRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PortfolioServiceServer).ListItems(ctx, in)
+		return srv.(PortfolioServiceServer).GetDesign(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PortfolioService_ListItems_FullMethodName,
+		FullMethod: PortfolioService_GetDesign_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PortfolioServiceServer).ListItems(ctx, req.(*ListItemsRequest))
+		return srv.(PortfolioServiceServer).GetDesign(ctx, req.(*GetDesignRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PortfolioService_UpdateItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateItemRequest)
+func _PortfolioService_ListDesigns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDesignsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PortfolioServiceServer).UpdateItem(ctx, in)
+		return srv.(PortfolioServiceServer).ListDesigns(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PortfolioService_UpdateItem_FullMethodName,
+		FullMethod: PortfolioService_ListDesigns_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PortfolioServiceServer).UpdateItem(ctx, req.(*UpdateItemRequest))
+		return srv.(PortfolioServiceServer).ListDesigns(ctx, req.(*ListDesignsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_UpdateDesign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDesignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).UpdateDesign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_UpdateDesign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).UpdateDesign(ctx, req.(*UpdateDesignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_DeleteDesign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDesignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).DeleteDesign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_DeleteDesign_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).DeleteDesign(ctx, req.(*DeleteDesignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_CreateDesignCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDesignCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).CreateDesignCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_CreateDesignCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).CreateDesignCategory(ctx, req.(*CreateDesignCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_ListDesignCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDesignCategoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).ListDesignCategories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_ListDesignCategories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).ListDesignCategories(ctx, req.(*ListDesignCategoriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_AssignDesignToCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssignDesignToCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).AssignDesignToCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_AssignDesignToCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).AssignDesignToCategory(ctx, req.(*AssignDesignToCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_ShareDesignWithCustomer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShareDesignWithCustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).ShareDesignWithCustomer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_ShareDesignWithCustomer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).ShareDesignWithCustomer(ctx, req.(*ShareDesignWithCustomerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PortfolioService_GetSharedDesignsForCustomer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSharedDesignsForCustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PortfolioServiceServer).GetSharedDesignsForCustomer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PortfolioService_GetSharedDesignsForCustomer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PortfolioServiceServer).GetSharedDesignsForCustomer(ctx, req.(*GetSharedDesignsForCustomerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -180,16 +426,44 @@ var PortfolioService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PortfolioServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "UploadItem",
-			Handler:    _PortfolioService_UploadItem_Handler,
+			MethodName: "UploadDesign",
+			Handler:    _PortfolioService_UploadDesign_Handler,
 		},
 		{
-			MethodName: "ListItems",
-			Handler:    _PortfolioService_ListItems_Handler,
+			MethodName: "GetDesign",
+			Handler:    _PortfolioService_GetDesign_Handler,
 		},
 		{
-			MethodName: "UpdateItem",
-			Handler:    _PortfolioService_UpdateItem_Handler,
+			MethodName: "ListDesigns",
+			Handler:    _PortfolioService_ListDesigns_Handler,
+		},
+		{
+			MethodName: "UpdateDesign",
+			Handler:    _PortfolioService_UpdateDesign_Handler,
+		},
+		{
+			MethodName: "DeleteDesign",
+			Handler:    _PortfolioService_DeleteDesign_Handler,
+		},
+		{
+			MethodName: "CreateDesignCategory",
+			Handler:    _PortfolioService_CreateDesignCategory_Handler,
+		},
+		{
+			MethodName: "ListDesignCategories",
+			Handler:    _PortfolioService_ListDesignCategories_Handler,
+		},
+		{
+			MethodName: "AssignDesignToCategory",
+			Handler:    _PortfolioService_AssignDesignToCategory_Handler,
+		},
+		{
+			MethodName: "ShareDesignWithCustomer",
+			Handler:    _PortfolioService_ShareDesignWithCustomer_Handler,
+		},
+		{
+			MethodName: "GetSharedDesignsForCustomer",
+			Handler:    _PortfolioService_GetSharedDesignsForCustomer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

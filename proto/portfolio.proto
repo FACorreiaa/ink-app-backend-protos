@@ -2,58 +2,178 @@ syntax = "proto3";
 
 package inkMe.portfolio;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/portfolio";
 
-// POST MVP
-
+// Portfolio service for managing artist portfolios and designs
 service PortfolioService {
-  rpc UploadItem(UploadItemRequest) returns (UploadItemResponse);
-  rpc ListItems(ListItemsRequest) returns (ListItemsResponse);
-  rpc UpdateItem(UpdateItemRequest) returns (UpdateItemResponse);
-  // etc.
+  rpc UploadDesign(UploadDesignRequest) returns (UploadDesignResponse);
+  rpc GetDesign(GetDesignRequest) returns (GetDesignResponse);
+  rpc ListDesigns(ListDesignsRequest) returns (ListDesignsResponse);
+  rpc UpdateDesign(UpdateDesignRequest) returns (UpdateDesignResponse);
+  rpc DeleteDesign(DeleteDesignRequest) returns (DeleteDesignResponse);
+  
+  // Categorization
+  rpc CreateDesignCategory(CreateDesignCategoryRequest) returns (CreateDesignCategoryResponse);
+  rpc ListDesignCategories(ListDesignCategoriesRequest) returns (ListDesignCategoriesResponse);
+  rpc AssignDesignToCategory(AssignDesignToCategoryRequest) returns (AssignDesignToCategoryResponse);
+  
+  // Shared portfolios
+  rpc ShareDesignWithCustomer(ShareDesignWithCustomerRequest) returns (ShareDesignWithCustomerResponse);
+  rpc GetSharedDesignsForCustomer(GetSharedDesignsForCustomerRequest) returns (GetSharedDesignsForCustomerResponse);
 }
 
-message UploadItemRequest {
+message UploadDesignRequest {
   string studio_id = 1;
   string artist_id = 2;
   string image_url = 3;
-  string title     = 4;
+  string title = 4;
   string description = 5;
+  string style = 6;
+  google.protobuf.Timestamp created_at = 7;
+  BaseRequest request = 100;
 }
 
-message UploadItemResponse {
-  string portfolio_item_id = 1;
-  string message           = 2;
+message UploadDesignResponse {
+  string design_id = 1;
+  string message = 2;
+  BaseResponse response = 100;
 }
 
-message ListItemsRequest {
+message GetDesignRequest {
+  string design_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetDesignResponse {
+  Design design = 1;
+  BaseResponse response = 100;
+}
+
+message ListDesignsRequest {
   string studio_id = 1;
   string artist_id = 2; // optional
+  string category_id = 3; // optional
+  BaseRequest request = 100;
 }
 
-message ListItemsResponse {
-  repeated PortfolioItem items = 1;
+message ListDesignsResponse {
+  repeated Design designs = 1;
+  BaseResponse response = 100;
 }
 
-message UpdateItemRequest {
-  string portfolio_item_id = 1;
-  string title             = 2;
-  string description       = 3;
+message UpdateDesignRequest {
+  string design_id = 1;
+  string title = 2;
+  string description = 3;
+  string style = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  BaseRequest request = 100;
 }
 
-message UpdateItemResponse {
+message UpdateDesignResponse {
   string message = 1;
+  BaseResponse response = 100;
 }
 
-message PortfolioItem {
-  string id          = 1;
-  string studio_id   = 2;
-  string artist_id   = 3;
-  string image_url   = 4;
-  string title       = 5;
+message DeleteDesignRequest {
+  string design_id = 1;
+  BaseRequest request = 100;
+}
+
+message DeleteDesignResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message CreateDesignCategoryRequest {
+  string studio_id = 1;
+  string name = 2;
+  string description = 3;
+  BaseRequest request = 100;
+}
+
+message CreateDesignCategoryResponse {
+  string category_id = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+message ListDesignCategoriesRequest {
+  string studio_id = 1;
+  BaseRequest request = 100;
+}
+
+message ListDesignCategoriesResponse {
+  repeated Category categories = 1;
+  BaseResponse response = 100;
+}
+
+message AssignDesignToCategoryRequest {
+  string design_id = 1;
+  string category_id = 2;
+  BaseRequest request = 100;
+}
+
+message AssignDesignToCategoryResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message ShareDesignWithCustomerRequest {
+  string design_id = 1;
+  string customer_id = 2;
+  string message = 3;
+  google.protobuf.Timestamp expiry = 4; // optional
+  BaseRequest request = 100;
+}
+
+message ShareDesignWithCustomerResponse {
+  string share_id = 1; 
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+message GetSharedDesignsForCustomerRequest {
+  string customer_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetSharedDesignsForCustomerResponse {
+  repeated SharedDesign shared_designs = 1;
+  BaseResponse response = 100;
+}
+
+message Design {
+  string id = 1;
+  string studio_id = 2;
+  string artist_id = 3;
+  string image_url = 4;
+  string title = 5;
   string description = 6;
-  string created_at  = 7;
-  string updated_at  = 8;
+  string style = 7;
+  repeated string category_ids = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+message Category {
+  string id = 1;
+  string studio_id = 2;
+  string name = 3;
+  string description = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message SharedDesign {
+  string id = 1;
+  Design design = 2;
+  string customer_id = 3;
+  string share_message = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp expiry = 6;
 }
 
 message BaseRequest {
@@ -66,4 +186,3 @@ message BaseResponse {
   string request_id = 999;
   string status = 1000;
 }
-

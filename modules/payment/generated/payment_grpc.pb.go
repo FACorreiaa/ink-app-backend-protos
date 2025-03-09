@@ -22,15 +22,33 @@ const (
 	PaymentService_CreatePaymentIntent_FullMethodName = "/inkMe.payment.PaymentService/CreatePaymentIntent"
 	PaymentService_CapturePayment_FullMethodName      = "/inkMe.payment.PaymentService/CapturePayment"
 	PaymentService_RefundPayment_FullMethodName       = "/inkMe.payment.PaymentService/RefundPayment"
+	PaymentService_GetPayment_FullMethodName          = "/inkMe.payment.PaymentService/GetPayment"
+	PaymentService_ListPayments_FullMethodName        = "/inkMe.payment.PaymentService/ListPayments"
+	PaymentService_RequestDeposit_FullMethodName      = "/inkMe.payment.PaymentService/RequestDeposit"
+	PaymentService_ConfirmDeposit_FullMethodName      = "/inkMe.payment.PaymentService/ConfirmDeposit"
+	PaymentService_CreateInvoice_FullMethodName       = "/inkMe.payment.PaymentService/CreateInvoice"
+	PaymentService_SendInvoice_FullMethodName         = "/inkMe.payment.PaymentService/SendInvoice"
+	PaymentService_GetInvoice_FullMethodName          = "/inkMe.payment.PaymentService/GetInvoice"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// PaymentService for deposits and transactions
 type PaymentServiceClient interface {
 	CreatePaymentIntent(ctx context.Context, in *CreatePaymentIntentRequest, opts ...grpc.CallOption) (*CreatePaymentIntentResponse, error)
 	CapturePayment(ctx context.Context, in *CapturePaymentRequest, opts ...grpc.CallOption) (*CapturePaymentResponse, error)
 	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*RefundPaymentResponse, error)
+	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
+	ListPayments(ctx context.Context, in *ListPaymentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error)
+	// Deposits
+	RequestDeposit(ctx context.Context, in *RequestDepositRequest, opts ...grpc.CallOption) (*RequestDepositResponse, error)
+	ConfirmDeposit(ctx context.Context, in *ConfirmDepositRequest, opts ...grpc.CallOption) (*ConfirmDepositResponse, error)
+	// Invoice generation
+	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*CreateInvoiceResponse, error)
+	SendInvoice(ctx context.Context, in *SendInvoiceRequest, opts ...grpc.CallOption) (*SendInvoiceResponse, error)
+	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*GetInvoiceResponse, error)
 }
 
 type paymentServiceClient struct {
@@ -71,13 +89,94 @@ func (c *paymentServiceClient) RefundPayment(ctx context.Context, in *RefundPaym
 	return out, nil
 }
 
+func (c *paymentServiceClient) GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentResponse)
+	err := c.cc.Invoke(ctx, PaymentService_GetPayment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) ListPayments(ctx context.Context, in *ListPaymentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPaymentsResponse)
+	err := c.cc.Invoke(ctx, PaymentService_ListPayments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) RequestDeposit(ctx context.Context, in *RequestDepositRequest, opts ...grpc.CallOption) (*RequestDepositResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestDepositResponse)
+	err := c.cc.Invoke(ctx, PaymentService_RequestDeposit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) ConfirmDeposit(ctx context.Context, in *ConfirmDepositRequest, opts ...grpc.CallOption) (*ConfirmDepositResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmDepositResponse)
+	err := c.cc.Invoke(ctx, PaymentService_ConfirmDeposit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*CreateInvoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateInvoiceResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CreateInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) SendInvoice(ctx context.Context, in *SendInvoiceRequest, opts ...grpc.CallOption) (*SendInvoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendInvoiceResponse)
+	err := c.cc.Invoke(ctx, PaymentService_SendInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentServiceClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*GetInvoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInvoiceResponse)
+	err := c.cc.Invoke(ctx, PaymentService_GetInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentServiceServer is the server API for PaymentService service.
 // All implementations must embed UnimplementedPaymentServiceServer
 // for forward compatibility.
+//
+// PaymentService for deposits and transactions
 type PaymentServiceServer interface {
 	CreatePaymentIntent(context.Context, *CreatePaymentIntentRequest) (*CreatePaymentIntentResponse, error)
 	CapturePayment(context.Context, *CapturePaymentRequest) (*CapturePaymentResponse, error)
 	RefundPayment(context.Context, *RefundPaymentRequest) (*RefundPaymentResponse, error)
+	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
+	ListPayments(context.Context, *ListPaymentsRequest) (*ListPaymentsResponse, error)
+	// Deposits
+	RequestDeposit(context.Context, *RequestDepositRequest) (*RequestDepositResponse, error)
+	ConfirmDeposit(context.Context, *ConfirmDepositRequest) (*ConfirmDepositResponse, error)
+	// Invoice generation
+	CreateInvoice(context.Context, *CreateInvoiceRequest) (*CreateInvoiceResponse, error)
+	SendInvoice(context.Context, *SendInvoiceRequest) (*SendInvoiceResponse, error)
+	GetInvoice(context.Context, *GetInvoiceRequest) (*GetInvoiceResponse, error)
 	mustEmbedUnimplementedPaymentServiceServer()
 }
 
@@ -96,6 +195,27 @@ func (UnimplementedPaymentServiceServer) CapturePayment(context.Context, *Captur
 }
 func (UnimplementedPaymentServiceServer) RefundPayment(context.Context, *RefundPaymentRequest) (*RefundPaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefundPayment not implemented")
+}
+func (UnimplementedPaymentServiceServer) GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayment not implemented")
+}
+func (UnimplementedPaymentServiceServer) ListPayments(context.Context, *ListPaymentsRequest) (*ListPaymentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPayments not implemented")
+}
+func (UnimplementedPaymentServiceServer) RequestDeposit(context.Context, *RequestDepositRequest) (*RequestDepositResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestDeposit not implemented")
+}
+func (UnimplementedPaymentServiceServer) ConfirmDeposit(context.Context, *ConfirmDepositRequest) (*ConfirmDepositResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmDeposit not implemented")
+}
+func (UnimplementedPaymentServiceServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*CreateInvoiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (UnimplementedPaymentServiceServer) SendInvoice(context.Context, *SendInvoiceRequest) (*SendInvoiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendInvoice not implemented")
+}
+func (UnimplementedPaymentServiceServer) GetInvoice(context.Context, *GetInvoiceRequest) (*GetInvoiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
 }
 func (UnimplementedPaymentServiceServer) mustEmbedUnimplementedPaymentServiceServer() {}
 func (UnimplementedPaymentServiceServer) testEmbeddedByValue()                        {}
@@ -172,6 +292,132 @@ func _PaymentService_RefundPayment_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PaymentService_GetPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).GetPayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_GetPayment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).GetPayment(ctx, req.(*GetPaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_ListPayments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPaymentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).ListPayments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_ListPayments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).ListPayments(ctx, req.(*ListPaymentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_RequestDeposit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestDepositRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).RequestDeposit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_RequestDeposit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).RequestDeposit(ctx, req.(*RequestDepositRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_ConfirmDeposit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmDepositRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).ConfirmDeposit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_ConfirmDeposit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).ConfirmDeposit(ctx, req.(*ConfirmDepositRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).CreateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_CreateInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).CreateInvoice(ctx, req.(*CreateInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_SendInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).SendInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_SendInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).SendInvoice(ctx, req.(*SendInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentService_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServiceServer).GetInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentService_GetInvoice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServiceServer).GetInvoice(ctx, req.(*GetInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PaymentService_ServiceDesc is the grpc.ServiceDesc for PaymentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +436,34 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefundPayment",
 			Handler:    _PaymentService_RefundPayment_Handler,
+		},
+		{
+			MethodName: "GetPayment",
+			Handler:    _PaymentService_GetPayment_Handler,
+		},
+		{
+			MethodName: "ListPayments",
+			Handler:    _PaymentService_ListPayments_Handler,
+		},
+		{
+			MethodName: "RequestDeposit",
+			Handler:    _PaymentService_RequestDeposit_Handler,
+		},
+		{
+			MethodName: "ConfirmDeposit",
+			Handler:    _PaymentService_ConfirmDeposit_Handler,
+		},
+		{
+			MethodName: "CreateInvoice",
+			Handler:    _PaymentService_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "SendInvoice",
+			Handler:    _PaymentService_SendInvoice_Handler,
+		},
+		{
+			MethodName: "GetInvoice",
+			Handler:    _PaymentService_GetInvoice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -9,15 +9,26 @@ service AppointmentService {
   rpc GetAppointment(GetAppointmentRequest) returns (GetAppointmentResponse);
   rpc ListAppointments(ListAppointmentsRequest) returns (ListAppointmentsResponse);
   rpc UpdateAppointment(UpdateAppointmentRequest) returns (UpdateAppointmentResponse);
+  rpc CancelAppointment(CancelAppointmentRequest) returns (CancelAppointmentResponse);
+  rpc RescheduleAppointment(RescheduleAppointmentRequest) returns (RescheduleAppointmentResponse);
+
+  // Artist availability management
+  rpc SetAvailability(SetAvailabilityRequest) returns (SetAvailabilityResponse);
+  rpc GetAvailability(GetAvailabilityRequest) returns (GetAvailabilityResponse);
+  rpc ListAvailableTimeSlots(ListAvailableTimeSlotsRequest) returns (ListAvailableTimeSlotsResponse);
+  
+  // Appointment reminders/notifications
+  rpc SendAppointmentReminder(SendAppointmentReminderRequest) returns (SendAppointmentReminderResponse);
+  
+  // Handle booking requests from mobile app
+  rpc RequestAppointment(RequestAppointmentRequest) returns (RequestAppointmentResponse);
+  rpc ApproveAppointmentRequest(ApproveAppointmentRequestRequest) returns (ApproveAppointmentRequestResponse);
+  rpc RejectAppointmentRequest(RejectAppointmentRequestRequest) returns (RejectAppointmentRequestResponse);
 }
 
 message CreateAppointmentRequest {
-  string studio_id  = 1;
-  string client_id  = 2;
-  string artist_id  = 3;
-  string start_time = 4; // ISO8601 or RFC3339
-  string end_time   = 5; // same format
-  string notes      = 6;
+  Appointment appointment = 1;
+  BaseRequest request = 100;
 }
 
 message CreateAppointmentResponse {
@@ -27,19 +38,22 @@ message CreateAppointmentResponse {
 
 message GetAppointmentRequest {
   string appointment_id = 1;
+  BaseRequest request = 100;
 }
 
 message GetAppointmentResponse {
   Appointment appointment = 1;
+  BaseResponse response = 100;
 }
 
 message ListAppointmentsRequest {
   string studio_id = 1;
-  // or optional filters like date range
+  BaseRequest request = 100;
 }
 
 message ListAppointmentsResponse {
   repeated Appointment appointments = 1;
+  BaseResponse response = 100;
 }
 
 message UpdateAppointmentRequest {
@@ -52,6 +66,102 @@ message UpdateAppointmentRequest {
 message UpdateAppointmentResponse {
   string message = 1;
 }
+
+message CancelAppointmentRequest {
+  string appointment_id = 1;
+  BaseRequest request = 100;
+}
+
+message CancelAppointmentResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message RescheduleAppointmentRequest {
+  string appointment_id = 1;
+  string new_start_time = 2;
+  string new_end_time   = 3;
+  string new_artist_id  = 4;
+  BaseRequest request = 100;
+}
+
+message RescheduleAppointmentResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message SetAvailabilityRequest {
+  string artist_id = 1;
+  repeated string available_times = 2;
+  BaseRequest request = 100;
+}
+
+message SetAvailabilityResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message GetAvailabilityRequest {
+  string artist_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetAvailabilityResponse {
+  repeated string available_times = 1;
+  BaseResponse response = 100;
+}
+
+message ListAvailableTimeSlotsRequest {
+  string artist_id = 1;
+  string date = 2;
+  BaseRequest request = 100;
+}
+
+message ListAvailableTimeSlotsResponse {
+  repeated string available_times = 1;
+  BaseResponse response = 100;
+}
+
+message SendAppointmentReminderRequest {
+  string appointment_id = 1;
+  BaseRequest request = 100;
+}
+
+message SendAppointmentReminderResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message RequestAppointmentRequest {
+  Appointment appointment = 1;
+  BaseRequest request = 100;
+}
+
+message RequestAppointmentResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message ApproveAppointmentRequestRequest {
+  string appointment_id = 1;
+  BaseRequest request = 100;
+}
+
+message ApproveAppointmentRequestResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message RejectAppointmentRequestRequest {
+  string appointment_id = 1;
+  BaseRequest request = 100;
+}
+
+message RejectAppointmentRequestResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
 
 message Appointment {
   string id         = 1;

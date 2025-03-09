@@ -19,10 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AppointmentService_CreateAppointment_FullMethodName = "/inkMe.appointment.AppointmentService/CreateAppointment"
-	AppointmentService_GetAppointment_FullMethodName    = "/inkMe.appointment.AppointmentService/GetAppointment"
-	AppointmentService_ListAppointments_FullMethodName  = "/inkMe.appointment.AppointmentService/ListAppointments"
-	AppointmentService_UpdateAppointment_FullMethodName = "/inkMe.appointment.AppointmentService/UpdateAppointment"
+	AppointmentService_CreateAppointment_FullMethodName         = "/inkMe.appointment.AppointmentService/CreateAppointment"
+	AppointmentService_GetAppointment_FullMethodName            = "/inkMe.appointment.AppointmentService/GetAppointment"
+	AppointmentService_ListAppointments_FullMethodName          = "/inkMe.appointment.AppointmentService/ListAppointments"
+	AppointmentService_UpdateAppointment_FullMethodName         = "/inkMe.appointment.AppointmentService/UpdateAppointment"
+	AppointmentService_CancelAppointment_FullMethodName         = "/inkMe.appointment.AppointmentService/CancelAppointment"
+	AppointmentService_RescheduleAppointment_FullMethodName     = "/inkMe.appointment.AppointmentService/RescheduleAppointment"
+	AppointmentService_SetAvailability_FullMethodName           = "/inkMe.appointment.AppointmentService/SetAvailability"
+	AppointmentService_GetAvailability_FullMethodName           = "/inkMe.appointment.AppointmentService/GetAvailability"
+	AppointmentService_ListAvailableTimeSlots_FullMethodName    = "/inkMe.appointment.AppointmentService/ListAvailableTimeSlots"
+	AppointmentService_SendAppointmentReminder_FullMethodName   = "/inkMe.appointment.AppointmentService/SendAppointmentReminder"
+	AppointmentService_RequestAppointment_FullMethodName        = "/inkMe.appointment.AppointmentService/RequestAppointment"
+	AppointmentService_ApproveAppointmentRequest_FullMethodName = "/inkMe.appointment.AppointmentService/ApproveAppointmentRequest"
+	AppointmentService_RejectAppointmentRequest_FullMethodName  = "/inkMe.appointment.AppointmentService/RejectAppointmentRequest"
 )
 
 // AppointmentServiceClient is the client API for AppointmentService service.
@@ -33,6 +42,18 @@ type AppointmentServiceClient interface {
 	GetAppointment(ctx context.Context, in *GetAppointmentRequest, opts ...grpc.CallOption) (*GetAppointmentResponse, error)
 	ListAppointments(ctx context.Context, in *ListAppointmentsRequest, opts ...grpc.CallOption) (*ListAppointmentsResponse, error)
 	UpdateAppointment(ctx context.Context, in *UpdateAppointmentRequest, opts ...grpc.CallOption) (*UpdateAppointmentResponse, error)
+	CancelAppointment(ctx context.Context, in *CancelAppointmentRequest, opts ...grpc.CallOption) (*CancelAppointmentResponse, error)
+	RescheduleAppointment(ctx context.Context, in *RescheduleAppointmentRequest, opts ...grpc.CallOption) (*RescheduleAppointmentResponse, error)
+	// Artist availability management
+	SetAvailability(ctx context.Context, in *SetAvailabilityRequest, opts ...grpc.CallOption) (*SetAvailabilityResponse, error)
+	GetAvailability(ctx context.Context, in *GetAvailabilityRequest, opts ...grpc.CallOption) (*GetAvailabilityResponse, error)
+	ListAvailableTimeSlots(ctx context.Context, in *ListAvailableTimeSlotsRequest, opts ...grpc.CallOption) (*ListAvailableTimeSlotsResponse, error)
+	// Appointment reminders/notifications
+	SendAppointmentReminder(ctx context.Context, in *SendAppointmentReminderRequest, opts ...grpc.CallOption) (*SendAppointmentReminderResponse, error)
+	// Handle booking requests from mobile app
+	RequestAppointment(ctx context.Context, in *RequestAppointmentRequest, opts ...grpc.CallOption) (*RequestAppointmentResponse, error)
+	ApproveAppointmentRequest(ctx context.Context, in *ApproveAppointmentRequestRequest, opts ...grpc.CallOption) (*ApproveAppointmentRequestResponse, error)
+	RejectAppointmentRequest(ctx context.Context, in *RejectAppointmentRequestRequest, opts ...grpc.CallOption) (*RejectAppointmentRequestResponse, error)
 }
 
 type appointmentServiceClient struct {
@@ -83,6 +104,96 @@ func (c *appointmentServiceClient) UpdateAppointment(ctx context.Context, in *Up
 	return out, nil
 }
 
+func (c *appointmentServiceClient) CancelAppointment(ctx context.Context, in *CancelAppointmentRequest, opts ...grpc.CallOption) (*CancelAppointmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelAppointmentResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_CancelAppointment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) RescheduleAppointment(ctx context.Context, in *RescheduleAppointmentRequest, opts ...grpc.CallOption) (*RescheduleAppointmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RescheduleAppointmentResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_RescheduleAppointment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) SetAvailability(ctx context.Context, in *SetAvailabilityRequest, opts ...grpc.CallOption) (*SetAvailabilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAvailabilityResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_SetAvailability_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) GetAvailability(ctx context.Context, in *GetAvailabilityRequest, opts ...grpc.CallOption) (*GetAvailabilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAvailabilityResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_GetAvailability_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) ListAvailableTimeSlots(ctx context.Context, in *ListAvailableTimeSlotsRequest, opts ...grpc.CallOption) (*ListAvailableTimeSlotsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAvailableTimeSlotsResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_ListAvailableTimeSlots_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) SendAppointmentReminder(ctx context.Context, in *SendAppointmentReminderRequest, opts ...grpc.CallOption) (*SendAppointmentReminderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendAppointmentReminderResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_SendAppointmentReminder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) RequestAppointment(ctx context.Context, in *RequestAppointmentRequest, opts ...grpc.CallOption) (*RequestAppointmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestAppointmentResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_RequestAppointment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) ApproveAppointmentRequest(ctx context.Context, in *ApproveAppointmentRequestRequest, opts ...grpc.CallOption) (*ApproveAppointmentRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApproveAppointmentRequestResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_ApproveAppointmentRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *appointmentServiceClient) RejectAppointmentRequest(ctx context.Context, in *RejectAppointmentRequestRequest, opts ...grpc.CallOption) (*RejectAppointmentRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RejectAppointmentRequestResponse)
+	err := c.cc.Invoke(ctx, AppointmentService_RejectAppointmentRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AppointmentServiceServer is the server API for AppointmentService service.
 // All implementations must embed UnimplementedAppointmentServiceServer
 // for forward compatibility.
@@ -91,6 +202,18 @@ type AppointmentServiceServer interface {
 	GetAppointment(context.Context, *GetAppointmentRequest) (*GetAppointmentResponse, error)
 	ListAppointments(context.Context, *ListAppointmentsRequest) (*ListAppointmentsResponse, error)
 	UpdateAppointment(context.Context, *UpdateAppointmentRequest) (*UpdateAppointmentResponse, error)
+	CancelAppointment(context.Context, *CancelAppointmentRequest) (*CancelAppointmentResponse, error)
+	RescheduleAppointment(context.Context, *RescheduleAppointmentRequest) (*RescheduleAppointmentResponse, error)
+	// Artist availability management
+	SetAvailability(context.Context, *SetAvailabilityRequest) (*SetAvailabilityResponse, error)
+	GetAvailability(context.Context, *GetAvailabilityRequest) (*GetAvailabilityResponse, error)
+	ListAvailableTimeSlots(context.Context, *ListAvailableTimeSlotsRequest) (*ListAvailableTimeSlotsResponse, error)
+	// Appointment reminders/notifications
+	SendAppointmentReminder(context.Context, *SendAppointmentReminderRequest) (*SendAppointmentReminderResponse, error)
+	// Handle booking requests from mobile app
+	RequestAppointment(context.Context, *RequestAppointmentRequest) (*RequestAppointmentResponse, error)
+	ApproveAppointmentRequest(context.Context, *ApproveAppointmentRequestRequest) (*ApproveAppointmentRequestResponse, error)
+	RejectAppointmentRequest(context.Context, *RejectAppointmentRequestRequest) (*RejectAppointmentRequestResponse, error)
 	mustEmbedUnimplementedAppointmentServiceServer()
 }
 
@@ -112,6 +235,33 @@ func (UnimplementedAppointmentServiceServer) ListAppointments(context.Context, *
 }
 func (UnimplementedAppointmentServiceServer) UpdateAppointment(context.Context, *UpdateAppointmentRequest) (*UpdateAppointmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAppointment not implemented")
+}
+func (UnimplementedAppointmentServiceServer) CancelAppointment(context.Context, *CancelAppointmentRequest) (*CancelAppointmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelAppointment not implemented")
+}
+func (UnimplementedAppointmentServiceServer) RescheduleAppointment(context.Context, *RescheduleAppointmentRequest) (*RescheduleAppointmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RescheduleAppointment not implemented")
+}
+func (UnimplementedAppointmentServiceServer) SetAvailability(context.Context, *SetAvailabilityRequest) (*SetAvailabilityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetAvailability not implemented")
+}
+func (UnimplementedAppointmentServiceServer) GetAvailability(context.Context, *GetAvailabilityRequest) (*GetAvailabilityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvailability not implemented")
+}
+func (UnimplementedAppointmentServiceServer) ListAvailableTimeSlots(context.Context, *ListAvailableTimeSlotsRequest) (*ListAvailableTimeSlotsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAvailableTimeSlots not implemented")
+}
+func (UnimplementedAppointmentServiceServer) SendAppointmentReminder(context.Context, *SendAppointmentReminderRequest) (*SendAppointmentReminderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendAppointmentReminder not implemented")
+}
+func (UnimplementedAppointmentServiceServer) RequestAppointment(context.Context, *RequestAppointmentRequest) (*RequestAppointmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestAppointment not implemented")
+}
+func (UnimplementedAppointmentServiceServer) ApproveAppointmentRequest(context.Context, *ApproveAppointmentRequestRequest) (*ApproveAppointmentRequestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApproveAppointmentRequest not implemented")
+}
+func (UnimplementedAppointmentServiceServer) RejectAppointmentRequest(context.Context, *RejectAppointmentRequestRequest) (*RejectAppointmentRequestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RejectAppointmentRequest not implemented")
 }
 func (UnimplementedAppointmentServiceServer) mustEmbedUnimplementedAppointmentServiceServer() {}
 func (UnimplementedAppointmentServiceServer) testEmbeddedByValue()                            {}
@@ -206,6 +356,168 @@ func _AppointmentService_UpdateAppointment_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AppointmentService_CancelAppointment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelAppointmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).CancelAppointment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_CancelAppointment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).CancelAppointment(ctx, req.(*CancelAppointmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_RescheduleAppointment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RescheduleAppointmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).RescheduleAppointment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_RescheduleAppointment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).RescheduleAppointment(ctx, req.(*RescheduleAppointmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_SetAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAvailabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).SetAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_SetAvailability_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).SetAvailability(ctx, req.(*SetAvailabilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_GetAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAvailabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).GetAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_GetAvailability_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).GetAvailability(ctx, req.(*GetAvailabilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_ListAvailableTimeSlots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAvailableTimeSlotsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).ListAvailableTimeSlots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_ListAvailableTimeSlots_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).ListAvailableTimeSlots(ctx, req.(*ListAvailableTimeSlotsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_SendAppointmentReminder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendAppointmentReminderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).SendAppointmentReminder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_SendAppointmentReminder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).SendAppointmentReminder(ctx, req.(*SendAppointmentReminderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_RequestAppointment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestAppointmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).RequestAppointment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_RequestAppointment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).RequestAppointment(ctx, req.(*RequestAppointmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_ApproveAppointmentRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApproveAppointmentRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).ApproveAppointmentRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_ApproveAppointmentRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).ApproveAppointmentRequest(ctx, req.(*ApproveAppointmentRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AppointmentService_RejectAppointmentRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RejectAppointmentRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AppointmentServiceServer).RejectAppointmentRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AppointmentService_RejectAppointmentRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AppointmentServiceServer).RejectAppointmentRequest(ctx, req.(*RejectAppointmentRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AppointmentService_ServiceDesc is the grpc.ServiceDesc for AppointmentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +540,42 @@ var AppointmentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAppointment",
 			Handler:    _AppointmentService_UpdateAppointment_Handler,
+		},
+		{
+			MethodName: "CancelAppointment",
+			Handler:    _AppointmentService_CancelAppointment_Handler,
+		},
+		{
+			MethodName: "RescheduleAppointment",
+			Handler:    _AppointmentService_RescheduleAppointment_Handler,
+		},
+		{
+			MethodName: "SetAvailability",
+			Handler:    _AppointmentService_SetAvailability_Handler,
+		},
+		{
+			MethodName: "GetAvailability",
+			Handler:    _AppointmentService_GetAvailability_Handler,
+		},
+		{
+			MethodName: "ListAvailableTimeSlots",
+			Handler:    _AppointmentService_ListAvailableTimeSlots_Handler,
+		},
+		{
+			MethodName: "SendAppointmentReminder",
+			Handler:    _AppointmentService_SendAppointmentReminder_Handler,
+		},
+		{
+			MethodName: "RequestAppointment",
+			Handler:    _AppointmentService_RequestAppointment_Handler,
+		},
+		{
+			MethodName: "ApproveAppointmentRequest",
+			Handler:    _AppointmentService_ApproveAppointmentRequest_Handler,
+		},
+		{
+			MethodName: "RejectAppointmentRequest",
+			Handler:    _AppointmentService_RejectAppointmentRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

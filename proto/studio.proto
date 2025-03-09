@@ -1,0 +1,166 @@
+syntax = "proto3";
+
+package inkMe.studio;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/yourorg/inkme-grpc/inkMe/studio";
+
+// StudioService for managing tattoo studios and staff
+service StudioService {
+  rpc CreateStudio(CreateStudioRequest) returns (CreateStudioResponse);
+  rpc UpdateStudio(UpdateStudioRequest) returns (UpdateStudioResponse);
+  rpc GetStudio(GetStudioRequest) returns (GetStudioResponse);
+  
+  // Staff management
+  rpc AddStaffMember(AddStaffMemberRequest) returns (AddStaffMemberResponse);
+  rpc UpdateStaffMember(UpdateStaffMemberRequest) returns (UpdateStaffMemberResponse);
+  rpc RemoveStaffMember(RemoveStaffMemberRequest) returns (RemoveStaffMemberResponse);
+  rpc ListStaffMembers(ListStaffMembersRequest) returns (ListStaffMembersResponse);
+  
+  // Permissions and roles
+  rpc SetStaffPermissions(SetStaffPermissionsRequest) returns (SetStaffPermissionsResponse);
+  rpc GetStaffPermissions(GetStaffPermissionsRequest) returns (GetStaffPermissionsResponse);
+}
+
+message CreateStudioRequest {
+  string name = 1;
+  string address = 2;
+  string phone = 3;
+  string email = 4;
+  string website = 5;
+  string owner_id = 6;
+  google.protobuf.Timestamp created_at = 7;
+  BaseRequest request = 100;
+}
+
+message CreateStudioResponse {
+  string studio_id = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+message UpdateStudioRequest {
+  string studio_id = 1;
+  string name = 2;
+  string address = 3;
+  string phone = 4;
+  string email = 5;
+  string website = 6;
+  google.protobuf.Timestamp updated_at = 7;
+  BaseRequest request = 100;
+}
+
+message UpdateStudioResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message GetStudioRequest {
+  string studio_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetStudioResponse {
+  Studio studio = 1;
+  BaseResponse response = 100;
+}
+
+message AddStaffMemberRequest {
+  string studio_id = 1;
+  string user_id = 2;
+  string role = 3;
+  repeated string permissions = 4;
+  BaseRequest request = 100;
+}
+
+message AddStaffMemberResponse {
+  string staff_id = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+message UpdateStaffMemberRequest {
+  string staff_id = 1;
+  string role = 2;
+  BaseRequest request = 100;
+}
+
+message UpdateStaffMemberResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message RemoveStaffMemberRequest {
+  string staff_id = 1;
+  BaseRequest request = 100;
+}
+
+message RemoveStaffMemberResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message ListStaffMembersRequest {
+  string studio_id = 1;
+  BaseRequest request = 100;
+}
+
+message ListStaffMembersResponse {
+  repeated StaffMember staff_members = 1;
+  BaseResponse response = 100;
+}
+
+message SetStaffPermissionsRequest {
+  string staff_id = 1;
+  repeated string permissions = 2;
+  BaseRequest request = 100;
+}
+
+message SetStaffPermissionsResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message GetStaffPermissionsRequest {
+  string staff_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetStaffPermissionsResponse {
+  repeated string permissions = 1;
+  BaseResponse response = 100;
+}
+
+message Studio {
+  string id = 1;
+  string name = 2;
+  string address = 3;
+  string phone = 4;
+  string email = 5;
+  string website = 6;
+  string owner_id = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message StaffMember {
+  string id = 1;
+  string studio_id = 2;
+  string user_id = 3;
+  string role = 4;
+  repeated string permissions = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}

@@ -2,15 +2,26 @@ syntax = "proto3";
 
 package inkMe.payment;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/payment";
 
-// POST MVP
-
+// PaymentService for deposits and transactions
 service PaymentService {
   rpc CreatePaymentIntent(CreatePaymentIntentRequest) returns (CreatePaymentIntentResponse);
   rpc CapturePayment(CapturePaymentRequest) returns (CapturePaymentResponse);
   rpc RefundPayment(RefundPaymentRequest) returns (RefundPaymentResponse);
-  // ...
+  rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
+  rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
+  
+  // Deposits
+  rpc RequestDeposit(RequestDepositRequest) returns (RequestDepositResponse);
+  rpc ConfirmDeposit(ConfirmDepositRequest) returns (ConfirmDepositResponse);
+  
+  // Invoice generation
+  rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse);
+  rpc SendInvoice(SendInvoiceRequest) returns (SendInvoiceResponse);
+  rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse);
 }
 
 message CreatePaymentIntentRequest {
@@ -18,30 +29,143 @@ message CreatePaymentIntentRequest {
   string appointment_id = 2;
   double amount         = 3;
   string currency       = 4; // e.g. 'USD'
+  google.protobuf.Timestamp created_at = 5;
+  BaseRequest request = 100;
 }
 
 message CreatePaymentIntentResponse {
   string intent_id = 1;
   string client_secret = 2;
-  // ...
+  string message = 3;
+  BaseResponse response = 100;
 }
 
 message CapturePaymentRequest {
   string intent_id = 1;
+  BaseRequest request = 100;
 }
 
 message CapturePaymentResponse {
   string message = 1;
+  BaseResponse response = 100;
 }
 
 message RefundPaymentRequest {
   string payment_id = 1;
   double amount     = 2;
+  BaseRequest request = 100;
 }
 
 message RefundPaymentResponse {
   string message = 1;
+  BaseResponse response = 100;
 }
+
+message GetPaymentRequest {
+  string payment_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetPaymentResponse {
+  Payment payment = 1;
+  BaseResponse response = 100;
+}
+
+message ListPaymentsRequest {
+  string studio_id = 1;
+  string client_id = 2;
+  BaseRequest request = 100;
+}
+
+message ListPaymentsResponse {
+  repeated Payment payments = 1;
+  BaseResponse response = 100;
+}
+
+message Payment {
+  string id           = 1;
+  string studio_id    = 2;
+  string client_id    = 3;
+  string appointment_id = 4;
+  double amount       = 5;
+  string currency     = 6;
+  string status       = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message RequestDepositRequest {
+  string studio_id = 1;
+  double amount    = 2;
+  string currency  = 3;
+  BaseRequest request = 100;
+}
+
+message RequestDepositResponse {
+  string deposit_id = 1;
+  string message    = 2;
+  BaseResponse response = 100;
+}
+
+message ConfirmDepositRequest {
+  string deposit_id = 1;
+  BaseRequest request = 100;
+}
+
+message ConfirmDepositResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message CreateInvoiceRequest {
+  string studio_id = 1;
+  string client_id = 2;
+  string appointment_id = 3;
+  double amount = 4;
+  string currency = 5;
+  google.protobuf.Timestamp created_at = 6;
+  BaseRequest request = 100;
+}
+
+message CreateInvoiceResponse {
+  string invoice_id = 1;
+  string message    = 2;
+  BaseResponse response = 100;
+}
+
+message SendInvoiceRequest {
+  string invoice_id = 1;
+  BaseRequest request = 100;
+}
+
+message SendInvoiceResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message GetInvoiceRequest {
+  string invoice_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetInvoiceResponse {
+  Invoice invoice = 1;
+  BaseResponse response = 100;
+}
+
+message Invoice {
+  string id           = 1;
+  string studio_id    = 2;
+  string client_id    = 3;
+  string appointment_id = 4;
+  double amount       = 5;
+  string currency     = 6;
+  string status       = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+
 
 message BaseRequest {
   string downstream = 998;
