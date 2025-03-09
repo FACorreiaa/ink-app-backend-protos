@@ -1,25 +1,20 @@
-package customer
+package client
 
 import (
 	"context"
 	"errors"
 
-	"github.com/FACorreiaa/ink-app-backend-protos/core"
-	"github.com/FACorreiaa/ink-app-backend-protos/modules/customer/generated"
-	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 	"google.golang.org/grpc"
+
+	Customer "github.com/FACorreiaa/ink-app-backend-protos/modules/customer/generated"
+	"github.com/FACorreiaa/ink-app-backend-protos/utils"
 )
 
 type Broker struct {
 	serverAddr string
 	conn       *grpc.ClientConn
-	client     generated.CustomerClient
+	client     Customer.CustomerServiceClient
 }
-
-var (
-	_ generated.CustomerClient = (*Broker)(nil)
-	_ core.Broker              = (*Broker)(nil)
-)
 
 func NewBroker(serverAddr string) (*Broker, error) {
 	b := new(Broker)
@@ -39,7 +34,7 @@ func (b *Broker) NewConnection() (*grpc.ClientConn, error) {
 	}
 
 	b.conn = conn
-	b.client = generated.NewCustomerClient(b.conn)
+	b.client = Customer.NewCustomerServiceClient(b.conn)
 
 	return b.conn, nil
 }
@@ -48,18 +43,39 @@ func (b *Broker) GetAddress() string {
 	return b.serverAddr
 }
 
-func (b *Broker) GetCustomer(ctx context.Context, in *generated.GetCustomerReq, opts ...grpc.CallOption) (*generated.GetCustomerRes, error) {
-	return b.client.GetCustomer(ctx, in, opts...)
-}
-
-func (b *Broker) CreateCustomer(ctx context.Context, in *generated.CreateCustomerReq, opts ...grpc.CallOption) (*generated.CreateCustomerRes, error) {
+// Implement the CustomerServiceClient interface methods
+func (b *Broker) CreateCustomer(ctx context.Context, in *Customer.CreateCustomerRequest, opts ...grpc.CallOption) (*Customer.CreateCustomerResponse, error) {
 	return b.client.CreateCustomer(ctx, in, opts...)
 }
 
-func (b *Broker) UpdateCustomer(ctx context.Context, in *generated.UpdateCustomerReq, opts ...grpc.CallOption) (*generated.UpdateCustomerRes, error) {
+func (b *Broker) GetCustomer(ctx context.Context, in *Customer.GetCustomerRequest, opts ...grpc.CallOption) (*Customer.GetCustomerResponse, error) {
+	return b.client.GetCustomer(ctx, in, opts...)
+}
+
+func (b *Broker) UpdateCustomer(ctx context.Context, in *Customer.UpdateCustomerRequest, opts ...grpc.CallOption) (*Customer.UpdateCustomerResponse, error) {
 	return b.client.UpdateCustomer(ctx, in, opts...)
 }
 
-func (b *Broker) DeleteCustomer(ctx context.Context, in *generated.DeleteCustomerReq, opts ...grpc.CallOption) (*generated.NilRes, error) {
+func (b *Broker) DeleteCustomer(ctx context.Context, in *Customer.DeleteCustomerRequest, opts ...grpc.CallOption) (*Customer.DeleteCustomerResponse, error) {
 	return b.client.DeleteCustomer(ctx, in, opts...)
+}
+
+func (b *Broker) ListCustomers(ctx context.Context, in *Customer.ListCustomersRequest, opts ...grpc.CallOption) (*Customer.ListCustomersResponse, error) {
+	return b.client.ListCustomers(ctx, in, opts...)
+}
+
+func (b *Broker) ArchiveCustomer(ctx context.Context, in *Customer.ArchiveCustomerRequest, opts ...grpc.CallOption) (*Customer.ArchiveCustomerResponse, error) {
+	return b.client.ArchiveCustomer(ctx, in, opts...)
+}
+
+func (b *Broker) GetCustomerHistory(ctx context.Context, in *Customer.GetCustomerHistoryRequest, opts ...grpc.CallOption) (*Customer.GetCustomerHistoryResponse, error) {
+	return b.client.GetCustomerHistory(ctx, in, opts...)
+}
+
+func (b *Broker) AddCustomerNote(ctx context.Context, in *Customer.AddCustomerNoteRequest, opts ...grpc.CallOption) (*Customer.AddCustomerNoteResponse, error) {
+	return b.client.AddCustomerNote(ctx, in, opts...)
+}
+
+func (b *Broker) SearchCustomers(ctx context.Context, in *Customer.SearchCustomersRequest, opts ...grpc.CallOption) (*Customer.SearchCustomersResponse, error) {
+	return b.client.SearchCustomers(ctx, in, opts...)
 }

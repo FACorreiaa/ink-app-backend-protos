@@ -16,7 +16,7 @@ import (
 //
 // Ensure that you're using the interface type here and not the implementation
 type Brokers struct {
-	Customer       customer.CustomerClient
+	Customer       customer.CustomerServiceClient
 	Auth           auth.AuthClient
 	TransportUtils *utils.TransportUtils
 }
