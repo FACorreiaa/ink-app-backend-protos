@@ -1,5 +1,5 @@
-# github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250309212048-16160b6f7f5a
-## explicit; go 1.24
+# github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250310154550-b7f8b7bc536c
+## explicit; go 1.24.1
 github.com/FACorreiaa/ink-app-backend-grpc/internal/domain
 github.com/FACorreiaa/ink-app-backend-grpc/protocol/grpc
 github.com/FACorreiaa/ink-app-backend-grpc/protocol/grpc/middleware
