@@ -19,18 +19,30 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ConversationService_CreateConversation_FullMethodName = "/inkMe.conversation.ConversationService/CreateConversation"
-	ConversationService_ListConversations_FullMethodName  = "/inkMe.conversation.ConversationService/ListConversations"
-	ConversationService_AddParticipant_FullMethodName     = "/inkMe.conversation.ConversationService/AddParticipant"
+	ConversationService_CreateConversation_FullMethodName  = "/inkMe.conversation.ConversationService/CreateConversation"
+	ConversationService_ListConversations_FullMethodName   = "/inkMe.conversation.ConversationService/ListConversations"
+	ConversationService_GetConversation_FullMethodName     = "/inkMe.conversation.ConversationService/GetConversation"
+	ConversationService_SendMessage_FullMethodName         = "/inkMe.conversation.ConversationService/SendMessage"
+	ConversationService_MarkAsRead_FullMethodName          = "/inkMe.conversation.ConversationService/MarkAsRead"
+	ConversationService_ArchiveConversation_FullMethodName = "/inkMe.conversation.ConversationService/ArchiveConversation"
 )
 
 // ConversationServiceClient is the client API for ConversationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConversationServiceClient interface {
+	// Create a new conversation between an artist and client
 	CreateConversation(ctx context.Context, in *CreateConversationRequest, opts ...grpc.CallOption) (*CreateConversationResponse, error)
+	// List conversations with various filters
 	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*ListConversationsResponse, error)
-	AddParticipant(ctx context.Context, in *AddParticipantRequest, opts ...grpc.CallOption) (*AddParticipantResponse, error)
+	// Get a specific conversation by ID
+	GetConversation(ctx context.Context, in *GetConversationRequest, opts ...grpc.CallOption) (*GetConversationResponse, error)
+	// Send a message in a conversation
+	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
+	// Mark messages as read
+	MarkAsRead(ctx context.Context, in *MarkAsReadRequest, opts ...grpc.CallOption) (*MarkAsReadResponse, error)
+	// Archive a conversation
+	ArchiveConversation(ctx context.Context, in *ArchiveConversationRequest, opts ...grpc.CallOption) (*ArchiveConversationResponse, error)
 }
 
 type conversationServiceClient struct {
@@ -61,10 +73,40 @@ func (c *conversationServiceClient) ListConversations(ctx context.Context, in *L
 	return out, nil
 }
 
-func (c *conversationServiceClient) AddParticipant(ctx context.Context, in *AddParticipantRequest, opts ...grpc.CallOption) (*AddParticipantResponse, error) {
+func (c *conversationServiceClient) GetConversation(ctx context.Context, in *GetConversationRequest, opts ...grpc.CallOption) (*GetConversationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddParticipantResponse)
-	err := c.cc.Invoke(ctx, ConversationService_AddParticipant_FullMethodName, in, out, cOpts...)
+	out := new(GetConversationResponse)
+	err := c.cc.Invoke(ctx, ConversationService_GetConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationServiceClient) SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendMessageResponse)
+	err := c.cc.Invoke(ctx, ConversationService_SendMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationServiceClient) MarkAsRead(ctx context.Context, in *MarkAsReadRequest, opts ...grpc.CallOption) (*MarkAsReadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MarkAsReadResponse)
+	err := c.cc.Invoke(ctx, ConversationService_MarkAsRead_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationServiceClient) ArchiveConversation(ctx context.Context, in *ArchiveConversationRequest, opts ...grpc.CallOption) (*ArchiveConversationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ArchiveConversationResponse)
+	err := c.cc.Invoke(ctx, ConversationService_ArchiveConversation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,9 +117,18 @@ func (c *conversationServiceClient) AddParticipant(ctx context.Context, in *AddP
 // All implementations must embed UnimplementedConversationServiceServer
 // for forward compatibility.
 type ConversationServiceServer interface {
+	// Create a new conversation between an artist and client
 	CreateConversation(context.Context, *CreateConversationRequest) (*CreateConversationResponse, error)
+	// List conversations with various filters
 	ListConversations(context.Context, *ListConversationsRequest) (*ListConversationsResponse, error)
-	AddParticipant(context.Context, *AddParticipantRequest) (*AddParticipantResponse, error)
+	// Get a specific conversation by ID
+	GetConversation(context.Context, *GetConversationRequest) (*GetConversationResponse, error)
+	// Send a message in a conversation
+	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)
+	// Mark messages as read
+	MarkAsRead(context.Context, *MarkAsReadRequest) (*MarkAsReadResponse, error)
+	// Archive a conversation
+	ArchiveConversation(context.Context, *ArchiveConversationRequest) (*ArchiveConversationResponse, error)
 	mustEmbedUnimplementedConversationServiceServer()
 }
 
@@ -94,8 +145,17 @@ func (UnimplementedConversationServiceServer) CreateConversation(context.Context
 func (UnimplementedConversationServiceServer) ListConversations(context.Context, *ListConversationsRequest) (*ListConversationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListConversations not implemented")
 }
-func (UnimplementedConversationServiceServer) AddParticipant(context.Context, *AddParticipantRequest) (*AddParticipantResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddParticipant not implemented")
+func (UnimplementedConversationServiceServer) GetConversation(context.Context, *GetConversationRequest) (*GetConversationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConversation not implemented")
+}
+func (UnimplementedConversationServiceServer) SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (UnimplementedConversationServiceServer) MarkAsRead(context.Context, *MarkAsReadRequest) (*MarkAsReadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarkAsRead not implemented")
+}
+func (UnimplementedConversationServiceServer) ArchiveConversation(context.Context, *ArchiveConversationRequest) (*ArchiveConversationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ArchiveConversation not implemented")
 }
 func (UnimplementedConversationServiceServer) mustEmbedUnimplementedConversationServiceServer() {}
 func (UnimplementedConversationServiceServer) testEmbeddedByValue()                             {}
@@ -154,20 +214,74 @@ func _ConversationService_ListConversations_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationService_AddParticipant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddParticipantRequest)
+func _ConversationService_GetConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConversationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationServiceServer).AddParticipant(ctx, in)
+		return srv.(ConversationServiceServer).GetConversation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ConversationService_AddParticipant_FullMethodName,
+		FullMethod: ConversationService_GetConversation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationServiceServer).AddParticipant(ctx, req.(*AddParticipantRequest))
+		return srv.(ConversationServiceServer).GetConversation(ctx, req.(*GetConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationService_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationServiceServer).SendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationService_SendMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationServiceServer).SendMessage(ctx, req.(*SendMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationService_MarkAsRead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MarkAsReadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationServiceServer).MarkAsRead(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationService_MarkAsRead_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationServiceServer).MarkAsRead(ctx, req.(*MarkAsReadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationService_ArchiveConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationServiceServer).ArchiveConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationService_ArchiveConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationServiceServer).ArchiveConversation(ctx, req.(*ArchiveConversationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -188,8 +302,20 @@ var ConversationService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ConversationService_ListConversations_Handler,
 		},
 		{
-			MethodName: "AddParticipant",
-			Handler:    _ConversationService_AddParticipant_Handler,
+			MethodName: "GetConversation",
+			Handler:    _ConversationService_GetConversation_Handler,
+		},
+		{
+			MethodName: "SendMessage",
+			Handler:    _ConversationService_SendMessage_Handler,
+		},
+		{
+			MethodName: "MarkAsRead",
+			Handler:    _ConversationService_MarkAsRead_Handler,
+		},
+		{
+			MethodName: "ArchiveConversation",
+			Handler:    _ConversationService_ArchiveConversation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2,51 +2,161 @@ syntax = "proto3";
 
 package inkMe.conversation;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/conversation";
 
 service ConversationService {
+  // Create a new conversation between an artist and client
   rpc CreateConversation(CreateConversationRequest) returns (CreateConversationResponse);
+  
+  // List conversations with various filters
   rpc ListConversations(ListConversationsRequest) returns (ListConversationsResponse);
-  rpc AddParticipant(AddParticipantRequest) returns (AddParticipantResponse);
-  // ...
+  
+  // Get a specific conversation by ID
+  rpc GetConversation(GetConversationRequest) returns (GetConversationResponse);
+  
+  // Send a message in a conversation
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  
+  // Mark messages as read
+  rpc MarkAsRead(MarkAsReadRequest) returns (MarkAsReadResponse);
+  
+  // Archive a conversation
+  rpc ArchiveConversation(ArchiveConversationRequest) returns (ArchiveConversationResponse);
 }
 
+message Status {
+  enum Code {
+    UNSPECIFIED = 0;
+    OK = 1;
+    ERROR = 2;
+  }
+  Code code = 1;
+  string message = 2;
+}
+
+// Request to create a new conversation
 message CreateConversationRequest {
-  string studio_id = 1;
-  string client_id = 2;
-  string subject   = 3;
-  repeated string user_ids = 4; // staff participants
+  string studio_id = 2;
+  string artist_id = 3;  // The tattoo artist
+  string client_id = 4;  // The client
+  string subject = 5;    // Optional subject for the conversation
+  BaseRequest request = 100;
+
 }
 
 message CreateConversationResponse {
-  string conversation_id = 1;
-  string message         = 2;
+  Conversation conversation = 2;
+  BaseResponse response = 1;
+
 }
 
+// Request to list conversations
 message ListConversationsRequest {
-  string studio_id = 1;
-  // possibly filter by client, or user
+  BaseRequest request = 100;
+  string studio_id = 2;
+  optional string artist_id = 3;  // Filter by artist
+  optional string client_id = 4;  // Filter by client
+  optional bool unread_only = 5;  // Filter for unread messages only
+  optional bool archived = 6;     // Include archived conversations
+  int32 page = 7;                 // For pagination
+  int32 page_size = 8;            // For pagination
 }
 
 message ListConversationsResponse {
-  repeated Conversation conversations = 1;
+  BaseResponse response = 100;
+  repeated Conversation conversations = 2;
+  int32 total_count = 3;          // Total number of conversations matching filters
 }
 
-message AddParticipantRequest {
-  string conversation_id = 1;
-  string user_id         = 2;
+// Request to get a specific conversation
+message GetConversationRequest {
+  string conversation_id = 2;
+  optional int32 message_limit = 3;   // Limit number of messages returned
+  optional int64 before_timestamp = 4; // Get messages before this timestamp
+  BaseRequest request = 100;
 }
 
-message AddParticipantResponse {
-  string message = 1;
+message GetConversationResponse {
+  Conversation conversation = 2;
+  repeated Message messages = 3;
+  BaseResponse response = 100;
 }
 
+// Request to send a message
+message SendMessageRequest {
+  BaseRequest base = 1;
+  string conversation_id = 2;
+  string sender_id = 3;       // Either artist_id or client_id
+  string content = 4;         // Text content
+  repeated Attachment attachments = 5; // Optional attachments
+}
+
+message SendMessageResponse {
+  BaseResponse base = 1;
+  Message message = 2;
+}
+
+// Request to mark messages as read
+message MarkAsReadRequest {
+  BaseRequest base = 1;
+  string conversation_id = 2;
+  string user_id = 3;         // The user marking messages as read
+  int64 read_up_to = 4;       // Timestamp up to which messages are read
+}
+
+message MarkAsReadResponse {
+  BaseResponse base = 1;
+}
+
+// Request to archive a conversation
+message ArchiveConversationRequest {
+  BaseRequest base = 1;
+  string conversation_id = 2;
+  string user_id = 3;         // User performing the archive operation
+  bool archive = 4;           // True to archive, false to unarchive
+}
+
+message ArchiveConversationResponse {
+  BaseResponse base = 1;
+}
+
+// Conversation entity
 message Conversation {
-  string id         = 1;
-  string studio_id  = 2;
-  string client_id  = 3;
-  string subject    = 4;
-  // etc
+  string id = 1;
+  string studio_id = 2;
+  string artist_id = 3;
+  string client_id = 4;
+  string subject = 5;
+  google.protobuf.Timestamp created_at = 6;       // Timestamp when the conversation was created
+  google.protobuf.Timestamp updated_at = 7;       // Timestamp of the last message
+  bool is_archived = 8;       // Whether the conversation is archived
+  
+  // Counts for unread messages
+  int32 artist_unread_count = 9;  // Unread messages for the artist
+  int32 client_unread_count = 10;  // Unread messages for the client
+}
+
+// Message entity
+message Message {
+  string id = 1;
+  string conversation_id = 2;
+  string sender_id = 3;       // ID of the sender (artist or client)
+  string content = 4;         // Text content
+  int64 sent_at = 5;          // Timestamp when the message was sent
+  bool is_read = 6;           // Whether the message has been read by the recipient
+  repeated Attachment attachments = 7; // Optional attachments
+}
+
+// Attachment entity for messages
+message Attachment {
+  string id = 1;
+  string type = 2;            // e.g., "image", "document", "tattoo_design"
+  string url = 3;             // URL to the attachment
+  string name = 4;            // Original filename
+  int64 size = 5;             // Size in bytes
+  string mime_type = 6;       // MIME type
 }
 
 message BaseRequest {

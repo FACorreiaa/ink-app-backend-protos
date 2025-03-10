@@ -2,49 +2,114 @@ syntax = "proto3";
 
 package inkMe.integration;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/integration";
 
-// POST MVP
-
+// Integration service for managing connections with external providers
 service IntegrationService {
+  // Link an external provider to a studio
   rpc LinkProvider(LinkProviderRequest) returns (LinkProviderResponse);
+  
+  // Refresh the authentication tokens for a provider
   rpc RefreshProvider(RefreshProviderRequest) returns (RefreshProviderResponse);
+  
+  // Get information about a linked provider
   rpc GetProviderInfo(GetProviderInfoRequest) returns (GetProviderInfoResponse);
+  
+  // Unlink a provider from a studio
+  rpc UnlinkProvider(UnlinkProviderRequest) returns (UnlinkProviderResponse);
+  
+  // List all linked providers for a studio
+  rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse);
+}
+
+enum ProviderType {
+  PROVIDER_TYPE_UNSPECIFIED = 0;
+  INSTAGRAM = 1;
+  WHATSAPP = 2;
+  FACEBOOK = 3;
+  TWITTER = 4;
+  TIKTOK = 5;
 }
 
 message LinkProviderRequest {
   string studio_id = 1;
-  string provider  = 2; // 'INSTAGRAM', 'WHATSAPP'
-  // Possibly an OAuth code or token
+  ProviderType provider = 2;
+  string auth_code = 3;
+  string redirect_uri = 4;
+  BaseRequest base = 999;
 }
 
 message LinkProviderResponse {
   string message = 1;
+  ProviderInfo info = 2;
+  BaseResponse base = 999;
 }
 
 message RefreshProviderRequest {
   string studio_id = 1;
-  string provider  = 2;
+  ProviderType provider = 2;
+  BaseRequest base = 999;
 }
 
 message RefreshProviderResponse {
   string message = 1;
+  ProviderInfo info = 2;
+  BaseResponse base = 999;
 }
 
 message GetProviderInfoRequest {
   string studio_id = 1;
-  string provider  = 2;
+  ProviderType provider = 2;
+  BaseRequest base = 999;
 }
 
 message GetProviderInfoResponse {
   ProviderInfo info = 1;
+  BaseResponse base = 999;
+}
+
+message UnlinkProviderRequest {
+  string studio_id = 1;
+  ProviderType provider = 2;
+  BaseRequest base = 999;
+}
+
+message UnlinkProviderResponse {
+  string message = 1;
+  BaseResponse base = 999;
+}
+
+message ListProvidersRequest {
+  string studio_id = 1;
+  BaseRequest base = 999;
+}
+
+message ListProvidersResponse {
+  repeated ProviderInfo providers = 1;
+  BaseResponse base = 999;
 }
 
 message ProviderInfo {
-  string provider      = 1;
-  string access_token  = 2;
+  ProviderType provider = 1;
+  string access_token = 2;
   string refresh_token = 3;
-  string expires_at    = 4;
+  google.protobuf.Timestamp expires_at = 4;
+  string username = 5;
+  string provider_user_id = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  ProviderStatus status = 9;
+  map<string, string> metadata = 10;
+}
+
+enum ProviderStatus {
+  PROVIDER_STATUS_UNSPECIFIED = 0;
+  ACTIVE = 1;
+  EXPIRED = 2;
+  REVOKED = 4;
+  ERROR = 5;
 }
 
 message BaseRequest {

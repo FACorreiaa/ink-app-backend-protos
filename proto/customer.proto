@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package inkMe.customer;
 
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/Customer";
 
 service CustomerService {
@@ -20,6 +23,7 @@ service CustomerService {
 
 message CreateCustomerRequest {
   Customer customer = 1;
+  google.protobuf.Timestamp created_at = 2;
   BaseRequest request = 100;
 }
 
@@ -52,7 +56,9 @@ message ListCustomersResponse {
 
 message UpdateCustomerRequest {
   string customer_id = 1;
-  repeated XDiff diffs = 2;
+  Customer customer = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  google.protobuf.Timestamp updated_at = 4;
   BaseRequest request = 100;
 }
 
@@ -95,7 +101,8 @@ message DeleteCustomerRequest {
 }
 
 message DeleteCustomerResponse {
-  string message = 1;
+  bool success = 1;
+  string message = 2;
   BaseResponse response = 100;
 }
 

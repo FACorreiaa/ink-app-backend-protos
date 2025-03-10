@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package inkMe.notification;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/notification";
 
 // POST MVP
@@ -16,6 +18,7 @@ service NotificationService {
 message SubscribeRequest {
   string user_id  = 1;
   string device_token = 2; // For push notifications
+  google.protobuf.Timestamp created_at = 3;
 }
 
 message SubscribeResponse {

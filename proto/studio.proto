@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package inkMe.studio;
 
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/studio";
@@ -42,17 +43,15 @@ message CreateStudioResponse {
 
 message UpdateStudioRequest {
   string studio_id = 1;
-  string name = 2;
-  string address = 3;
-  string phone = 4;
-  string email = 5;
-  string website = 6;
-  google.protobuf.Timestamp updated_at = 7;
-  BaseRequest request = 100;
+  Studio studio = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  BaseRequest base = 100;
 }
 
 message UpdateStudioResponse {
-  string message = 1;
+  bool success = 1;
+  string message = 2;
+  Studio studio = 3;
   BaseResponse response = 100;
 }
 

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package inkMe.portfolio;
 
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/portfolio";
@@ -27,11 +28,9 @@ service PortfolioService {
 message UploadDesignRequest {
   string studio_id = 1;
   string artist_id = 2;
-  string image_url = 3;
-  string title = 4;
-  string description = 5;
-  string style = 6;
-  google.protobuf.Timestamp created_at = 7;
+  Design design = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.FieldMask update_mask = 5;
   BaseRequest request = 100;
 }
 

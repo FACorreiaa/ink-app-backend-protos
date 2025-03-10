@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package inkMe.user;
 
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/user";
 
 service UserService {
@@ -17,6 +20,7 @@ service UserService {
 
 message GetUserRequest {
   string user_id = 1;
+  google.protobuf.Timestamp created_at = 2;
   // or string username if needed
 }
 
@@ -28,6 +32,8 @@ message UpdateUserRequest {
   string user_id   = 1;
   string display_name = 2;
   string role         = 3;
+  google.protobuf.FieldMask update_mask = 4;
+
   // etc.
 }
 

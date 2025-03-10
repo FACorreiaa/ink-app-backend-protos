@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package inkMe.appointment;
 
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/yourorg/inkme-grpc/inkMe/appointment";
 
 service AppointmentService {
@@ -28,12 +31,15 @@ service AppointmentService {
 
 message CreateAppointmentRequest {
   Appointment appointment = 1;
+  google.protobuf.Timestamp created_at = 2;
   BaseRequest request = 100;
 }
 
 message CreateAppointmentResponse {
-  string appointment_id = 1;
-  string message        = 2;
+  bool success = 1;
+  string message = 2;
+  Appointment appointment = 3;
+  BaseResponse response = 100;
 }
 
 message GetAppointmentRequest {
@@ -42,7 +48,11 @@ message GetAppointmentRequest {
 }
 
 message GetAppointmentResponse {
-  Appointment appointment = 1;
+  bool success = 1;
+  string message = 2;
+  Appointment appointment = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
   BaseResponse response = 100;
 }
 
@@ -53,18 +63,23 @@ message ListAppointmentsRequest {
 
 message ListAppointmentsResponse {
   repeated Appointment appointments = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
   BaseResponse response = 100;
 }
 
 message UpdateAppointmentRequest {
   string appointment_id = 1;
-  string status         = 2;
-  string notes          = 3;
-  // possibly new times or new artist
+  Appointment appointment = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  BaseRequest base = 100;
 }
 
 message UpdateAppointmentResponse {
-  string message = 1;
+  bool success = 1;
+  string message = 2;
+  Appointment appointment = 3;
+  BaseResponse response = 100;
 }
 
 message CancelAppointmentRequest {
@@ -82,6 +97,7 @@ message RescheduleAppointmentRequest {
   string new_start_time = 2;
   string new_end_time   = 3;
   string new_artist_id  = 4;
+  google.protobuf.Timestamp updated_at = 5;
   BaseRequest request = 100;
 }
 

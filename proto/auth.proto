@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package inkMe.auth;
 
+import "google/protobuf/timestamp.proto";
+
 service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
@@ -24,6 +26,7 @@ message RegisterRequest {
   string password = 3;
   string studio_id = 4;
   string role = 5;
+  google.protobuf.Timestamp created_at = 6;
   BaseRequest request = 100;
 }
 

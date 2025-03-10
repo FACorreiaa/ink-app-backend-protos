@@ -22,15 +22,26 @@ const (
 	IntegrationService_LinkProvider_FullMethodName    = "/inkMe.integration.IntegrationService/LinkProvider"
 	IntegrationService_RefreshProvider_FullMethodName = "/inkMe.integration.IntegrationService/RefreshProvider"
 	IntegrationService_GetProviderInfo_FullMethodName = "/inkMe.integration.IntegrationService/GetProviderInfo"
+	IntegrationService_UnlinkProvider_FullMethodName  = "/inkMe.integration.IntegrationService/UnlinkProvider"
+	IntegrationService_ListProviders_FullMethodName   = "/inkMe.integration.IntegrationService/ListProviders"
 )
 
 // IntegrationServiceClient is the client API for IntegrationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Integration service for managing connections with external providers
 type IntegrationServiceClient interface {
+	// Link an external provider to a studio
 	LinkProvider(ctx context.Context, in *LinkProviderRequest, opts ...grpc.CallOption) (*LinkProviderResponse, error)
+	// Refresh the authentication tokens for a provider
 	RefreshProvider(ctx context.Context, in *RefreshProviderRequest, opts ...grpc.CallOption) (*RefreshProviderResponse, error)
+	// Get information about a linked provider
 	GetProviderInfo(ctx context.Context, in *GetProviderInfoRequest, opts ...grpc.CallOption) (*GetProviderInfoResponse, error)
+	// Unlink a provider from a studio
+	UnlinkProvider(ctx context.Context, in *UnlinkProviderRequest, opts ...grpc.CallOption) (*UnlinkProviderResponse, error)
+	// List all linked providers for a studio
+	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
 }
 
 type integrationServiceClient struct {
@@ -71,13 +82,42 @@ func (c *integrationServiceClient) GetProviderInfo(ctx context.Context, in *GetP
 	return out, nil
 }
 
+func (c *integrationServiceClient) UnlinkProvider(ctx context.Context, in *UnlinkProviderRequest, opts ...grpc.CallOption) (*UnlinkProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnlinkProviderResponse)
+	err := c.cc.Invoke(ctx, IntegrationService_UnlinkProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationServiceClient) ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProvidersResponse)
+	err := c.cc.Invoke(ctx, IntegrationService_ListProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IntegrationServiceServer is the server API for IntegrationService service.
 // All implementations must embed UnimplementedIntegrationServiceServer
 // for forward compatibility.
+//
+// Integration service for managing connections with external providers
 type IntegrationServiceServer interface {
+	// Link an external provider to a studio
 	LinkProvider(context.Context, *LinkProviderRequest) (*LinkProviderResponse, error)
+	// Refresh the authentication tokens for a provider
 	RefreshProvider(context.Context, *RefreshProviderRequest) (*RefreshProviderResponse, error)
+	// Get information about a linked provider
 	GetProviderInfo(context.Context, *GetProviderInfoRequest) (*GetProviderInfoResponse, error)
+	// Unlink a provider from a studio
+	UnlinkProvider(context.Context, *UnlinkProviderRequest) (*UnlinkProviderResponse, error)
+	// List all linked providers for a studio
+	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	mustEmbedUnimplementedIntegrationServiceServer()
 }
 
@@ -96,6 +136,12 @@ func (UnimplementedIntegrationServiceServer) RefreshProvider(context.Context, *R
 }
 func (UnimplementedIntegrationServiceServer) GetProviderInfo(context.Context, *GetProviderInfoRequest) (*GetProviderInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProviderInfo not implemented")
+}
+func (UnimplementedIntegrationServiceServer) UnlinkProvider(context.Context, *UnlinkProviderRequest) (*UnlinkProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnlinkProvider not implemented")
+}
+func (UnimplementedIntegrationServiceServer) ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProviders not implemented")
 }
 func (UnimplementedIntegrationServiceServer) mustEmbedUnimplementedIntegrationServiceServer() {}
 func (UnimplementedIntegrationServiceServer) testEmbeddedByValue()                            {}
@@ -172,6 +218,42 @@ func _IntegrationService_GetProviderInfo_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IntegrationService_UnlinkProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnlinkProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationServiceServer).UnlinkProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntegrationService_UnlinkProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationServiceServer).UnlinkProvider(ctx, req.(*UnlinkProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationService_ListProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationServiceServer).ListProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntegrationService_ListProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationServiceServer).ListProviders(ctx, req.(*ListProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // IntegrationService_ServiceDesc is the grpc.ServiceDesc for IntegrationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +272,14 @@ var IntegrationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProviderInfo",
 			Handler:    _IntegrationService_GetProviderInfo_Handler,
+		},
+		{
+			MethodName: "UnlinkProvider",
+			Handler:    _IntegrationService_UnlinkProvider_Handler,
+		},
+		{
+			MethodName: "ListProviders",
+			Handler:    _IntegrationService_ListProviders_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
