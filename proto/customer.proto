@@ -165,3 +165,9 @@ message SearchCustomersResponse {
   repeated Customer customers = 1;
   BaseResponse response = 100;
 }
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  SUCCESS = 1;
+  FAILURE = 2;
+}
