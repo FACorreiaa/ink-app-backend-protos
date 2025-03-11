@@ -84,6 +84,7 @@ message Customer {
   string id_card_number    = 12;
   string first_name = 13;
   string last_name  = 14;
+  string birthday   = 15;
 }
 
 message BaseRequest {
