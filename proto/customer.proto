@@ -85,6 +85,7 @@ message Customer {
   string first_name = 13;
   string last_name  = 14;
   string birthday   = 15;
+  bool is_archived = 16;
 }
 
 message BaseRequest {
