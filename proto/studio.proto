@@ -5,7 +5,7 @@ package inkMe.studio;
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/studio";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/studio/generated";
 
 // StudioService for managing tattoo studios and staff
 service StudioService {

@@ -4,7 +4,7 @@ package inkMe.conversation;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/conversation";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/conversation/generated";
 
 service ConversationService {
   // Create a new conversation between an artist and client

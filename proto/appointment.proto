@@ -5,7 +5,7 @@ package inkMe.appointment;
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/appointment";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/appointment/generated";
 
 service AppointmentService {
   rpc CreateAppointment(CreateAppointmentRequest) returns (CreateAppointmentResponse);

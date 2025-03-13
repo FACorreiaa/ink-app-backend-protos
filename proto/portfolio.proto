@@ -5,7 +5,7 @@ package inkMe.portfolio;
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/portfolio";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/portfolio/generated";
 
 // Portfolio service for managing artist portfolios and designs
 service PortfolioService {

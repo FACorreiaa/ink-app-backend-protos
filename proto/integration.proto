@@ -4,7 +4,7 @@ package inkMe.integration;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/integration";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/integration/generated";
 
 // Integration service for managing connections with external providers
 service IntegrationService {

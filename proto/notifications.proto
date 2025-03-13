@@ -4,7 +4,7 @@ package inkMe.notification;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/notification";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/notifications/generated";
 
 // POST MVP
 service NotificationService {

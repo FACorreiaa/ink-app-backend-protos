@@ -4,7 +4,7 @@ package inkMe.payment;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/payment";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/payment/generated";
 
 // PaymentService for deposits and transactions
 service PaymentService {

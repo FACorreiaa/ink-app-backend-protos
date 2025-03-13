@@ -4,7 +4,7 @@ package inkMe.message;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourorg/inkme-grpc/inkMe/message";
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/message/generated";
 
 service MessagingService {
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);

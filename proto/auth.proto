@@ -4,6 +4,9 @@ package inkMe.auth;
 
 import "google/protobuf/timestamp.proto";
 
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/auth/generated";
+
+
 service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
