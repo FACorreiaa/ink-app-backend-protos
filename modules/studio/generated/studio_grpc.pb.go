@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: studio.proto
 
-package studio
+package generated
 
 import (
 	context "context"
@@ -21,7 +21,10 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	StudioService_CreateStudio_FullMethodName        = "/inkMe.studio.StudioService/CreateStudio"
 	StudioService_UpdateStudio_FullMethodName        = "/inkMe.studio.StudioService/UpdateStudio"
-	StudioService_GetStudio_FullMethodName           = "/inkMe.studio.StudioService/GetStudio"
+	StudioService_AddStudioUser_FullMethodName       = "/inkMe.studio.StudioService/AddStudioUser"
+	StudioService_UpdateStudioUser_FullMethodName    = "/inkMe.studio.StudioService/UpdateStudioUser"
+	StudioService_RemoveStudioUser_FullMethodName    = "/inkMe.studio.StudioService/RemoveStudioUser"
+	StudioService_ListStudios_FullMethodName         = "/inkMe.studio.StudioService/ListStudios"
 	StudioService_AddStaffMember_FullMethodName      = "/inkMe.studio.StudioService/AddStaffMember"
 	StudioService_UpdateStaffMember_FullMethodName   = "/inkMe.studio.StudioService/UpdateStaffMember"
 	StudioService_RemoveStaffMember_FullMethodName   = "/inkMe.studio.StudioService/RemoveStaffMember"
@@ -36,9 +39,16 @@ const (
 //
 // StudioService for managing tattoo studios and staff
 type StudioServiceClient interface {
+	// Creates a new studio with owner
 	CreateStudio(ctx context.Context, in *CreateStudioRequest, opts ...grpc.CallOption) (*CreateStudioResponse, error)
+	// For existing studio owners to edit their studio
 	UpdateStudio(ctx context.Context, in *UpdateStudioRequest, opts ...grpc.CallOption) (*UpdateStudioResponse, error)
-	GetStudio(ctx context.Context, in *GetStudioRequest, opts ...grpc.CallOption) (*GetStudioResponse, error)
+	// For managing staff/users within a studio
+	AddStudioUser(ctx context.Context, in *AddStudioUserRequest, opts ...grpc.CallOption) (*AddStudioUserResponse, error)
+	UpdateStudioUser(ctx context.Context, in *UpdateStudioUserRequest, opts ...grpc.CallOption) (*UpdateStudioUserResponse, error)
+	RemoveStudioUser(ctx context.Context, in *RemoveStudioUserRequest, opts ...grpc.CallOption) (*RemoveStudioUserResponse, error)
+	// For multi-studio scenarios
+	ListStudios(ctx context.Context, in *ListStudiosRequest, opts ...grpc.CallOption) (*ListStudiosResponse, error)
 	// Staff management
 	AddStaffMember(ctx context.Context, in *AddStaffMemberRequest, opts ...grpc.CallOption) (*AddStaffMemberResponse, error)
 	UpdateStaffMember(ctx context.Context, in *UpdateStaffMemberRequest, opts ...grpc.CallOption) (*UpdateStaffMemberResponse, error)
@@ -77,10 +87,40 @@ func (c *studioServiceClient) UpdateStudio(ctx context.Context, in *UpdateStudio
 	return out, nil
 }
 
-func (c *studioServiceClient) GetStudio(ctx context.Context, in *GetStudioRequest, opts ...grpc.CallOption) (*GetStudioResponse, error) {
+func (c *studioServiceClient) AddStudioUser(ctx context.Context, in *AddStudioUserRequest, opts ...grpc.CallOption) (*AddStudioUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStudioResponse)
-	err := c.cc.Invoke(ctx, StudioService_GetStudio_FullMethodName, in, out, cOpts...)
+	out := new(AddStudioUserResponse)
+	err := c.cc.Invoke(ctx, StudioService_AddStudioUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studioServiceClient) UpdateStudioUser(ctx context.Context, in *UpdateStudioUserRequest, opts ...grpc.CallOption) (*UpdateStudioUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateStudioUserResponse)
+	err := c.cc.Invoke(ctx, StudioService_UpdateStudioUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studioServiceClient) RemoveStudioUser(ctx context.Context, in *RemoveStudioUserRequest, opts ...grpc.CallOption) (*RemoveStudioUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveStudioUserResponse)
+	err := c.cc.Invoke(ctx, StudioService_RemoveStudioUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studioServiceClient) ListStudios(ctx context.Context, in *ListStudiosRequest, opts ...grpc.CallOption) (*ListStudiosResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListStudiosResponse)
+	err := c.cc.Invoke(ctx, StudioService_ListStudios_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -153,9 +193,16 @@ func (c *studioServiceClient) GetStaffPermissions(ctx context.Context, in *GetSt
 //
 // StudioService for managing tattoo studios and staff
 type StudioServiceServer interface {
+	// Creates a new studio with owner
 	CreateStudio(context.Context, *CreateStudioRequest) (*CreateStudioResponse, error)
+	// For existing studio owners to edit their studio
 	UpdateStudio(context.Context, *UpdateStudioRequest) (*UpdateStudioResponse, error)
-	GetStudio(context.Context, *GetStudioRequest) (*GetStudioResponse, error)
+	// For managing staff/users within a studio
+	AddStudioUser(context.Context, *AddStudioUserRequest) (*AddStudioUserResponse, error)
+	UpdateStudioUser(context.Context, *UpdateStudioUserRequest) (*UpdateStudioUserResponse, error)
+	RemoveStudioUser(context.Context, *RemoveStudioUserRequest) (*RemoveStudioUserResponse, error)
+	// For multi-studio scenarios
+	ListStudios(context.Context, *ListStudiosRequest) (*ListStudiosResponse, error)
 	// Staff management
 	AddStaffMember(context.Context, *AddStaffMemberRequest) (*AddStaffMemberResponse, error)
 	UpdateStaffMember(context.Context, *UpdateStaffMemberRequest) (*UpdateStaffMemberResponse, error)
@@ -180,8 +227,17 @@ func (UnimplementedStudioServiceServer) CreateStudio(context.Context, *CreateStu
 func (UnimplementedStudioServiceServer) UpdateStudio(context.Context, *UpdateStudioRequest) (*UpdateStudioResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateStudio not implemented")
 }
-func (UnimplementedStudioServiceServer) GetStudio(context.Context, *GetStudioRequest) (*GetStudioResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetStudio not implemented")
+func (UnimplementedStudioServiceServer) AddStudioUser(context.Context, *AddStudioUserRequest) (*AddStudioUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddStudioUser not implemented")
+}
+func (UnimplementedStudioServiceServer) UpdateStudioUser(context.Context, *UpdateStudioUserRequest) (*UpdateStudioUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStudioUser not implemented")
+}
+func (UnimplementedStudioServiceServer) RemoveStudioUser(context.Context, *RemoveStudioUserRequest) (*RemoveStudioUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveStudioUser not implemented")
+}
+func (UnimplementedStudioServiceServer) ListStudios(context.Context, *ListStudiosRequest) (*ListStudiosResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStudios not implemented")
 }
 func (UnimplementedStudioServiceServer) AddStaffMember(context.Context, *AddStaffMemberRequest) (*AddStaffMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddStaffMember not implemented")
@@ -258,20 +314,74 @@ func _StudioService_UpdateStudio_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StudioService_GetStudio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStudioRequest)
+func _StudioService_AddStudioUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddStudioUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StudioServiceServer).GetStudio(ctx, in)
+		return srv.(StudioServiceServer).AddStudioUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: StudioService_GetStudio_FullMethodName,
+		FullMethod: StudioService_AddStudioUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StudioServiceServer).GetStudio(ctx, req.(*GetStudioRequest))
+		return srv.(StudioServiceServer).AddStudioUser(ctx, req.(*AddStudioUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudioService_UpdateStudioUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStudioUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudioServiceServer).UpdateStudioUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudioService_UpdateStudioUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudioServiceServer).UpdateStudioUser(ctx, req.(*UpdateStudioUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudioService_RemoveStudioUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveStudioUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudioServiceServer).RemoveStudioUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudioService_RemoveStudioUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudioServiceServer).RemoveStudioUser(ctx, req.(*RemoveStudioUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudioService_ListStudios_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStudiosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudioServiceServer).ListStudios(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudioService_ListStudios_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudioServiceServer).ListStudios(ctx, req.(*ListStudiosRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -400,8 +510,20 @@ var StudioService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _StudioService_UpdateStudio_Handler,
 		},
 		{
-			MethodName: "GetStudio",
-			Handler:    _StudioService_GetStudio_Handler,
+			MethodName: "AddStudioUser",
+			Handler:    _StudioService_AddStudioUser_Handler,
+		},
+		{
+			MethodName: "UpdateStudioUser",
+			Handler:    _StudioService_UpdateStudioUser_Handler,
+		},
+		{
+			MethodName: "RemoveStudioUser",
+			Handler:    _StudioService_RemoveStudioUser_Handler,
+		},
+		{
+			MethodName: "ListStudios",
+			Handler:    _StudioService_ListStudios_Handler,
 		},
 		{
 			MethodName: "AddStaffMember",

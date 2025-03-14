@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: portfolio.proto
 
-package portfolio
+package generated
 
 import (
 	context "context"

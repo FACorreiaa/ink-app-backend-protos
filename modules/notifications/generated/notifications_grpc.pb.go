@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: notifications.proto
 
-package notification
+package generated
 
 import (
 	context "context"

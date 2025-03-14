@@ -9,10 +9,17 @@ option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/studio
 
 // StudioService for managing tattoo studios and staff
 service StudioService {
+  // Creates a new studio with owner
   rpc CreateStudio(CreateStudioRequest) returns (CreateStudioResponse);
+  // For existing studio owners to edit their studio
   rpc UpdateStudio(UpdateStudioRequest) returns (UpdateStudioResponse);
-  rpc GetStudio(GetStudioRequest) returns (GetStudioResponse);
-  
+  // For managing staff/users within a studio
+  rpc AddStudioUser(AddStudioUserRequest) returns (AddStudioUserResponse);
+  rpc UpdateStudioUser(UpdateStudioUserRequest) returns (UpdateStudioUserResponse);
+  rpc RemoveStudioUser(RemoveStudioUserRequest) returns (RemoveStudioUserResponse);
+
+  // For multi-studio scenarios
+  rpc ListStudios(ListStudiosRequest) returns (ListStudiosResponse);  
   // Staff management
   rpc AddStaffMember(AddStaffMemberRequest) returns (AddStaffMemberResponse);
   rpc UpdateStaffMember(UpdateStaffMemberRequest) returns (UpdateStaffMemberResponse);
@@ -26,12 +33,13 @@ service StudioService {
 
 message CreateStudioRequest {
   string name = 1;
-  string address = 2;
-  string phone = 3;
-  string email = 4;
-  string website = 5;
-  string owner_id = 6;
-  google.protobuf.Timestamp created_at = 7;
+  string subdomain = 2;  // Added to match DB schema
+  string address = 3;    
+  string phone = 4;
+  string email = 5;      // For the owner
+  string website = 6;
+  OwnerInfo owner = 7;
+  google.protobuf.Timestamp created_at = 8;
   BaseRequest request = 100;
 }
 
@@ -52,16 +60,6 @@ message UpdateStudioResponse {
   bool success = 1;
   string message = 2;
   Studio studio = 3;
-  BaseResponse response = 100;
-}
-
-message GetStudioRequest {
-  string studio_id = 1;
-  BaseRequest request = 100;
-}
-
-message GetStudioResponse {
-  Studio studio = 1;
   BaseResponse response = 100;
 }
 
@@ -151,6 +149,84 @@ message StaffMember {
   repeated string permissions = 5;
   google.protobuf.Timestamp created_at = 6;
   google.protobuf.Timestamp updated_at = 7;
+}
+
+message OwnerInfo {
+  string email = 1;
+  string password = 2; // Hashed password
+  string display_name = 3;
+  string username = 4;
+  string first_name = 5;
+  string last_name = 6;
+}
+
+// For AddStudioUser RPC
+message AddStudioUserRequest {
+  string studio_id = 1;
+  string email = 2;
+  string password = 3;
+  string role = 4;
+  string display_name = 5;
+  string username = 6;
+  string first_name = 7;
+  string last_name = 8;
+  BaseRequest request = 100;
+}
+
+message AddStudioUserResponse {
+  string user_id = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+// For UpdateStudioUser RPC
+message UpdateStudioUserRequest {
+  string user_id = 1;
+  string studio_id = 2;
+  string email = 3;
+  string role = 4;
+  string display_name = 5;
+  string username = 6;
+  string first_name = 7;
+  string last_name = 8;
+  google.protobuf.FieldMask update_mask = 9;
+  BaseRequest request = 100;
+}
+
+message UpdateStudioUserResponse {
+  bool success = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+// For RemoveStudioUser RPC
+message RemoveStudioUserRequest {
+  string user_id = 1;
+  string studio_id = 2;
+  BaseRequest request = 100;
+}
+
+message RemoveStudioUserResponse {
+  bool success = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+// For ListStudios RPC
+message ListStudiosRequest {
+  int32 page_size = 1;
+  int32 page_number = 2;
+  string filter = 3;
+  string owner_id = 4; // Optional: to filter studios by owner
+  BaseRequest request = 100;
+}
+
+message ListStudiosResponse {
+  repeated Studio studios = 1;
+  int32 total_count = 2;
+  int32 page_number = 3;
+  int32 total_pages = 4;
+  BaseResponse response = 100;
 }
 
 message BaseRequest {

@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: conversation.proto
 
-package conversation
+package generated
 
 import (
 	context "context"

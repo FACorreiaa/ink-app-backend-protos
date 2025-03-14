@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: integration.proto
 
-package integration
+package generated
 
 import (
 	context "context"
