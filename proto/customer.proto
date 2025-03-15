@@ -20,6 +20,18 @@ service CustomerService {
   rpc SearchCustomers(SearchCustomersRequest) returns (SearchCustomersResponse); // Search Customers by name, phone, or other criteria
 }
 
+service CustomerAuth {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(NilReq) returns (NilRes);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc ChangeEmail(ChangeEmailRequest) returns (ChangeEmailResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (TokenResponse);
+
+  // New user-related services
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+}
+
 
 message CreateCustomerRequest {
   Customer customer = 1;
@@ -170,4 +182,106 @@ enum Status {
   STATUS_UNSPECIFIED = 0;
   SUCCESS = 1;
   FAILURE = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+  BaseRequest request = 100;
+}
+
+message LoginResponse {
+  string token = 1;
+  string message = 2;
+  BaseResponse response = 100;
+}
+
+message NilReq {
+
+}
+
+message NilRes {
+
+}
+
+message ChangePasswordRequest {
+  string username = 1;
+  string old_password = 2;
+  string new_password = 3;
+  BaseRequest request = 100;
+}
+
+message ChangePasswordResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message ChangeEmailRequest {
+  string username = 1;
+  string password = 2;
+  string new_email = 3;
+  BaseRequest request = 100;
+}
+
+message ChangeEmailResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string username = 3;
+  string password_hash = 4;
+  bool is_admin = 5;
+  string created_at = 6;
+  string updated_at = 7;
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ADMIN = 1;
+    STAFF = 2;
+    USER = 3;
+    MODERATOR = 4;
+  }
+
+  Role role = 8;
+  string studio_id = 9;
+}
+
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  string studio_id = 4;
+  string role = 5;
+  google.protobuf.Timestamp created_at = 6;
+  BaseRequest request = 100;
+}
+
+message RegisterResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message UpdateUserRequest {
+  User user = 1;
+  BaseRequest request = 100;
+}
+
+message UpdateUserResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+  BaseRequest request = 100;
+}
+
+message TokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  BaseResponse response = 100;
 }

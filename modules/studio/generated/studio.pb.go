@@ -23,6 +23,61 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type User_Role int32
+
+const (
+	User_ROLE_UNSPECIFIED User_Role = 0
+	User_ADMIN            User_Role = 1
+	User_STAFF            User_Role = 2
+	User_USER             User_Role = 3
+	User_MODERATOR        User_Role = 4
+)
+
+// Enum value maps for User_Role.
+var (
+	User_Role_name = map[int32]string{
+		0: "ROLE_UNSPECIFIED",
+		1: "ADMIN",
+		2: "STAFF",
+		3: "USER",
+		4: "MODERATOR",
+	}
+	User_Role_value = map[string]int32{
+		"ROLE_UNSPECIFIED": 0,
+		"ADMIN":            1,
+		"STAFF":            2,
+		"USER":             3,
+		"MODERATOR":        4,
+	}
+)
+
+func (x User_Role) Enum() *User_Role {
+	p := new(User_Role)
+	*p = x
+	return p
+}
+
+func (x User_Role) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (User_Role) Descriptor() protoreflect.EnumDescriptor {
+	return file_studio_proto_enumTypes[0].Descriptor()
+}
+
+func (User_Role) Type() protoreflect.EnumType {
+	return &file_studio_proto_enumTypes[0]
+}
+
+func (x User_Role) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use User_Role.Descriptor instead.
+func (User_Role) EnumDescriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{37, 0}
+}
+
 type CreateStudioRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -1903,6 +1958,1323 @@ func (x *ListStudiosResponse) GetResponse() *BaseResponse {
 	return nil
 }
 
+type RegisterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	StudioId      string                 `protobuf:"bytes,4,opt,name=studio_id,json=studioId,proto3" json:"studio_id,omitempty"`
+	Role          string                 `protobuf:"bytes,5,opt,name=role,proto3" json:"role,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterRequest) Reset() {
+	*x = RegisterRequest{}
+	mi := &file_studio_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterRequest) ProtoMessage() {}
+
+func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
+func (*RegisterRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *RegisterRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetStudioId() string {
+	if x != nil {
+		return x.StudioId
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *RegisterRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type RegisterResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterResponse) Reset() {
+	*x = RegisterResponse{}
+	mi := &file_studio_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterResponse) ProtoMessage() {}
+
+func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
+func (*RegisterResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *RegisterResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type LoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginRequest) Reset() {
+	*x = LoginRequest{}
+	mi := &file_studio_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginRequest) ProtoMessage() {}
+
+func (x *LoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
+func (*LoginRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *LoginRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type LoginResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginResponse) Reset() {
+	*x = LoginResponse{}
+	mi := &file_studio_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginResponse) ProtoMessage() {}
+
+func (x *LoginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
+func (*LoginResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *LoginResponse) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type NilReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NilReq) Reset() {
+	*x = NilReq{}
+	mi := &file_studio_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NilReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NilReq) ProtoMessage() {}
+
+func (x *NilReq) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NilReq.ProtoReflect.Descriptor instead.
+func (*NilReq) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{31}
+}
+
+type NilRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NilRes) Reset() {
+	*x = NilRes{}
+	mi := &file_studio_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NilRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NilRes) ProtoMessage() {}
+
+func (x *NilRes) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NilRes.ProtoReflect.Descriptor instead.
+func (*NilRes) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{32}
+}
+
+type ChangePasswordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	OldPassword   string                 `protobuf:"bytes,2,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
+	NewPassword   string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangePasswordRequest) Reset() {
+	*x = ChangePasswordRequest{}
+	mi := &file_studio_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangePasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangePasswordRequest) ProtoMessage() {}
+
+func (x *ChangePasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangePasswordRequest.ProtoReflect.Descriptor instead.
+func (*ChangePasswordRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ChangePasswordRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *ChangePasswordRequest) GetOldPassword() string {
+	if x != nil {
+		return x.OldPassword
+	}
+	return ""
+}
+
+func (x *ChangePasswordRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
+func (x *ChangePasswordRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type ChangePasswordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangePasswordResponse) Reset() {
+	*x = ChangePasswordResponse{}
+	mi := &file_studio_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangePasswordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangePasswordResponse) ProtoMessage() {}
+
+func (x *ChangePasswordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangePasswordResponse.ProtoReflect.Descriptor instead.
+func (*ChangePasswordResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *ChangePasswordResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ChangePasswordResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type ChangeEmailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	NewEmail      string                 `protobuf:"bytes,3,opt,name=new_email,json=newEmail,proto3" json:"new_email,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeEmailRequest) Reset() {
+	*x = ChangeEmailRequest{}
+	mi := &file_studio_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeEmailRequest) ProtoMessage() {}
+
+func (x *ChangeEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeEmailRequest.ProtoReflect.Descriptor instead.
+func (*ChangeEmailRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *ChangeEmailRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *ChangeEmailRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *ChangeEmailRequest) GetNewEmail() string {
+	if x != nil {
+		return x.NewEmail
+	}
+	return ""
+}
+
+func (x *ChangeEmailRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type ChangeEmailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangeEmailResponse) Reset() {
+	*x = ChangeEmailResponse{}
+	mi := &file_studio_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangeEmailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangeEmailResponse) ProtoMessage() {}
+
+func (x *ChangeEmailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangeEmailResponse.ProtoReflect.Descriptor instead.
+func (*ChangeEmailResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *ChangeEmailResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ChangeEmailResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	PasswordHash  string                 `protobuf:"bytes,4,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
+	IsAdmin       bool                   `protobuf:"varint,5,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Role          User_Role              `protobuf:"varint,8,opt,name=role,proto3,enum=inkMe.studio.User_Role" json:"role,omitempty"`
+	StudioId      string                 `protobuf:"bytes,9,opt,name=studio_id,json=studioId,proto3" json:"studio_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_studio_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *User) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *User) GetPasswordHash() string {
+	if x != nil {
+		return x.PasswordHash
+	}
+	return ""
+}
+
+func (x *User) GetIsAdmin() bool {
+	if x != nil {
+		return x.IsAdmin
+	}
+	return false
+}
+
+func (x *User) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *User) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+func (x *User) GetRole() User_Role {
+	if x != nil {
+		return x.Role
+	}
+	return User_ROLE_UNSPECIFIED
+}
+
+func (x *User) GetStudioId() string {
+	if x != nil {
+		return x.StudioId
+	}
+	return ""
+}
+
+// Request and response messages for new user-related services
+type GetAllUsersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllUsersRequest) Reset() {
+	*x = GetAllUsersRequest{}
+	mi := &file_studio_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllUsersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllUsersRequest) ProtoMessage() {}
+
+func (x *GetAllUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllUsersRequest.ProtoReflect.Descriptor instead.
+func (*GetAllUsersRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *GetAllUsersRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type GetAllUsersResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllUsersResponse) Reset() {
+	*x = GetAllUsersResponse{}
+	mi := &file_studio_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllUsersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllUsersResponse) ProtoMessage() {}
+
+func (x *GetAllUsersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllUsersResponse.ProtoReflect.Descriptor instead.
+func (*GetAllUsersResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GetAllUsersResponse) GetUsers() []*User {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
+func (x *GetAllUsersResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type GetUserByIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserByIDRequest) Reset() {
+	*x = GetUserByIDRequest{}
+	mi := &file_studio_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserByIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserByIDRequest) ProtoMessage() {}
+
+func (x *GetUserByIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserByIDRequest.ProtoReflect.Descriptor instead.
+func (*GetUserByIDRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *GetUserByIDRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *GetUserByIDRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type GetUserByIDResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserByIDResponse) Reset() {
+	*x = GetUserByIDResponse{}
+	mi := &file_studio_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserByIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserByIDResponse) ProtoMessage() {}
+
+func (x *GetUserByIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserByIDResponse.ProtoReflect.Descriptor instead.
+func (*GetUserByIDResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetUserByIDResponse) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *GetUserByIDResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type DeleteUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserRequest) Reset() {
+	*x = DeleteUserRequest{}
+	mi := &file_studio_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserRequest) ProtoMessage() {}
+
+func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
+func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *DeleteUserRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *DeleteUserRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type DeleteUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserResponse) Reset() {
+	*x = DeleteUserResponse{}
+	mi := &file_studio_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserResponse) ProtoMessage() {}
+
+func (x *DeleteUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserResponse.ProtoReflect.Descriptor instead.
+func (*DeleteUserResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *DeleteUserResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *DeleteUserResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type UpdateUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserRequest) Reset() {
+	*x = UpdateUserRequest{}
+	mi := &file_studio_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRequest) ProtoMessage() {}
+
+func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *UpdateUserRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *UpdateUserRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type UpdateUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserResponse) Reset() {
+	*x = UpdateUserResponse{}
+	mi := &file_studio_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserResponse) ProtoMessage() {}
+
+func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *UpdateUserResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateUserResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type InsertUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InsertUserRequest) Reset() {
+	*x = InsertUserRequest{}
+	mi := &file_studio_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsertUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsertUserRequest) ProtoMessage() {}
+
+func (x *InsertUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsertUserRequest.ProtoReflect.Descriptor instead.
+func (*InsertUserRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *InsertUserRequest) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *InsertUserRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type InsertUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InsertUserResponse) Reset() {
+	*x = InsertUserResponse{}
+	mi := &file_studio_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InsertUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InsertUserResponse) ProtoMessage() {}
+
+func (x *InsertUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InsertUserResponse.ProtoReflect.Descriptor instead.
+func (*InsertUserResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *InsertUserResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *InsertUserResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
+type RefreshTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenRequest) Reset() {
+	*x = RefreshTokenRequest{}
+	mi := &file_studio_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenRequest) ProtoMessage() {}
+
+func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
+func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *RefreshTokenRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RefreshTokenRequest) GetRequest() *BaseRequest {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
+type TokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TokenResponse) Reset() {
+	*x = TokenResponse{}
+	mi := &file_studio_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TokenResponse) ProtoMessage() {}
+
+func (x *TokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studio_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TokenResponse.ProtoReflect.Descriptor instead.
+func (*TokenResponse) Descriptor() ([]byte, []int) {
+	return file_studio_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *TokenResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *TokenResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *TokenResponse) GetResponse() *BaseResponse {
+	if x != nil {
+		return x.Response
+	}
+	return nil
+}
+
 type BaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Downstream    string                 `protobuf:"bytes,998,opt,name=downstream,proto3" json:"downstream,omitempty"`
@@ -1913,7 +3285,7 @@ type BaseRequest struct {
 
 func (x *BaseRequest) Reset() {
 	*x = BaseRequest{}
-	mi := &file_studio_proto_msgTypes[27]
+	mi := &file_studio_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1925,7 +3297,7 @@ func (x *BaseRequest) String() string {
 func (*BaseRequest) ProtoMessage() {}
 
 func (x *BaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_studio_proto_msgTypes[27]
+	mi := &file_studio_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1938,7 +3310,7 @@ func (x *BaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BaseRequest.ProtoReflect.Descriptor instead.
 func (*BaseRequest) Descriptor() ([]byte, []int) {
-	return file_studio_proto_rawDescGZIP(), []int{27}
+	return file_studio_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *BaseRequest) GetDownstream() string {
@@ -1966,7 +3338,7 @@ type BaseResponse struct {
 
 func (x *BaseResponse) Reset() {
 	*x = BaseResponse{}
-	mi := &file_studio_proto_msgTypes[28]
+	mi := &file_studio_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1978,7 +3350,7 @@ func (x *BaseResponse) String() string {
 func (*BaseResponse) ProtoMessage() {}
 
 func (x *BaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_studio_proto_msgTypes[28]
+	mi := &file_studio_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1991,7 +3363,7 @@ func (x *BaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BaseResponse.ProtoReflect.Descriptor instead.
 func (*BaseResponse) Descriptor() ([]byte, []int) {
-	return file_studio_proto_rawDescGZIP(), []int{28}
+	return file_studio_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *BaseResponse) GetUpstream() string {
@@ -2319,6 +3691,184 @@ var file_studio_proto_rawDesc = string([]byte{
 	0x65, 0x73, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75,
 	0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x80, 0x02, 0x0a, 0x0f, 0x52,
+	0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a,
+	0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d,
+	0x61, 0x69, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c,
+	0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x1b, 0x0a, 0x09,
+	0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c,
+	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x12, 0x39, 0x0a,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d,
+	0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x64, 0x0a,
+	0x10, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x08, 0x72,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
+	0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x91, 0x01, 0x0a, 0x0c, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65,
+	0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x14, 0x0a, 0x05,
+	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61,
+	0x69, 0x6c, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64,
+	0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x07,
+	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x77, 0x0a, 0x0d, 0x4c, 0x6f, 0x67, 0x69, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x6b, 0x65,
+	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x18,
+	0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b,
+	0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x08, 0x0a, 0x06, 0x4e, 0x69, 0x6c, 0x52, 0x65, 0x71, 0x22, 0x08, 0x0a, 0x06, 0x4e, 0x69,
+	0x6c, 0x52, 0x65, 0x73, 0x22, 0xae, 0x01, 0x0a, 0x15, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50,
+	0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a,
+	0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x6f, 0x6c,
+	0x64, 0x5f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0b, 0x6f, 0x6c, 0x64, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x21, 0x0a,
+	0x0c, 0x6e, 0x65, 0x77, 0x5f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
+	0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f,
+	0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x07, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x6a, 0x0a, 0x16, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50,
+	0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e,
+	0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x22, 0x9e, 0x01, 0x0a, 0x12, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x45, 0x6d, 0x61, 0x69,
+	0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
+	0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x65, 0x77, 0x5f, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x65, 0x77, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x33, 0x0a,
+	0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19,
+	0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61,
+	0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x22, 0x67, 0x0a, 0x13, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x45, 0x6d, 0x61, 0x69,
+	0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18,
+	0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74,
+	0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xdd, 0x02, 0x0a, 0x04,
+	0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73,
+	0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73,
+	0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f,
+	0x72, 0x64, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x70,
+	0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x48, 0x61, 0x73, 0x68, 0x12, 0x19, 0x0a, 0x08, 0x69,
+	0x73, 0x5f, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69,
+	0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x64, 0x41, 0x74, 0x12, 0x2b, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x08, 0x20, 0x01,
+	0x28, 0x0e, 0x32, 0x17, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69,
+	0x6f, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x2e, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x6c,
+	0x65, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x09,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x49, 0x64, 0x22, 0x4b,
+	0x0a, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14, 0x0a, 0x10, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x55,
+	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05,
+	0x41, 0x44, 0x4d, 0x49, 0x4e, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x53, 0x54, 0x41, 0x46, 0x46,
+	0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x55, 0x53, 0x45, 0x52, 0x10, 0x03, 0x12, 0x0d, 0x0a, 0x09,
+	0x4d, 0x4f, 0x44, 0x45, 0x52, 0x41, 0x54, 0x4f, 0x52, 0x10, 0x04, 0x22, 0x49, 0x0a, 0x12, 0x47,
+	0x65, 0x74, 0x41, 0x6c, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69,
+	0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x07, 0x72,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x77, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c,
+	0x55, 0x73, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x28, 0x0a,
+	0x05, 0x75, 0x73, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x69,
+	0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x05, 0x75, 0x73, 0x65, 0x72, 0x73, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b, 0x4d,
+	0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x59, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49, 0x44, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73,
+	0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x75, 0x0a, 0x13, 0x47, 0x65,
+	0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x26, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x12, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e,
+	0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x22, 0x58, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e,
+	0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x66, 0x0a, 0x12, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x08, 0x72,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
+	0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x70, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73,
+	0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72,
+	0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f,
+	0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x07, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x66, 0x0a, 0x12, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e,
+	0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x70, 0x0a,
+	0x11, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x26, 0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x12, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e,
+	0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e,
+	0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
+	0x66, 0x0a, 0x12, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
+	0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f,
+	0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x08, 0x72,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x6f, 0x0a, 0x13, 0x52, 0x65, 0x66, 0x72, 0x65,
+	0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x23,
+	0x0a, 0x0d, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f,
+	0x6b, 0x65, 0x6e, 0x12, 0x33, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x64,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75,
+	0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52,
+	0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x8f, 0x01, 0x0a, 0x0d, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0b, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x23, 0x0a,
+	0x0d, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x12, 0x36, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x64,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75,
+	0x64, 0x69, 0x6f, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x4e, 0x0a, 0x0b, 0x42, 0x61,
 	0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f, 0x0a, 0x0a, 0x64, 0x6f, 0x77,
 	0x6e, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x18, 0xe6, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
@@ -2404,12 +3954,67 @@ var file_studio_proto_rawDesc = string([]byte{
 	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e,
 	0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x47, 0x65, 0x74,
 	0x53, 0x74, 0x61, 0x66, 0x66, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x47, 0x5a, 0x45, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x46, 0x41, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x69, 0x61,
-	0x61, 0x2f, 0x69, 0x6e, 0x6b, 0x2d, 0x61, 0x70, 0x70, 0x2d, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e,
-	0x64, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73,
-	0x2f, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65,
-	0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xeb, 0x06, 0x0a, 0x0a, 0x53, 0x74, 0x75,
+	0x64, 0x69, 0x6f, 0x41, 0x75, 0x74, 0x68, 0x12, 0x49, 0x0a, 0x08, 0x52, 0x65, 0x67, 0x69, 0x73,
+	0x74, 0x65, 0x72, 0x12, 0x1d, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64,
+	0x69, 0x6f, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69,
+	0x6f, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x40, 0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x1a, 0x2e, 0x69, 0x6e,
+	0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e,
+	0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34, 0x0a, 0x06, 0x4c, 0x6f, 0x67, 0x6f, 0x75, 0x74, 0x12, 0x14,
+	0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x4e, 0x69,
+	0x6c, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75,
+	0x64, 0x69, 0x6f, 0x2e, 0x4e, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x12, 0x5b, 0x0a, 0x0e, 0x43, 0x68,
+	0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x23, 0x2e, 0x69,
+	0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x43, 0x68, 0x61, 0x6e,
+	0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x24, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f,
+	0x2e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x43, 0x68, 0x61, 0x6e, 0x67,
+	0x65, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x20, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73,
+	0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x45, 0x6d, 0x61, 0x69,
+	0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65,
+	0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x45, 0x6d,
+	0x61, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0c, 0x52,
+	0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x21, 0x2e, 0x69, 0x6e,
+	0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x52, 0x65, 0x66, 0x72, 0x65,
+	0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b,
+	0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x54, 0x6f,
+	0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0b, 0x47,
+	0x65, 0x74, 0x41, 0x6c, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x20, 0x2e, 0x69, 0x6e, 0x6b,
+	0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c,
+	0x55, 0x73, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x69,
+	0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x47, 0x65, 0x74, 0x41,
+	0x6c, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x52, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49, 0x44, 0x12, 0x20,
+	0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e, 0x47, 0x65,
+	0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x21, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f, 0x2e,
+	0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x4f, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65,
+	0x72, 0x12, 0x1f, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69, 0x6f,
+	0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x20, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69,
+	0x6f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4f, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73,
+	0x65, 0x72, 0x12, 0x1f, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64, 0x69,
+	0x6f, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64,
+	0x69, 0x6f, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4f, 0x0a, 0x0a, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x55,
+	0x73, 0x65, 0x72, 0x12, 0x1f, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75, 0x64,
+	0x69, 0x6f, 0x2e, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x69, 0x6e, 0x6b, 0x4d, 0x65, 0x2e, 0x73, 0x74, 0x75,
+	0x64, 0x69, 0x6f, 0x2e, 0x49, 0x6e, 0x73, 0x65, 0x72, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x47, 0x5a, 0x45, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x46, 0x41, 0x43, 0x6f, 0x72, 0x72, 0x65, 0x69, 0x61, 0x61, 0x2f,
+	0x69, 0x6e, 0x6b, 0x2d, 0x61, 0x70, 0x70, 0x2d, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2d,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x2f, 0x73,
+	0x74, 0x75, 0x64, 0x69, 0x6f, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -2424,106 +4029,179 @@ func file_studio_proto_rawDescGZIP() []byte {
 	return file_studio_proto_rawDescData
 }
 
-var file_studio_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_studio_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_studio_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_studio_proto_goTypes = []any{
-	(*CreateStudioRequest)(nil),         // 0: inkMe.studio.CreateStudioRequest
-	(*CreateStudioResponse)(nil),        // 1: inkMe.studio.CreateStudioResponse
-	(*UpdateStudioRequest)(nil),         // 2: inkMe.studio.UpdateStudioRequest
-	(*UpdateStudioResponse)(nil),        // 3: inkMe.studio.UpdateStudioResponse
-	(*AddStaffMemberRequest)(nil),       // 4: inkMe.studio.AddStaffMemberRequest
-	(*AddStaffMemberResponse)(nil),      // 5: inkMe.studio.AddStaffMemberResponse
-	(*UpdateStaffMemberRequest)(nil),    // 6: inkMe.studio.UpdateStaffMemberRequest
-	(*UpdateStaffMemberResponse)(nil),   // 7: inkMe.studio.UpdateStaffMemberResponse
-	(*RemoveStaffMemberRequest)(nil),    // 8: inkMe.studio.RemoveStaffMemberRequest
-	(*RemoveStaffMemberResponse)(nil),   // 9: inkMe.studio.RemoveStaffMemberResponse
-	(*ListStaffMembersRequest)(nil),     // 10: inkMe.studio.ListStaffMembersRequest
-	(*ListStaffMembersResponse)(nil),    // 11: inkMe.studio.ListStaffMembersResponse
-	(*SetStaffPermissionsRequest)(nil),  // 12: inkMe.studio.SetStaffPermissionsRequest
-	(*SetStaffPermissionsResponse)(nil), // 13: inkMe.studio.SetStaffPermissionsResponse
-	(*GetStaffPermissionsRequest)(nil),  // 14: inkMe.studio.GetStaffPermissionsRequest
-	(*GetStaffPermissionsResponse)(nil), // 15: inkMe.studio.GetStaffPermissionsResponse
-	(*Studio)(nil),                      // 16: inkMe.studio.Studio
-	(*StaffMember)(nil),                 // 17: inkMe.studio.StaffMember
-	(*OwnerInfo)(nil),                   // 18: inkMe.studio.OwnerInfo
-	(*AddStudioUserRequest)(nil),        // 19: inkMe.studio.AddStudioUserRequest
-	(*AddStudioUserResponse)(nil),       // 20: inkMe.studio.AddStudioUserResponse
-	(*UpdateStudioUserRequest)(nil),     // 21: inkMe.studio.UpdateStudioUserRequest
-	(*UpdateStudioUserResponse)(nil),    // 22: inkMe.studio.UpdateStudioUserResponse
-	(*RemoveStudioUserRequest)(nil),     // 23: inkMe.studio.RemoveStudioUserRequest
-	(*RemoveStudioUserResponse)(nil),    // 24: inkMe.studio.RemoveStudioUserResponse
-	(*ListStudiosRequest)(nil),          // 25: inkMe.studio.ListStudiosRequest
-	(*ListStudiosResponse)(nil),         // 26: inkMe.studio.ListStudiosResponse
-	(*BaseRequest)(nil),                 // 27: inkMe.studio.BaseRequest
-	(*BaseResponse)(nil),                // 28: inkMe.studio.BaseResponse
-	(*timestamppb.Timestamp)(nil),       // 29: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),       // 30: google.protobuf.FieldMask
+	(User_Role)(0),                      // 0: inkMe.studio.User.Role
+	(*CreateStudioRequest)(nil),         // 1: inkMe.studio.CreateStudioRequest
+	(*CreateStudioResponse)(nil),        // 2: inkMe.studio.CreateStudioResponse
+	(*UpdateStudioRequest)(nil),         // 3: inkMe.studio.UpdateStudioRequest
+	(*UpdateStudioResponse)(nil),        // 4: inkMe.studio.UpdateStudioResponse
+	(*AddStaffMemberRequest)(nil),       // 5: inkMe.studio.AddStaffMemberRequest
+	(*AddStaffMemberResponse)(nil),      // 6: inkMe.studio.AddStaffMemberResponse
+	(*UpdateStaffMemberRequest)(nil),    // 7: inkMe.studio.UpdateStaffMemberRequest
+	(*UpdateStaffMemberResponse)(nil),   // 8: inkMe.studio.UpdateStaffMemberResponse
+	(*RemoveStaffMemberRequest)(nil),    // 9: inkMe.studio.RemoveStaffMemberRequest
+	(*RemoveStaffMemberResponse)(nil),   // 10: inkMe.studio.RemoveStaffMemberResponse
+	(*ListStaffMembersRequest)(nil),     // 11: inkMe.studio.ListStaffMembersRequest
+	(*ListStaffMembersResponse)(nil),    // 12: inkMe.studio.ListStaffMembersResponse
+	(*SetStaffPermissionsRequest)(nil),  // 13: inkMe.studio.SetStaffPermissionsRequest
+	(*SetStaffPermissionsResponse)(nil), // 14: inkMe.studio.SetStaffPermissionsResponse
+	(*GetStaffPermissionsRequest)(nil),  // 15: inkMe.studio.GetStaffPermissionsRequest
+	(*GetStaffPermissionsResponse)(nil), // 16: inkMe.studio.GetStaffPermissionsResponse
+	(*Studio)(nil),                      // 17: inkMe.studio.Studio
+	(*StaffMember)(nil),                 // 18: inkMe.studio.StaffMember
+	(*OwnerInfo)(nil),                   // 19: inkMe.studio.OwnerInfo
+	(*AddStudioUserRequest)(nil),        // 20: inkMe.studio.AddStudioUserRequest
+	(*AddStudioUserResponse)(nil),       // 21: inkMe.studio.AddStudioUserResponse
+	(*UpdateStudioUserRequest)(nil),     // 22: inkMe.studio.UpdateStudioUserRequest
+	(*UpdateStudioUserResponse)(nil),    // 23: inkMe.studio.UpdateStudioUserResponse
+	(*RemoveStudioUserRequest)(nil),     // 24: inkMe.studio.RemoveStudioUserRequest
+	(*RemoveStudioUserResponse)(nil),    // 25: inkMe.studio.RemoveStudioUserResponse
+	(*ListStudiosRequest)(nil),          // 26: inkMe.studio.ListStudiosRequest
+	(*ListStudiosResponse)(nil),         // 27: inkMe.studio.ListStudiosResponse
+	(*RegisterRequest)(nil),             // 28: inkMe.studio.RegisterRequest
+	(*RegisterResponse)(nil),            // 29: inkMe.studio.RegisterResponse
+	(*LoginRequest)(nil),                // 30: inkMe.studio.LoginRequest
+	(*LoginResponse)(nil),               // 31: inkMe.studio.LoginResponse
+	(*NilReq)(nil),                      // 32: inkMe.studio.NilReq
+	(*NilRes)(nil),                      // 33: inkMe.studio.NilRes
+	(*ChangePasswordRequest)(nil),       // 34: inkMe.studio.ChangePasswordRequest
+	(*ChangePasswordResponse)(nil),      // 35: inkMe.studio.ChangePasswordResponse
+	(*ChangeEmailRequest)(nil),          // 36: inkMe.studio.ChangeEmailRequest
+	(*ChangeEmailResponse)(nil),         // 37: inkMe.studio.ChangeEmailResponse
+	(*User)(nil),                        // 38: inkMe.studio.User
+	(*GetAllUsersRequest)(nil),          // 39: inkMe.studio.GetAllUsersRequest
+	(*GetAllUsersResponse)(nil),         // 40: inkMe.studio.GetAllUsersResponse
+	(*GetUserByIDRequest)(nil),          // 41: inkMe.studio.GetUserByIDRequest
+	(*GetUserByIDResponse)(nil),         // 42: inkMe.studio.GetUserByIDResponse
+	(*DeleteUserRequest)(nil),           // 43: inkMe.studio.DeleteUserRequest
+	(*DeleteUserResponse)(nil),          // 44: inkMe.studio.DeleteUserResponse
+	(*UpdateUserRequest)(nil),           // 45: inkMe.studio.UpdateUserRequest
+	(*UpdateUserResponse)(nil),          // 46: inkMe.studio.UpdateUserResponse
+	(*InsertUserRequest)(nil),           // 47: inkMe.studio.InsertUserRequest
+	(*InsertUserResponse)(nil),          // 48: inkMe.studio.InsertUserResponse
+	(*RefreshTokenRequest)(nil),         // 49: inkMe.studio.RefreshTokenRequest
+	(*TokenResponse)(nil),               // 50: inkMe.studio.TokenResponse
+	(*BaseRequest)(nil),                 // 51: inkMe.studio.BaseRequest
+	(*BaseResponse)(nil),                // 52: inkMe.studio.BaseResponse
+	(*timestamppb.Timestamp)(nil),       // 53: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),       // 54: google.protobuf.FieldMask
 }
 var file_studio_proto_depIdxs = []int32{
-	18, // 0: inkMe.studio.CreateStudioRequest.owner:type_name -> inkMe.studio.OwnerInfo
-	29, // 1: inkMe.studio.CreateStudioRequest.created_at:type_name -> google.protobuf.Timestamp
-	27, // 2: inkMe.studio.CreateStudioRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 3: inkMe.studio.CreateStudioResponse.response:type_name -> inkMe.studio.BaseResponse
-	16, // 4: inkMe.studio.UpdateStudioRequest.studio:type_name -> inkMe.studio.Studio
-	30, // 5: inkMe.studio.UpdateStudioRequest.update_mask:type_name -> google.protobuf.FieldMask
-	27, // 6: inkMe.studio.UpdateStudioRequest.base:type_name -> inkMe.studio.BaseRequest
-	16, // 7: inkMe.studio.UpdateStudioResponse.studio:type_name -> inkMe.studio.Studio
-	28, // 8: inkMe.studio.UpdateStudioResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 9: inkMe.studio.AddStaffMemberRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 10: inkMe.studio.AddStaffMemberResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 11: inkMe.studio.UpdateStaffMemberRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 12: inkMe.studio.UpdateStaffMemberResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 13: inkMe.studio.RemoveStaffMemberRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 14: inkMe.studio.RemoveStaffMemberResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 15: inkMe.studio.ListStaffMembersRequest.request:type_name -> inkMe.studio.BaseRequest
-	17, // 16: inkMe.studio.ListStaffMembersResponse.staff_members:type_name -> inkMe.studio.StaffMember
-	28, // 17: inkMe.studio.ListStaffMembersResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 18: inkMe.studio.SetStaffPermissionsRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 19: inkMe.studio.SetStaffPermissionsResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 20: inkMe.studio.GetStaffPermissionsRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 21: inkMe.studio.GetStaffPermissionsResponse.response:type_name -> inkMe.studio.BaseResponse
-	29, // 22: inkMe.studio.Studio.created_at:type_name -> google.protobuf.Timestamp
-	29, // 23: inkMe.studio.Studio.updated_at:type_name -> google.protobuf.Timestamp
-	29, // 24: inkMe.studio.StaffMember.created_at:type_name -> google.protobuf.Timestamp
-	29, // 25: inkMe.studio.StaffMember.updated_at:type_name -> google.protobuf.Timestamp
-	27, // 26: inkMe.studio.AddStudioUserRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 27: inkMe.studio.AddStudioUserResponse.response:type_name -> inkMe.studio.BaseResponse
-	30, // 28: inkMe.studio.UpdateStudioUserRequest.update_mask:type_name -> google.protobuf.FieldMask
-	27, // 29: inkMe.studio.UpdateStudioUserRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 30: inkMe.studio.UpdateStudioUserResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 31: inkMe.studio.RemoveStudioUserRequest.request:type_name -> inkMe.studio.BaseRequest
-	28, // 32: inkMe.studio.RemoveStudioUserResponse.response:type_name -> inkMe.studio.BaseResponse
-	27, // 33: inkMe.studio.ListStudiosRequest.request:type_name -> inkMe.studio.BaseRequest
-	16, // 34: inkMe.studio.ListStudiosResponse.studios:type_name -> inkMe.studio.Studio
-	28, // 35: inkMe.studio.ListStudiosResponse.response:type_name -> inkMe.studio.BaseResponse
-	0,  // 36: inkMe.studio.StudioService.CreateStudio:input_type -> inkMe.studio.CreateStudioRequest
-	2,  // 37: inkMe.studio.StudioService.UpdateStudio:input_type -> inkMe.studio.UpdateStudioRequest
-	19, // 38: inkMe.studio.StudioService.AddStudioUser:input_type -> inkMe.studio.AddStudioUserRequest
-	21, // 39: inkMe.studio.StudioService.UpdateStudioUser:input_type -> inkMe.studio.UpdateStudioUserRequest
-	23, // 40: inkMe.studio.StudioService.RemoveStudioUser:input_type -> inkMe.studio.RemoveStudioUserRequest
-	25, // 41: inkMe.studio.StudioService.ListStudios:input_type -> inkMe.studio.ListStudiosRequest
-	4,  // 42: inkMe.studio.StudioService.AddStaffMember:input_type -> inkMe.studio.AddStaffMemberRequest
-	6,  // 43: inkMe.studio.StudioService.UpdateStaffMember:input_type -> inkMe.studio.UpdateStaffMemberRequest
-	8,  // 44: inkMe.studio.StudioService.RemoveStaffMember:input_type -> inkMe.studio.RemoveStaffMemberRequest
-	10, // 45: inkMe.studio.StudioService.ListStaffMembers:input_type -> inkMe.studio.ListStaffMembersRequest
-	12, // 46: inkMe.studio.StudioService.SetStaffPermissions:input_type -> inkMe.studio.SetStaffPermissionsRequest
-	14, // 47: inkMe.studio.StudioService.GetStaffPermissions:input_type -> inkMe.studio.GetStaffPermissionsRequest
-	1,  // 48: inkMe.studio.StudioService.CreateStudio:output_type -> inkMe.studio.CreateStudioResponse
-	3,  // 49: inkMe.studio.StudioService.UpdateStudio:output_type -> inkMe.studio.UpdateStudioResponse
-	20, // 50: inkMe.studio.StudioService.AddStudioUser:output_type -> inkMe.studio.AddStudioUserResponse
-	22, // 51: inkMe.studio.StudioService.UpdateStudioUser:output_type -> inkMe.studio.UpdateStudioUserResponse
-	24, // 52: inkMe.studio.StudioService.RemoveStudioUser:output_type -> inkMe.studio.RemoveStudioUserResponse
-	26, // 53: inkMe.studio.StudioService.ListStudios:output_type -> inkMe.studio.ListStudiosResponse
-	5,  // 54: inkMe.studio.StudioService.AddStaffMember:output_type -> inkMe.studio.AddStaffMemberResponse
-	7,  // 55: inkMe.studio.StudioService.UpdateStaffMember:output_type -> inkMe.studio.UpdateStaffMemberResponse
-	9,  // 56: inkMe.studio.StudioService.RemoveStaffMember:output_type -> inkMe.studio.RemoveStaffMemberResponse
-	11, // 57: inkMe.studio.StudioService.ListStaffMembers:output_type -> inkMe.studio.ListStaffMembersResponse
-	13, // 58: inkMe.studio.StudioService.SetStaffPermissions:output_type -> inkMe.studio.SetStaffPermissionsResponse
-	15, // 59: inkMe.studio.StudioService.GetStaffPermissions:output_type -> inkMe.studio.GetStaffPermissionsResponse
-	48, // [48:60] is the sub-list for method output_type
-	36, // [36:48] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	19, // 0: inkMe.studio.CreateStudioRequest.owner:type_name -> inkMe.studio.OwnerInfo
+	53, // 1: inkMe.studio.CreateStudioRequest.created_at:type_name -> google.protobuf.Timestamp
+	51, // 2: inkMe.studio.CreateStudioRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 3: inkMe.studio.CreateStudioResponse.response:type_name -> inkMe.studio.BaseResponse
+	17, // 4: inkMe.studio.UpdateStudioRequest.studio:type_name -> inkMe.studio.Studio
+	54, // 5: inkMe.studio.UpdateStudioRequest.update_mask:type_name -> google.protobuf.FieldMask
+	51, // 6: inkMe.studio.UpdateStudioRequest.base:type_name -> inkMe.studio.BaseRequest
+	17, // 7: inkMe.studio.UpdateStudioResponse.studio:type_name -> inkMe.studio.Studio
+	52, // 8: inkMe.studio.UpdateStudioResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 9: inkMe.studio.AddStaffMemberRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 10: inkMe.studio.AddStaffMemberResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 11: inkMe.studio.UpdateStaffMemberRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 12: inkMe.studio.UpdateStaffMemberResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 13: inkMe.studio.RemoveStaffMemberRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 14: inkMe.studio.RemoveStaffMemberResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 15: inkMe.studio.ListStaffMembersRequest.request:type_name -> inkMe.studio.BaseRequest
+	18, // 16: inkMe.studio.ListStaffMembersResponse.staff_members:type_name -> inkMe.studio.StaffMember
+	52, // 17: inkMe.studio.ListStaffMembersResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 18: inkMe.studio.SetStaffPermissionsRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 19: inkMe.studio.SetStaffPermissionsResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 20: inkMe.studio.GetStaffPermissionsRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 21: inkMe.studio.GetStaffPermissionsResponse.response:type_name -> inkMe.studio.BaseResponse
+	53, // 22: inkMe.studio.Studio.created_at:type_name -> google.protobuf.Timestamp
+	53, // 23: inkMe.studio.Studio.updated_at:type_name -> google.protobuf.Timestamp
+	53, // 24: inkMe.studio.StaffMember.created_at:type_name -> google.protobuf.Timestamp
+	53, // 25: inkMe.studio.StaffMember.updated_at:type_name -> google.protobuf.Timestamp
+	51, // 26: inkMe.studio.AddStudioUserRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 27: inkMe.studio.AddStudioUserResponse.response:type_name -> inkMe.studio.BaseResponse
+	54, // 28: inkMe.studio.UpdateStudioUserRequest.update_mask:type_name -> google.protobuf.FieldMask
+	51, // 29: inkMe.studio.UpdateStudioUserRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 30: inkMe.studio.UpdateStudioUserResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 31: inkMe.studio.RemoveStudioUserRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 32: inkMe.studio.RemoveStudioUserResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 33: inkMe.studio.ListStudiosRequest.request:type_name -> inkMe.studio.BaseRequest
+	17, // 34: inkMe.studio.ListStudiosResponse.studios:type_name -> inkMe.studio.Studio
+	52, // 35: inkMe.studio.ListStudiosResponse.response:type_name -> inkMe.studio.BaseResponse
+	53, // 36: inkMe.studio.RegisterRequest.created_at:type_name -> google.protobuf.Timestamp
+	51, // 37: inkMe.studio.RegisterRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 38: inkMe.studio.RegisterResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 39: inkMe.studio.LoginRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 40: inkMe.studio.LoginResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 41: inkMe.studio.ChangePasswordRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 42: inkMe.studio.ChangePasswordResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 43: inkMe.studio.ChangeEmailRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 44: inkMe.studio.ChangeEmailResponse.response:type_name -> inkMe.studio.BaseResponse
+	0,  // 45: inkMe.studio.User.role:type_name -> inkMe.studio.User.Role
+	51, // 46: inkMe.studio.GetAllUsersRequest.request:type_name -> inkMe.studio.BaseRequest
+	38, // 47: inkMe.studio.GetAllUsersResponse.users:type_name -> inkMe.studio.User
+	52, // 48: inkMe.studio.GetAllUsersResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 49: inkMe.studio.GetUserByIDRequest.request:type_name -> inkMe.studio.BaseRequest
+	38, // 50: inkMe.studio.GetUserByIDResponse.user:type_name -> inkMe.studio.User
+	52, // 51: inkMe.studio.GetUserByIDResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 52: inkMe.studio.DeleteUserRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 53: inkMe.studio.DeleteUserResponse.response:type_name -> inkMe.studio.BaseResponse
+	38, // 54: inkMe.studio.UpdateUserRequest.user:type_name -> inkMe.studio.User
+	51, // 55: inkMe.studio.UpdateUserRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 56: inkMe.studio.UpdateUserResponse.response:type_name -> inkMe.studio.BaseResponse
+	38, // 57: inkMe.studio.InsertUserRequest.user:type_name -> inkMe.studio.User
+	51, // 58: inkMe.studio.InsertUserRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 59: inkMe.studio.InsertUserResponse.response:type_name -> inkMe.studio.BaseResponse
+	51, // 60: inkMe.studio.RefreshTokenRequest.request:type_name -> inkMe.studio.BaseRequest
+	52, // 61: inkMe.studio.TokenResponse.response:type_name -> inkMe.studio.BaseResponse
+	1,  // 62: inkMe.studio.StudioService.CreateStudio:input_type -> inkMe.studio.CreateStudioRequest
+	3,  // 63: inkMe.studio.StudioService.UpdateStudio:input_type -> inkMe.studio.UpdateStudioRequest
+	20, // 64: inkMe.studio.StudioService.AddStudioUser:input_type -> inkMe.studio.AddStudioUserRequest
+	22, // 65: inkMe.studio.StudioService.UpdateStudioUser:input_type -> inkMe.studio.UpdateStudioUserRequest
+	24, // 66: inkMe.studio.StudioService.RemoveStudioUser:input_type -> inkMe.studio.RemoveStudioUserRequest
+	26, // 67: inkMe.studio.StudioService.ListStudios:input_type -> inkMe.studio.ListStudiosRequest
+	5,  // 68: inkMe.studio.StudioService.AddStaffMember:input_type -> inkMe.studio.AddStaffMemberRequest
+	7,  // 69: inkMe.studio.StudioService.UpdateStaffMember:input_type -> inkMe.studio.UpdateStaffMemberRequest
+	9,  // 70: inkMe.studio.StudioService.RemoveStaffMember:input_type -> inkMe.studio.RemoveStaffMemberRequest
+	11, // 71: inkMe.studio.StudioService.ListStaffMembers:input_type -> inkMe.studio.ListStaffMembersRequest
+	13, // 72: inkMe.studio.StudioService.SetStaffPermissions:input_type -> inkMe.studio.SetStaffPermissionsRequest
+	15, // 73: inkMe.studio.StudioService.GetStaffPermissions:input_type -> inkMe.studio.GetStaffPermissionsRequest
+	28, // 74: inkMe.studio.StudioAuth.Register:input_type -> inkMe.studio.RegisterRequest
+	30, // 75: inkMe.studio.StudioAuth.Login:input_type -> inkMe.studio.LoginRequest
+	32, // 76: inkMe.studio.StudioAuth.Logout:input_type -> inkMe.studio.NilReq
+	34, // 77: inkMe.studio.StudioAuth.ChangePassword:input_type -> inkMe.studio.ChangePasswordRequest
+	36, // 78: inkMe.studio.StudioAuth.ChangeEmail:input_type -> inkMe.studio.ChangeEmailRequest
+	49, // 79: inkMe.studio.StudioAuth.RefreshToken:input_type -> inkMe.studio.RefreshTokenRequest
+	39, // 80: inkMe.studio.StudioAuth.GetAllUsers:input_type -> inkMe.studio.GetAllUsersRequest
+	41, // 81: inkMe.studio.StudioAuth.GetUserByID:input_type -> inkMe.studio.GetUserByIDRequest
+	43, // 82: inkMe.studio.StudioAuth.DeleteUser:input_type -> inkMe.studio.DeleteUserRequest
+	45, // 83: inkMe.studio.StudioAuth.UpdateUser:input_type -> inkMe.studio.UpdateUserRequest
+	47, // 84: inkMe.studio.StudioAuth.InsertUser:input_type -> inkMe.studio.InsertUserRequest
+	2,  // 85: inkMe.studio.StudioService.CreateStudio:output_type -> inkMe.studio.CreateStudioResponse
+	4,  // 86: inkMe.studio.StudioService.UpdateStudio:output_type -> inkMe.studio.UpdateStudioResponse
+	21, // 87: inkMe.studio.StudioService.AddStudioUser:output_type -> inkMe.studio.AddStudioUserResponse
+	23, // 88: inkMe.studio.StudioService.UpdateStudioUser:output_type -> inkMe.studio.UpdateStudioUserResponse
+	25, // 89: inkMe.studio.StudioService.RemoveStudioUser:output_type -> inkMe.studio.RemoveStudioUserResponse
+	27, // 90: inkMe.studio.StudioService.ListStudios:output_type -> inkMe.studio.ListStudiosResponse
+	6,  // 91: inkMe.studio.StudioService.AddStaffMember:output_type -> inkMe.studio.AddStaffMemberResponse
+	8,  // 92: inkMe.studio.StudioService.UpdateStaffMember:output_type -> inkMe.studio.UpdateStaffMemberResponse
+	10, // 93: inkMe.studio.StudioService.RemoveStaffMember:output_type -> inkMe.studio.RemoveStaffMemberResponse
+	12, // 94: inkMe.studio.StudioService.ListStaffMembers:output_type -> inkMe.studio.ListStaffMembersResponse
+	14, // 95: inkMe.studio.StudioService.SetStaffPermissions:output_type -> inkMe.studio.SetStaffPermissionsResponse
+	16, // 96: inkMe.studio.StudioService.GetStaffPermissions:output_type -> inkMe.studio.GetStaffPermissionsResponse
+	29, // 97: inkMe.studio.StudioAuth.Register:output_type -> inkMe.studio.RegisterResponse
+	31, // 98: inkMe.studio.StudioAuth.Login:output_type -> inkMe.studio.LoginResponse
+	33, // 99: inkMe.studio.StudioAuth.Logout:output_type -> inkMe.studio.NilRes
+	35, // 100: inkMe.studio.StudioAuth.ChangePassword:output_type -> inkMe.studio.ChangePasswordResponse
+	37, // 101: inkMe.studio.StudioAuth.ChangeEmail:output_type -> inkMe.studio.ChangeEmailResponse
+	50, // 102: inkMe.studio.StudioAuth.RefreshToken:output_type -> inkMe.studio.TokenResponse
+	40, // 103: inkMe.studio.StudioAuth.GetAllUsers:output_type -> inkMe.studio.GetAllUsersResponse
+	42, // 104: inkMe.studio.StudioAuth.GetUserByID:output_type -> inkMe.studio.GetUserByIDResponse
+	44, // 105: inkMe.studio.StudioAuth.DeleteUser:output_type -> inkMe.studio.DeleteUserResponse
+	46, // 106: inkMe.studio.StudioAuth.UpdateUser:output_type -> inkMe.studio.UpdateUserResponse
+	48, // 107: inkMe.studio.StudioAuth.InsertUser:output_type -> inkMe.studio.InsertUserResponse
+	85, // [85:108] is the sub-list for method output_type
+	62, // [62:85] is the sub-list for method input_type
+	62, // [62:62] is the sub-list for extension type_name
+	62, // [62:62] is the sub-list for extension extendee
+	0,  // [0:62] is the sub-list for field type_name
 }
 
 func init() { file_studio_proto_init() }
@@ -2536,13 +4214,14 @@ func file_studio_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_studio_proto_rawDesc), len(file_studio_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   29,
+			NumEnums:      1,
+			NumMessages:   52,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_studio_proto_goTypes,
 		DependencyIndexes: file_studio_proto_depIdxs,
+		EnumInfos:         file_studio_proto_enumTypes,
 		MessageInfos:      file_studio_proto_msgTypes,
 	}.Build()
 	File_studio_proto = out.File
