@@ -129,8 +129,12 @@ func (b *Broker) Login(ctx context.Context, in *generated.LoginRequest, opts ...
 }
 
 // Logout implements generated.StudioAuthClient
-func (b *Broker) Logout(ctx context.Context, in *generated.NilReq, opts ...grpc.CallOption) (*generated.NilRes, error) {
+func (b *Broker) Logout(ctx context.Context, in *generated.LogoutRequest, opts ...grpc.CallOption) (*generated.LogoutResponse, error) {
 	return b.authClient.Logout(ctx, in, opts...)
+}
+
+func (b *Broker) ValidateSession(ctx context.Context, in *generated.ValidateSessionRequest, opts ...grpc.CallOption) (*generated.ValidateSessionResponse, error) {
+	return b.authClient.ValidateSession(ctx, in, opts...)
 }
 
 // ChangePassword implements generated.StudioAuthClient

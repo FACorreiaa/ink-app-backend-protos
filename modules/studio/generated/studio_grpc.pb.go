@@ -555,17 +555,18 @@ var StudioService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	StudioAuth_Register_FullMethodName       = "/inkMe.studio.StudioAuth/Register"
-	StudioAuth_Login_FullMethodName          = "/inkMe.studio.StudioAuth/Login"
-	StudioAuth_Logout_FullMethodName         = "/inkMe.studio.StudioAuth/Logout"
-	StudioAuth_ChangePassword_FullMethodName = "/inkMe.studio.StudioAuth/ChangePassword"
-	StudioAuth_ChangeEmail_FullMethodName    = "/inkMe.studio.StudioAuth/ChangeEmail"
-	StudioAuth_RefreshToken_FullMethodName   = "/inkMe.studio.StudioAuth/RefreshToken"
-	StudioAuth_GetAllUsers_FullMethodName    = "/inkMe.studio.StudioAuth/GetAllUsers"
-	StudioAuth_GetUserByID_FullMethodName    = "/inkMe.studio.StudioAuth/GetUserByID"
-	StudioAuth_DeleteUser_FullMethodName     = "/inkMe.studio.StudioAuth/DeleteUser"
-	StudioAuth_UpdateUser_FullMethodName     = "/inkMe.studio.StudioAuth/UpdateUser"
-	StudioAuth_InsertUser_FullMethodName     = "/inkMe.studio.StudioAuth/InsertUser"
+	StudioAuth_Register_FullMethodName        = "/inkMe.studio.StudioAuth/Register"
+	StudioAuth_Login_FullMethodName           = "/inkMe.studio.StudioAuth/Login"
+	StudioAuth_Logout_FullMethodName          = "/inkMe.studio.StudioAuth/Logout"
+	StudioAuth_ChangePassword_FullMethodName  = "/inkMe.studio.StudioAuth/ChangePassword"
+	StudioAuth_ChangeEmail_FullMethodName     = "/inkMe.studio.StudioAuth/ChangeEmail"
+	StudioAuth_RefreshToken_FullMethodName    = "/inkMe.studio.StudioAuth/RefreshToken"
+	StudioAuth_ValidateSession_FullMethodName = "/inkMe.studio.StudioAuth/ValidateSession"
+	StudioAuth_GetAllUsers_FullMethodName     = "/inkMe.studio.StudioAuth/GetAllUsers"
+	StudioAuth_GetUserByID_FullMethodName     = "/inkMe.studio.StudioAuth/GetUserByID"
+	StudioAuth_DeleteUser_FullMethodName      = "/inkMe.studio.StudioAuth/DeleteUser"
+	StudioAuth_UpdateUser_FullMethodName      = "/inkMe.studio.StudioAuth/UpdateUser"
+	StudioAuth_InsertUser_FullMethodName      = "/inkMe.studio.StudioAuth/InsertUser"
 )
 
 // StudioAuthClient is the client API for StudioAuth service.
@@ -574,10 +575,11 @@ const (
 type StudioAuthClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	Logout(ctx context.Context, in *NilReq, opts ...grpc.CallOption) (*NilRes, error)
+	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
 	ChangeEmail(ctx context.Context, in *ChangeEmailRequest, opts ...grpc.CallOption) (*ChangeEmailResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
+	ValidateSession(ctx context.Context, in *ValidateSessionRequest, opts ...grpc.CallOption) (*ValidateSessionResponse, error)
 	// New user-related services
 	GetAllUsers(ctx context.Context, in *GetAllUsersRequest, opts ...grpc.CallOption) (*GetAllUsersResponse, error)
 	GetUserByID(ctx context.Context, in *GetUserByIDRequest, opts ...grpc.CallOption) (*GetUserByIDResponse, error)
@@ -614,9 +616,9 @@ func (c *studioAuthClient) Login(ctx context.Context, in *LoginRequest, opts ...
 	return out, nil
 }
 
-func (c *studioAuthClient) Logout(ctx context.Context, in *NilReq, opts ...grpc.CallOption) (*NilRes, error) {
+func (c *studioAuthClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NilRes)
+	out := new(LogoutResponse)
 	err := c.cc.Invoke(ctx, StudioAuth_Logout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -648,6 +650,16 @@ func (c *studioAuthClient) RefreshToken(ctx context.Context, in *RefreshTokenReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TokenResponse)
 	err := c.cc.Invoke(ctx, StudioAuth_RefreshToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studioAuthClient) ValidateSession(ctx context.Context, in *ValidateSessionRequest, opts ...grpc.CallOption) (*ValidateSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ValidateSessionResponse)
+	err := c.cc.Invoke(ctx, StudioAuth_ValidateSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -710,10 +722,11 @@ func (c *studioAuthClient) InsertUser(ctx context.Context, in *InsertUserRequest
 type StudioAuthServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	Logout(context.Context, *NilReq) (*NilRes, error)
+	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
 	ChangeEmail(context.Context, *ChangeEmailRequest) (*ChangeEmailResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error)
+	ValidateSession(context.Context, *ValidateSessionRequest) (*ValidateSessionResponse, error)
 	// New user-related services
 	GetAllUsers(context.Context, *GetAllUsersRequest) (*GetAllUsersResponse, error)
 	GetUserByID(context.Context, *GetUserByIDRequest) (*GetUserByIDResponse, error)
@@ -736,7 +749,7 @@ func (UnimplementedStudioAuthServer) Register(context.Context, *RegisterRequest)
 func (UnimplementedStudioAuthServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedStudioAuthServer) Logout(context.Context, *NilReq) (*NilRes, error) {
+func (UnimplementedStudioAuthServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
 func (UnimplementedStudioAuthServer) ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error) {
@@ -747,6 +760,9 @@ func (UnimplementedStudioAuthServer) ChangeEmail(context.Context, *ChangeEmailRe
 }
 func (UnimplementedStudioAuthServer) RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
+}
+func (UnimplementedStudioAuthServer) ValidateSession(context.Context, *ValidateSessionRequest) (*ValidateSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateSession not implemented")
 }
 func (UnimplementedStudioAuthServer) GetAllUsers(context.Context, *GetAllUsersRequest) (*GetAllUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllUsers not implemented")
@@ -821,7 +837,7 @@ func _StudioAuth_Login_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _StudioAuth_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NilReq)
+	in := new(LogoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -833,7 +849,7 @@ func _StudioAuth_Logout_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: StudioAuth_Logout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StudioAuthServer).Logout(ctx, req.(*NilReq))
+		return srv.(StudioAuthServer).Logout(ctx, req.(*LogoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -888,6 +904,24 @@ func _StudioAuth_RefreshToken_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(StudioAuthServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudioAuth_ValidateSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudioAuthServer).ValidateSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudioAuth_ValidateSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudioAuthServer).ValidateSession(ctx, req.(*ValidateSessionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1012,6 +1046,10 @@ var StudioAuth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshToken",
 			Handler:    _StudioAuth_RefreshToken_Handler,
+		},
+		{
+			MethodName: "ValidateSession",
+			Handler:    _StudioAuth_ValidateSession_Handler,
 		},
 		{
 			MethodName: "GetAllUsers",
