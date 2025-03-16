@@ -49,14 +49,7 @@ service StudioAuth {
 }
 
 message CreateStudioRequest {
-  string name = 1;
-  string subdomain = 2;  // Added to match DB schema
-  string address = 3;    
-  string phone = 4;
-  string email = 5;      // For the owner
-  string website = 6;
-  OwnerInfo owner = 7;
-  google.protobuf.Timestamp created_at = 8;
+  Studio studio = 1;
   BaseRequest request = 100;
 }
 
@@ -146,6 +139,8 @@ message GetStaffPermissionsResponse {
   BaseResponse response = 100;
 }
 
+
+
 message Studio {
   string id = 1;
   string name = 2;
@@ -153,7 +148,7 @@ message Studio {
   string phone = 4;
   string email = 5;
   string website = 6;
-  string owner_id = 7;
+  OwnerInfo owner = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
 }
