@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/golang-jwt/jwt/v5"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -27,9 +28,9 @@ func InterceptorSession() grpc.UnaryServerInterceptor {
 	) (interface{}, error) {
 		// List of methods that don't require authentication
 		unauthenticatedMethods := map[string]bool{
-			"/inkMe.auth.Auth/Register":    true,
-			"/inkMe.auth.Auth/Login":       true,
-			"/inkMe.auth.Auth/GetAllUsers": true,
+			"/inkMe.studio.Auth/Register":    true,
+			"/inkMe.studio.Auth/Login":       true,
+			"/inkMe.studio.Auth/GetAllUsers": true,
 		}
 
 		// Extract tenant from metadata

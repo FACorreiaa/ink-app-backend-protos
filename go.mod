@@ -3,6 +3,7 @@ module github.com/FACorreiaa/ink-app-backend-protos
 go 1.24.1
 
 require (
+	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250315194907-111fbfeff609
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.21.1
 	go.opentelemetry.io/otel/trace v1.35.0
@@ -12,7 +13,6 @@ require (
 )
 
 require (
-	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250315170336-41b3c1e89396 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
