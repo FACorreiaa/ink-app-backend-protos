@@ -269,8 +269,10 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string token = 1;
-  string message = 2;
+  string access_token = 1;
+  string refresh_token = 2;
+  string message = 3;
+  bool success = 4;
   BaseResponse response = 100;
 }
 
