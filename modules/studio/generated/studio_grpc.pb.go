@@ -555,18 +555,20 @@ var StudioService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	StudioAuth_Register_FullMethodName        = "/inkMe.studio.StudioAuth/Register"
-	StudioAuth_Login_FullMethodName           = "/inkMe.studio.StudioAuth/Login"
-	StudioAuth_Logout_FullMethodName          = "/inkMe.studio.StudioAuth/Logout"
-	StudioAuth_ChangePassword_FullMethodName  = "/inkMe.studio.StudioAuth/ChangePassword"
-	StudioAuth_ChangeEmail_FullMethodName     = "/inkMe.studio.StudioAuth/ChangeEmail"
-	StudioAuth_RefreshToken_FullMethodName    = "/inkMe.studio.StudioAuth/RefreshToken"
-	StudioAuth_ValidateSession_FullMethodName = "/inkMe.studio.StudioAuth/ValidateSession"
-	StudioAuth_GetAllUsers_FullMethodName     = "/inkMe.studio.StudioAuth/GetAllUsers"
-	StudioAuth_GetUserByID_FullMethodName     = "/inkMe.studio.StudioAuth/GetUserByID"
-	StudioAuth_DeleteUser_FullMethodName      = "/inkMe.studio.StudioAuth/DeleteUser"
-	StudioAuth_UpdateUser_FullMethodName      = "/inkMe.studio.StudioAuth/UpdateUser"
-	StudioAuth_InsertUser_FullMethodName      = "/inkMe.studio.StudioAuth/InsertUser"
+	StudioAuth_Register_FullMethodName          = "/inkMe.studio.StudioAuth/Register"
+	StudioAuth_Login_FullMethodName             = "/inkMe.studio.StudioAuth/Login"
+	StudioAuth_Logout_FullMethodName            = "/inkMe.studio.StudioAuth/Logout"
+	StudioAuth_ChangePassword_FullMethodName    = "/inkMe.studio.StudioAuth/ChangePassword"
+	StudioAuth_ChangeEmail_FullMethodName       = "/inkMe.studio.StudioAuth/ChangeEmail"
+	StudioAuth_RefreshToken_FullMethodName      = "/inkMe.studio.StudioAuth/RefreshToken"
+	StudioAuth_ValidateSession_FullMethodName   = "/inkMe.studio.StudioAuth/ValidateSession"
+	StudioAuth_GetAllUsers_FullMethodName       = "/inkMe.studio.StudioAuth/GetAllUsers"
+	StudioAuth_GetUserByID_FullMethodName       = "/inkMe.studio.StudioAuth/GetUserByID"
+	StudioAuth_DeleteUser_FullMethodName        = "/inkMe.studio.StudioAuth/DeleteUser"
+	StudioAuth_UpdateUser_FullMethodName        = "/inkMe.studio.StudioAuth/UpdateUser"
+	StudioAuth_InsertUser_FullMethodName        = "/inkMe.studio.StudioAuth/InsertUser"
+	StudioAuth_GetUserByEmail_FullMethodName    = "/inkMe.studio.StudioAuth/GetUserByEmail"
+	StudioAuth_GetUserByUsername_FullMethodName = "/inkMe.studio.StudioAuth/GetUserByUsername"
 )
 
 // StudioAuthClient is the client API for StudioAuth service.
@@ -586,6 +588,8 @@ type StudioAuthClient interface {
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	InsertUser(ctx context.Context, in *InsertUserRequest, opts ...grpc.CallOption) (*InsertUserResponse, error)
+	GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error)
+	GetUserByUsername(ctx context.Context, in *GetUserByUsernameRequest, opts ...grpc.CallOption) (*GetUserByUsernameResponse, error)
 }
 
 type studioAuthClient struct {
@@ -716,6 +720,26 @@ func (c *studioAuthClient) InsertUser(ctx context.Context, in *InsertUserRequest
 	return out, nil
 }
 
+func (c *studioAuthClient) GetUserByEmail(ctx context.Context, in *GetUserByEmailRequest, opts ...grpc.CallOption) (*GetUserByEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserByEmailResponse)
+	err := c.cc.Invoke(ctx, StudioAuth_GetUserByEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studioAuthClient) GetUserByUsername(ctx context.Context, in *GetUserByUsernameRequest, opts ...grpc.CallOption) (*GetUserByUsernameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserByUsernameResponse)
+	err := c.cc.Invoke(ctx, StudioAuth_GetUserByUsername_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StudioAuthServer is the server API for StudioAuth service.
 // All implementations must embed UnimplementedStudioAuthServer
 // for forward compatibility.
@@ -733,6 +757,8 @@ type StudioAuthServer interface {
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	InsertUser(context.Context, *InsertUserRequest) (*InsertUserResponse, error)
+	GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error)
+	GetUserByUsername(context.Context, *GetUserByUsernameRequest) (*GetUserByUsernameResponse, error)
 	mustEmbedUnimplementedStudioAuthServer()
 }
 
@@ -778,6 +804,12 @@ func (UnimplementedStudioAuthServer) UpdateUser(context.Context, *UpdateUserRequ
 }
 func (UnimplementedStudioAuthServer) InsertUser(context.Context, *InsertUserRequest) (*InsertUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertUser not implemented")
+}
+func (UnimplementedStudioAuthServer) GetUserByEmail(context.Context, *GetUserByEmailRequest) (*GetUserByEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
+}
+func (UnimplementedStudioAuthServer) GetUserByUsername(context.Context, *GetUserByUsernameRequest) (*GetUserByUsernameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserByUsername not implemented")
 }
 func (UnimplementedStudioAuthServer) mustEmbedUnimplementedStudioAuthServer() {}
 func (UnimplementedStudioAuthServer) testEmbeddedByValue()                    {}
@@ -1016,6 +1048,42 @@ func _StudioAuth_InsertUser_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StudioAuth_GetUserByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudioAuthServer).GetUserByEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudioAuth_GetUserByEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudioAuthServer).GetUserByEmail(ctx, req.(*GetUserByEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudioAuth_GetUserByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByUsernameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudioAuthServer).GetUserByUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudioAuth_GetUserByUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudioAuthServer).GetUserByUsername(ctx, req.(*GetUserByUsernameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // StudioAuth_ServiceDesc is the grpc.ServiceDesc for StudioAuth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1070,6 +1138,14 @@ var StudioAuth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InsertUser",
 			Handler:    _StudioAuth_InsertUser_Handler,
+		},
+		{
+			MethodName: "GetUserByEmail",
+			Handler:    _StudioAuth_GetUserByEmail_Handler,
+		},
+		{
+			MethodName: "GetUserByUsername",
+			Handler:    _StudioAuth_GetUserByUsername_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

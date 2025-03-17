@@ -176,3 +176,13 @@ func (b *Broker) InsertUser(ctx context.Context, in *generated.InsertUserRequest
 func (b *Broker) RefreshToken(ctx context.Context, in *generated.RefreshTokenRequest, opts ...grpc.CallOption) (*generated.TokenResponse, error) {
 	return b.authClient.RefreshToken(ctx, in, opts...)
 }
+
+// GetUserByEmail implements generated.StudioAuthClient
+func (b *Broker) GetUserByEmail(ctx context.Context, in *generated.GetUserByEmailRequest, opts ...grpc.CallOption) (*generated.GetUserByEmailResponse, error) {
+	return b.authClient.GetUserByEmail(ctx, in, opts...)
+}
+
+// GetUserByUsername implements generated.StudioAuthClient
+func (b *Broker) GetUserByUsername(ctx context.Context, in *generated.GetUserByUsernameRequest, opts ...grpc.CallOption) (*generated.GetUserByUsernameResponse, error) {
+	return b.authClient.GetUserByUsername(ctx, in, opts...)
+}

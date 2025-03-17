@@ -46,7 +46,30 @@ service StudioAuth {
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
   rpc InsertUser(InsertUserRequest) returns (InsertUserResponse);
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserByUsernameResponse);
 }
+
+message GetUserByEmailRequest {
+  string email = 1;
+  BaseRequest request = 100;
+}
+
+message GetUserByUsernameRequest {
+  string username = 1;
+  BaseRequest request = 100;
+}
+
+message GetUserByUsernameResponse {
+  User user = 1;
+  BaseResponse response = 100;
+}
+
+message GetUserByEmailResponse {
+  User user = 1;
+  BaseResponse response = 100;
+}
+
 
 message CreateStudioRequest {
   Studio studio = 1;
