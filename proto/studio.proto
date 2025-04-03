@@ -13,25 +13,21 @@ service StudioService {
   rpc CreateStudio(CreateStudioRequest) returns (CreateStudioResponse);
   // For existing studio owners to edit their studio
   rpc UpdateStudio(UpdateStudioRequest) returns (UpdateStudioResponse);
-  // For managing staff/users within a studio
-  rpc AddStudioUser(AddStudioUserRequest) returns (AddStudioUserResponse);
-  rpc UpdateStudioUser(UpdateStudioUserRequest) returns (UpdateStudioUserResponse);
-  rpc RemoveStudioUser(RemoveStudioUserRequest) returns (RemoveStudioUserResponse);
 
   // For multi-studio scenarios
-  rpc ListStudios(ListStudiosRequest) returns (ListStudiosResponse);  
+  rpc ListStudios(ListStudiosRequest) returns (ListStudiosResponse);
   // Staff management
   rpc AddStaffMember(AddStaffMemberRequest) returns (AddStaffMemberResponse);
   rpc UpdateStaffMember(UpdateStaffMemberRequest) returns (UpdateStaffMemberResponse);
   rpc RemoveStaffMember(RemoveStaffMemberRequest) returns (RemoveStaffMemberResponse);
   rpc ListStaffMembers(ListStaffMembersRequest) returns (ListStaffMembersResponse);
-  
+
   // Permissions and roles
   rpc SetStaffPermissions(SetStaffPermissionsRequest) returns (SetStaffPermissionsResponse);
   rpc GetStaffPermissions(GetStaffPermissionsRequest) returns (GetStaffPermissionsResponse);
 }
 
-service StudioAuth {
+service AuthService {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc Logout(LogoutRequest) returns (LogoutResponse);
@@ -39,35 +35,6 @@ service StudioAuth {
   rpc ChangeEmail(ChangeEmailRequest) returns (ChangeEmailResponse);
   rpc RefreshToken(RefreshTokenRequest) returns (TokenResponse);
   rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse);
-
-  // New user-related services
-  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
-  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
-  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
-  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
-  rpc InsertUser(InsertUserRequest) returns (InsertUserResponse);
-  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
-  rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserByUsernameResponse);
-}
-
-message GetUserByEmailRequest {
-  string email = 1;
-  BaseRequest request = 100;
-}
-
-message GetUserByUsernameRequest {
-  string username = 1;
-  BaseRequest request = 100;
-}
-
-message GetUserByUsernameResponse {
-  User user = 1;
-  BaseResponse response = 100;
-}
-
-message GetUserByEmailResponse {
-  User user = 1;
-  BaseResponse response = 100;
 }
 
 
@@ -195,58 +162,6 @@ message OwnerInfo {
   string last_name = 6;
 }
 
-// For AddStudioUser RPC
-message AddStudioUserRequest {
-  string studio_id = 1;
-  string email = 2;
-  string password = 3;
-  string role = 4;
-  string display_name = 5;
-  string username = 6;
-  string first_name = 7;
-  string last_name = 8;
-  BaseRequest request = 100;
-}
-
-message AddStudioUserResponse {
-  string user_id = 1;
-  string message = 2;
-  BaseResponse response = 100;
-}
-
-// For UpdateStudioUser RPC
-message UpdateStudioUserRequest {
-  string user_id = 1;
-  string studio_id = 2;
-  string email = 3;
-  string role = 4;
-  string display_name = 5;
-  string username = 6;
-  string first_name = 7;
-  string last_name = 8;
-  google.protobuf.FieldMask update_mask = 9;
-  BaseRequest request = 100;
-}
-
-message UpdateStudioUserResponse {
-  bool success = 1;
-  string message = 2;
-  BaseResponse response = 100;
-}
-
-// For RemoveStudioUser RPC
-message RemoveStudioUserRequest {
-  string user_id = 1;
-  string studio_id = 2;
-  BaseRequest request = 100;
-}
-
-message RemoveStudioUserResponse {
-  bool success = 1;
-  string message = 2;
-  BaseResponse response = 100;
-}
-
 // For ListStudios RPC
 message ListStudiosRequest {
   int32 page_size = 1;
@@ -340,77 +255,6 @@ message ChangeEmailRequest {
 }
 
 message ChangeEmailResponse {
-  string message = 1;
-  BaseResponse response = 100;
-}
-
-message User {
-  string user_id = 1;
-  string email = 2;
-  string username = 3;
-  string password_hash = 4;
-  bool is_admin = 5;
-  string created_at = 6;
-  string updated_at = 7;
-  enum Role {
-    ROLE_UNSPECIFIED = 0;
-    ADMIN = 1;
-    STAFF = 2;
-    USER = 3;
-    MODERATOR = 4;
-  }
-
-  Role role = 8;
-  string studio_id = 9;
-}
-
-// Request and response messages for new user-related services
-message GetAllUsersRequest {
-  BaseRequest request = 100;
-}
-
-message GetAllUsersResponse {
-  repeated User users = 1;
-  BaseResponse response = 100;
-}
-
-message GetUserByIDRequest {
-  string user_id = 1;
-  BaseRequest request = 100;
-}
-
-message GetUserByIDResponse {
-  User user = 1;
-  BaseResponse response = 100;
-}
-
-message DeleteUserRequest {
-  string user_id = 1;
-  BaseRequest request = 100;
-}
-
-message DeleteUserResponse {
-  string message = 1;
-  BaseResponse response = 100;
-}
-
-message UpdateUserRequest {
-  User user = 1;
-  BaseRequest request = 100;
-}
-
-message UpdateUserResponse {
-  string message = 1;
-  BaseResponse response = 100;
-}
-
-message InsertUserRequest {
-  User user = 1;
-  BaseRequest request = 100;
-
-}
-
-message InsertUserResponse {
   string message = 1;
   BaseResponse response = 100;
 }

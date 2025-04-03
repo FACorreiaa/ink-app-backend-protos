@@ -16,13 +16,13 @@ type Broker struct {
 
 	// Separate clients for each service
 	studioClient generated.StudioServiceClient
-	authClient   generated.StudioAuthClient
+	authClient   generated.AuthServiceClient
 }
 
 // Ensure Broker implements both service interfaces
 var (
 	_ generated.StudioServiceClient = (*Broker)(nil)
-	_ generated.StudioAuthClient    = (*Broker)(nil)
+	_ generated.AuthServiceClient   = (*Broker)(nil)
 )
 
 func NewBroker(serverAddr string) (*Broker, error) {
@@ -45,7 +45,7 @@ func (b *Broker) NewConnection() (*grpc.ClientConn, error) {
 	b.conn = conn
 	// Initialize both clients with the same connection
 	b.studioClient = generated.NewStudioServiceClient(b.conn)
-	b.authClient = generated.NewStudioAuthClient(b.conn)
+	b.authClient = generated.NewAuthServiceClient(b.conn)
 
 	return b.conn, nil
 }
@@ -56,24 +56,9 @@ func (b *Broker) GetAddress() string {
 
 // --- StudioService implementation ---
 
-// AddStudioUser implements generated.StudioServiceClient
-func (b *Broker) AddStudioUser(ctx context.Context, in *generated.AddStudioUserRequest, opts ...grpc.CallOption) (*generated.AddStudioUserResponse, error) {
-	return b.studioClient.AddStudioUser(ctx, in, opts...)
-}
-
 // ListStudios implements generated.StudioServiceClient
 func (b *Broker) ListStudios(ctx context.Context, in *generated.ListStudiosRequest, opts ...grpc.CallOption) (*generated.ListStudiosResponse, error) {
 	return b.studioClient.ListStudios(ctx, in, opts...)
-}
-
-// RemoveStudioUser implements generated.StudioServiceClient
-func (b *Broker) RemoveStudioUser(ctx context.Context, in *generated.RemoveStudioUserRequest, opts ...grpc.CallOption) (*generated.RemoveStudioUserResponse, error) {
-	return b.studioClient.RemoveStudioUser(ctx, in, opts...)
-}
-
-// UpdateStudioUser implements generated.StudioServiceClient
-func (b *Broker) UpdateStudioUser(ctx context.Context, in *generated.UpdateStudioUserRequest, opts ...grpc.CallOption) (*generated.UpdateStudioUserResponse, error) {
-	return b.studioClient.UpdateStudioUser(ctx, in, opts...)
 }
 
 // AddStaffMember implements generated.StudioServiceClient
@@ -147,42 +132,7 @@ func (b *Broker) ChangeEmail(ctx context.Context, in *generated.ChangeEmailReque
 	return b.authClient.ChangeEmail(ctx, in, opts...)
 }
 
-// GetAllUsers implements generated.StudioAuthClient
-func (b *Broker) GetAllUsers(ctx context.Context, in *generated.GetAllUsersRequest, opts ...grpc.CallOption) (*generated.GetAllUsersResponse, error) {
-	return b.authClient.GetAllUsers(ctx, in, opts...)
-}
-
-// GetUserByID implements generated.StudioAuthClient
-func (b *Broker) GetUserByID(ctx context.Context, in *generated.GetUserByIDRequest, opts ...grpc.CallOption) (*generated.GetUserByIDResponse, error) {
-	return b.authClient.GetUserByID(ctx, in, opts...)
-}
-
-// DeleteUser implements generated.StudioAuthClient
-func (b *Broker) DeleteUser(ctx context.Context, in *generated.DeleteUserRequest, opts ...grpc.CallOption) (*generated.DeleteUserResponse, error) {
-	return b.authClient.DeleteUser(ctx, in, opts...)
-}
-
-// UpdateUser implements generated.StudioAuthClient
-func (b *Broker) UpdateUser(ctx context.Context, in *generated.UpdateUserRequest, opts ...grpc.CallOption) (*generated.UpdateUserResponse, error) {
-	return b.authClient.UpdateUser(ctx, in, opts...)
-}
-
-// InsertUser implements generated.StudioAuthClient
-func (b *Broker) InsertUser(ctx context.Context, in *generated.InsertUserRequest, opts ...grpc.CallOption) (*generated.InsertUserResponse, error) {
-	return b.authClient.InsertUser(ctx, in, opts...)
-}
-
 // RefreshToken implements generated.StudioAuthClient
 func (b *Broker) RefreshToken(ctx context.Context, in *generated.RefreshTokenRequest, opts ...grpc.CallOption) (*generated.TokenResponse, error) {
 	return b.authClient.RefreshToken(ctx, in, opts...)
-}
-
-// GetUserByEmail implements generated.StudioAuthClient
-func (b *Broker) GetUserByEmail(ctx context.Context, in *generated.GetUserByEmailRequest, opts ...grpc.CallOption) (*generated.GetUserByEmailResponse, error) {
-	return b.authClient.GetUserByEmail(ctx, in, opts...)
-}
-
-// GetUserByUsername implements generated.StudioAuthClient
-func (b *Broker) GetUserByUsername(ctx context.Context, in *generated.GetUserByUsernameRequest, opts ...grpc.CallOption) (*generated.GetUserByUsernameResponse, error) {
-	return b.authClient.GetUserByUsername(ctx, in, opts...)
 }

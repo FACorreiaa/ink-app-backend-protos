@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package inkMe.user;
+
+option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/user/generated";
+
+service UserService {
+
+  // New user-related services
+  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
+  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc InsertUser(InsertUserRequest) returns (InsertUserResponse);
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserByUsernameResponse);
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+  BaseRequest request = 100;
+}
+
+message GetUserByUsernameRequest {
+  string username = 1;
+  BaseRequest request = 100;
+}
+
+message GetUserByUsernameResponse {
+  User user = 1;
+  BaseResponse response = 100;
+}
+
+message GetUserByEmailResponse {
+  User user = 1;
+  BaseResponse response = 100;
+}
+
+
+
+
+message User {
+  string user_id = 1;
+  string email = 2;
+  string username = 3;
+  string password_hash = 4;
+  bool is_admin = 5;
+  string created_at = 6;
+  string updated_at = 7;
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ADMIN = 1;
+    STAFF = 2;
+    USER = 3;
+    MODERATOR = 4;
+  }
+
+  Role role = 8;
+  string studio_id = 9;
+}
+
+// Request and response messages for new user-related services
+message GetAllUsersRequest {
+  BaseRequest request = 100;
+}
+
+message GetAllUsersResponse {
+  repeated User users = 1;
+  BaseResponse response = 100;
+}
+
+message GetUserByIDRequest {
+  string user_id = 1;
+  BaseRequest request = 100;
+}
+
+message GetUserByIDResponse {
+  User user = 1;
+  BaseResponse response = 100;
+}
+
+message DeleteUserRequest {
+  string user_id = 1;
+  BaseRequest request = 100;
+}
+
+message DeleteUserResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message UpdateUserRequest {
+  User user = 1;
+  BaseRequest request = 100;
+}
+
+message UpdateUserResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message InsertUserRequest {
+  User user = 1;
+  BaseRequest request = 100;
+
+}
+
+message InsertUserResponse {
+  string message = 1;
+  BaseResponse response = 100;
+}
+
+message BaseRequest {
+  string downstream = 998;
+  string request_id = 999;
+}
+
+message BaseResponse {
+  string upstream = 998;
+  string request_id = 999;
+  string status = 1000;
+}
