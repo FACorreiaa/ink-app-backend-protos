@@ -136,3 +136,11 @@ func (b *Broker) ChangeEmail(ctx context.Context, in *generated.ChangeEmailReque
 func (b *Broker) RefreshToken(ctx context.Context, in *generated.RefreshTokenRequest, opts ...grpc.CallOption) (*generated.TokenResponse, error) {
 	return b.authClient.RefreshToken(ctx, in, opts...)
 }
+
+func (b *Broker) ChangeOwnPassword(ctx context.Context, in *generated.ChangeOwnPasswordRequest, opts ...grpc.CallOption) (*generated.ChangeOwnPasswordResponse, error) {
+	return b.authClient.ChangeOwnPassword(ctx, in, opts...)
+}
+
+func (b *Broker) AdminResetUserPassword(ctx context.Context, in *generated.AdminResetUserPasswordRequest, opts ...grpc.CallOption) (*generated.AdminResetUserPasswordResponse, error) {
+	return b.authClient.AdminResetUserPassword(ctx, in, opts...)
+}

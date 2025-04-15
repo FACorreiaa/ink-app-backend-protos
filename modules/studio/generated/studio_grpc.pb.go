@@ -439,13 +439,15 @@ var StudioService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	AuthService_Register_FullMethodName        = "/inkMe.studio.AuthService/Register"
-	AuthService_Login_FullMethodName           = "/inkMe.studio.AuthService/Login"
-	AuthService_Logout_FullMethodName          = "/inkMe.studio.AuthService/Logout"
-	AuthService_ChangePassword_FullMethodName  = "/inkMe.studio.AuthService/ChangePassword"
-	AuthService_ChangeEmail_FullMethodName     = "/inkMe.studio.AuthService/ChangeEmail"
-	AuthService_RefreshToken_FullMethodName    = "/inkMe.studio.AuthService/RefreshToken"
-	AuthService_ValidateSession_FullMethodName = "/inkMe.studio.AuthService/ValidateSession"
+	AuthService_Register_FullMethodName               = "/inkMe.studio.AuthService/Register"
+	AuthService_Login_FullMethodName                  = "/inkMe.studio.AuthService/Login"
+	AuthService_Logout_FullMethodName                 = "/inkMe.studio.AuthService/Logout"
+	AuthService_ChangePassword_FullMethodName         = "/inkMe.studio.AuthService/ChangePassword"
+	AuthService_ChangeEmail_FullMethodName            = "/inkMe.studio.AuthService/ChangeEmail"
+	AuthService_RefreshToken_FullMethodName           = "/inkMe.studio.AuthService/RefreshToken"
+	AuthService_ValidateSession_FullMethodName        = "/inkMe.studio.AuthService/ValidateSession"
+	AuthService_ChangeOwnPassword_FullMethodName      = "/inkMe.studio.AuthService/ChangeOwnPassword"
+	AuthService_AdminResetUserPassword_FullMethodName = "/inkMe.studio.AuthService/AdminResetUserPassword"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -459,6 +461,8 @@ type AuthServiceClient interface {
 	ChangeEmail(ctx context.Context, in *ChangeEmailRequest, opts ...grpc.CallOption) (*ChangeEmailResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 	ValidateSession(ctx context.Context, in *ValidateSessionRequest, opts ...grpc.CallOption) (*ValidateSessionResponse, error)
+	ChangeOwnPassword(ctx context.Context, in *ChangeOwnPasswordRequest, opts ...grpc.CallOption) (*ChangeOwnPasswordResponse, error)
+	AdminResetUserPassword(ctx context.Context, in *AdminResetUserPasswordRequest, opts ...grpc.CallOption) (*AdminResetUserPasswordResponse, error)
 }
 
 type authServiceClient struct {
@@ -539,6 +543,26 @@ func (c *authServiceClient) ValidateSession(ctx context.Context, in *ValidateSes
 	return out, nil
 }
 
+func (c *authServiceClient) ChangeOwnPassword(ctx context.Context, in *ChangeOwnPasswordRequest, opts ...grpc.CallOption) (*ChangeOwnPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ChangeOwnPasswordResponse)
+	err := c.cc.Invoke(ctx, AuthService_ChangeOwnPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) AdminResetUserPassword(ctx context.Context, in *AdminResetUserPasswordRequest, opts ...grpc.CallOption) (*AdminResetUserPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdminResetUserPasswordResponse)
+	err := c.cc.Invoke(ctx, AuthService_AdminResetUserPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -550,6 +574,8 @@ type AuthServiceServer interface {
 	ChangeEmail(context.Context, *ChangeEmailRequest) (*ChangeEmailResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error)
 	ValidateSession(context.Context, *ValidateSessionRequest) (*ValidateSessionResponse, error)
+	ChangeOwnPassword(context.Context, *ChangeOwnPasswordRequest) (*ChangeOwnPasswordResponse, error)
+	AdminResetUserPassword(context.Context, *AdminResetUserPasswordRequest) (*AdminResetUserPasswordResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -580,6 +606,12 @@ func (UnimplementedAuthServiceServer) RefreshToken(context.Context, *RefreshToke
 }
 func (UnimplementedAuthServiceServer) ValidateSession(context.Context, *ValidateSessionRequest) (*ValidateSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateSession not implemented")
+}
+func (UnimplementedAuthServiceServer) ChangeOwnPassword(context.Context, *ChangeOwnPasswordRequest) (*ChangeOwnPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeOwnPassword not implemented")
+}
+func (UnimplementedAuthServiceServer) AdminResetUserPassword(context.Context, *AdminResetUserPasswordRequest) (*AdminResetUserPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AdminResetUserPassword not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -728,6 +760,42 @@ func _AuthService_ValidateSession_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_ChangeOwnPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangeOwnPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ChangeOwnPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ChangeOwnPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ChangeOwnPassword(ctx, req.(*ChangeOwnPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_AdminResetUserPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdminResetUserPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).AdminResetUserPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_AdminResetUserPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).AdminResetUserPassword(ctx, req.(*AdminResetUserPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -762,6 +830,14 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateSession",
 			Handler:    _AuthService_ValidateSession_Handler,
+		},
+		{
+			MethodName: "ChangeOwnPassword",
+			Handler:    _AuthService_ChangeOwnPassword_Handler,
+		},
+		{
+			MethodName: "AdminResetUserPassword",
+			Handler:    _AuthService_AdminResetUserPassword_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
