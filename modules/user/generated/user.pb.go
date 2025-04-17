@@ -439,7 +439,9 @@ func (x *GetUsersReq) GetRequest() *BaseRequest {
 
 type GetUsersRes struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Users         []*User                `protobuf:"bytes,3,rep,name=users,proto3" json:"users,omitempty"`
 	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -473,6 +475,20 @@ func (x *GetUsersRes) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetUsersRes.ProtoReflect.Descriptor instead.
 func (*GetUsersRes) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetUsersRes) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *GetUsersRes) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 func (x *GetUsersRes) GetUsers() []*User {
@@ -1079,9 +1095,11 @@ const file_user_proto_rawDesc = "" +
 	"\x04USER\x10\x03\x12\r\n" +
 	"\tMODERATOR\x10\x04\"@\n" +
 	"\vGetUsersReq\x121\n" +
-	"\arequest\x18d \x01(\v2\x17.inkMe.user.BaseRequestR\arequest\"k\n" +
-	"\vGetUsersRes\x12&\n" +
-	"\x05users\x18\x01 \x03(\v2\x10.inkMe.user.UserR\x05users\x124\n" +
+	"\arequest\x18d \x01(\v2\x17.inkMe.user.BaseRequestR\arequest\"\x9f\x01\n" +
+	"\vGetUsersRes\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12&\n" +
+	"\x05users\x18\x03 \x03(\v2\x10.inkMe.user.UserR\x05users\x124\n" +
 	"\bresponse\x18d \x01(\v2\x18.inkMe.user.BaseResponseR\bresponse\"\\\n" +
 	"\x0eGetUserByIDReq\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x121\n" +

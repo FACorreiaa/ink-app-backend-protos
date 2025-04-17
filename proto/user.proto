@@ -61,11 +61,14 @@ message User {
 
 // Request and response messages for new user-related services
 message GetUsersReq {
+  
   BaseRequest request = 100;
 }
 
 message GetUsersRes {
-  repeated User users = 1;
+  bool success = 1;
+  string message = 2;
+  repeated User users = 3;
   BaseResponse response = 100;
 }
 
