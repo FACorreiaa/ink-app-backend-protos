@@ -909,6 +909,7 @@ type BaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Downstream    string                 `protobuf:"bytes,998,opt,name=downstream,proto3" json:"downstream,omitempty"`
 	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	TraceId       string                 `protobuf:"bytes,1000,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -957,11 +958,19 @@ func (x *BaseRequest) GetRequestId() string {
 	return ""
 }
 
+func (x *BaseRequest) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
 type BaseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Upstream      string                 `protobuf:"bytes,998,opt,name=upstream,proto3" json:"upstream,omitempty"`
 	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Status        string                 `protobuf:"bytes,1000,opt,name=status,proto3" json:"status,omitempty"`
+	TraceId       string                 `protobuf:"bytes,9999,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1013,6 +1022,13 @@ func (x *BaseResponse) GetRequestId() string {
 func (x *BaseResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+func (x *BaseResponse) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
 	}
 	return ""
 }
@@ -1082,18 +1098,20 @@ const file_user_proto_rawDesc = "" +
 	"\arequest\x18d \x01(\v2\x17.inkMe.user.BaseRequestR\arequest\"_\n" +
 	"\rInsertUserRes\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x124\n" +
-	"\bresponse\x18d \x01(\v2\x18.inkMe.user.BaseResponseR\bresponse\"N\n" +
+	"\bresponse\x18d \x01(\v2\x18.inkMe.user.BaseResponseR\bresponse\"j\n" +
 	"\vBaseRequest\x12\x1f\n" +
 	"\n" +
 	"downstream\x18\xe6\a \x01(\tR\n" +
 	"downstream\x12\x1e\n" +
 	"\n" +
-	"request_id\x18\xe7\a \x01(\tR\trequestId\"d\n" +
+	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x1a\n" +
+	"\btrace_id\x18\xe8\a \x01(\tR\atraceId\"\x80\x01\n" +
 	"\fBaseResponse\x12\x1b\n" +
 	"\bupstream\x18\xe6\a \x01(\tR\bupstream\x12\x1e\n" +
 	"\n" +
 	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x17\n" +
-	"\x06status\x18\xe8\a \x01(\tR\x06status2\x87\x04\n" +
+	"\x06status\x18\xe8\a \x01(\tR\x06status\x12\x1a\n" +
+	"\btrace_id\x18\x8fN \x01(\tR\atraceId2\x87\x04\n" +
 	"\vUserService\x12<\n" +
 	"\bGetUsers\x12\x17.inkMe.user.GetUsersReq\x1a\x17.inkMe.user.GetUsersRes\x12E\n" +
 	"\vGetUserByID\x12\x1a.inkMe.user.GetUserByIDReq\x1a\x1a.inkMe.user.GetUserByIDRes\x12B\n" +
