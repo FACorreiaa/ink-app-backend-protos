@@ -7,7 +7,7 @@ option go_package = "github.com/FACorreiaa/ink-app-backend-protos/modules/user/g
 service UserService {
 
   // New user-related services
-  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
+  rpc GetUsers(GetUsersReq) returns (GetUsersRes);
   rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
@@ -60,11 +60,11 @@ message User {
 }
 
 // Request and response messages for new user-related services
-message GetAllUsersRequest {
+message GetUsersReq {
   BaseRequest request = 100;
 }
 
-message GetAllUsersResponse {
+message GetUsersRes {
   repeated User users = 1;
   BaseResponse response = 100;
 }

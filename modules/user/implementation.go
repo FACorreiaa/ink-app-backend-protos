@@ -53,8 +53,8 @@ func (b *Broker) GetAddress() string {
 // --- StudioService implementation ---
 
 // GetAllUsers implements generated.Studioclient
-func (b *Broker) GetAllUsers(ctx context.Context, in *generated.GetAllUsersRequest, opts ...grpc.CallOption) (*generated.GetAllUsersResponse, error) {
-	return b.client.GetAllUsers(ctx, in, opts...)
+func (b *Broker) GetUsers(ctx context.Context, in *generated.GetUsersReq, opts ...grpc.CallOption) (*generated.GetUsersRes, error) {
+	return b.client.GetUsers(ctx, in, opts...)
 }
 
 // GetUserByID implements generated.Studioclient
