@@ -120,6 +120,6 @@ func (b *Broker) UpdateUser(ctx context.Context, in *generated.UpdateUserRequest
 }
 
 // RefreshToken implements generated.StudioAuthClient
-func (b *Broker) RefreshToken(ctx context.Context, in *generated.RefreshTokenRequest, opts ...grpc.CallOption) (*generated.TokenResponse, error) {
-	return b.authClient.RefreshToken(ctx, in, opts...)
-}
+// func (b *Broker) RefreshToken(ctx context.Context, in *generated.RefreshTokenRequest, opts ...grpc.CallOption) (*generated.TokenResponse, error) {
+// 	return b.authClient.RefreshToken(ctx, in, opts...)
+// }
