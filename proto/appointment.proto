@@ -193,10 +193,13 @@ message Appointment {
 message BaseRequest {
   string downstream = 998;
   string request_id = 999;
+  string trace_id = 1000;
 }
 
 message BaseResponse {
+  bool success = 997;
   string upstream = 998;
   string request_id = 999;
   string status = 1000;
+  string trace_id = 9999;
 }

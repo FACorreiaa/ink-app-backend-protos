@@ -1503,6 +1503,7 @@ type BaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Downstream    string                 `protobuf:"bytes,998,opt,name=downstream,proto3" json:"downstream,omitempty"`
 	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	TraceId       string                 `protobuf:"bytes,1000,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1551,11 +1552,20 @@ func (x *BaseRequest) GetRequestId() string {
 	return ""
 }
 
+func (x *BaseRequest) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
 type BaseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,997,opt,name=success,proto3" json:"success,omitempty"`
 	Upstream      string                 `protobuf:"bytes,998,opt,name=upstream,proto3" json:"upstream,omitempty"`
 	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Status        string                 `protobuf:"bytes,1000,opt,name=status,proto3" json:"status,omitempty"`
+	TraceId       string                 `protobuf:"bytes,9999,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1590,6 +1600,13 @@ func (*BaseResponse) Descriptor() ([]byte, []int) {
 	return file_portfolio_proto_rawDescGZIP(), []int{24}
 }
 
+func (x *BaseResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 func (x *BaseResponse) GetUpstream() string {
 	if x != nil {
 		return x.Upstream
@@ -1607,6 +1624,13 @@ func (x *BaseResponse) GetRequestId() string {
 func (x *BaseResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+func (x *BaseResponse) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
 	}
 	return ""
 }
@@ -1736,18 +1760,21 @@ const file_portfolio_proto_rawDesc = "" +
 	"\rshare_message\x18\x04 \x01(\tR\fshareMessage\x129\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x122\n" +
-	"\x06expiry\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06expiry\"N\n" +
+	"\x06expiry\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06expiry\"j\n" +
 	"\vBaseRequest\x12\x1f\n" +
 	"\n" +
 	"downstream\x18\xe6\a \x01(\tR\n" +
 	"downstream\x12\x1e\n" +
 	"\n" +
-	"request_id\x18\xe7\a \x01(\tR\trequestId\"d\n" +
-	"\fBaseResponse\x12\x1b\n" +
+	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x1a\n" +
+	"\btrace_id\x18\xe8\a \x01(\tR\atraceId\"\x9b\x01\n" +
+	"\fBaseResponse\x12\x19\n" +
+	"\asuccess\x18\xe5\a \x01(\bR\asuccess\x12\x1b\n" +
 	"\bupstream\x18\xe6\a \x01(\tR\bupstream\x12\x1e\n" +
 	"\n" +
 	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x17\n" +
-	"\x06status\x18\xe8\a \x01(\tR\x06status2\xc5\b\n" +
+	"\x06status\x18\xe8\a \x01(\tR\x06status\x12\x1a\n" +
+	"\btrace_id\x18\x8fN \x01(\tR\atraceId2\xc5\b\n" +
 	"\x10PortfolioService\x12[\n" +
 	"\fUploadDesign\x12$.inkMe.portfolio.UploadDesignRequest\x1a%.inkMe.portfolio.UploadDesignResponse\x12R\n" +
 	"\tGetDesign\x12!.inkMe.portfolio.GetDesignRequest\x1a\".inkMe.portfolio.GetDesignResponse\x12X\n" +

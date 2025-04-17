@@ -429,7 +429,6 @@ const (
 	CustomerAuth_Logout_FullMethodName         = "/inkMe.customer.CustomerAuth/Logout"
 	CustomerAuth_ChangePassword_FullMethodName = "/inkMe.customer.CustomerAuth/ChangePassword"
 	CustomerAuth_ChangeEmail_FullMethodName    = "/inkMe.customer.CustomerAuth/ChangeEmail"
-	CustomerAuth_RefreshToken_FullMethodName   = "/inkMe.customer.CustomerAuth/RefreshToken"
 	CustomerAuth_Register_FullMethodName       = "/inkMe.customer.CustomerAuth/Register"
 	CustomerAuth_UpdateUser_FullMethodName     = "/inkMe.customer.CustomerAuth/UpdateUser"
 )
@@ -442,7 +441,6 @@ type CustomerAuthClient interface {
 	Logout(ctx context.Context, in *NilReq, opts ...grpc.CallOption) (*NilRes, error)
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*ChangePasswordResponse, error)
 	ChangeEmail(ctx context.Context, in *ChangeEmailRequest, opts ...grpc.CallOption) (*ChangeEmailResponse, error)
-	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 	// New user-related services
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
@@ -496,16 +494,6 @@ func (c *customerAuthClient) ChangeEmail(ctx context.Context, in *ChangeEmailReq
 	return out, nil
 }
 
-func (c *customerAuthClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TokenResponse)
-	err := c.cc.Invoke(ctx, CustomerAuth_RefreshToken_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *customerAuthClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterResponse)
@@ -534,7 +522,6 @@ type CustomerAuthServer interface {
 	Logout(context.Context, *NilReq) (*NilRes, error)
 	ChangePassword(context.Context, *ChangePasswordRequest) (*ChangePasswordResponse, error)
 	ChangeEmail(context.Context, *ChangeEmailRequest) (*ChangeEmailResponse, error)
-	RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error)
 	// New user-related services
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
@@ -559,9 +546,6 @@ func (UnimplementedCustomerAuthServer) ChangePassword(context.Context, *ChangePa
 }
 func (UnimplementedCustomerAuthServer) ChangeEmail(context.Context, *ChangeEmailRequest) (*ChangeEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangeEmail not implemented")
-}
-func (UnimplementedCustomerAuthServer) RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedCustomerAuthServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
@@ -662,24 +646,6 @@ func _CustomerAuth_ChangeEmail_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CustomerAuth_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RefreshTokenRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CustomerAuthServer).RefreshToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CustomerAuth_RefreshToken_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CustomerAuthServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _CustomerAuth_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterRequest)
 	if err := dec(in); err != nil {
@@ -738,10 +704,6 @@ var CustomerAuth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeEmail",
 			Handler:    _CustomerAuth_ChangeEmail_Handler,
-		},
-		{
-			MethodName: "RefreshToken",
-			Handler:    _CustomerAuth_RefreshToken_Handler,
 		},
 		{
 			MethodName: "Register",

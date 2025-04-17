@@ -124,7 +124,7 @@ func (x User_Role) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use User_Role.Descriptor instead.
 func (User_Role) EnumDescriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{31, 0}
+	return file_customer_proto_rawDescGZIP(), []int{29, 0}
 }
 
 type CreateCustomerRequest struct {
@@ -764,118 +764,6 @@ func (x *Customer) GetIsArchived() bool {
 	return false
 }
 
-type BaseRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Downstream    string                 `protobuf:"bytes,998,opt,name=downstream,proto3" json:"downstream,omitempty"`
-	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BaseRequest) Reset() {
-	*x = BaseRequest{}
-	mi := &file_customer_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BaseRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BaseRequest) ProtoMessage() {}
-
-func (x *BaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BaseRequest.ProtoReflect.Descriptor instead.
-func (*BaseRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *BaseRequest) GetDownstream() string {
-	if x != nil {
-		return x.Downstream
-	}
-	return ""
-}
-
-func (x *BaseRequest) GetRequestId() string {
-	if x != nil {
-		return x.RequestId
-	}
-	return ""
-}
-
-type BaseResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Upstream      string                 `protobuf:"bytes,998,opt,name=upstream,proto3" json:"upstream,omitempty"`
-	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
-	Status        string                 `protobuf:"bytes,1000,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BaseResponse) Reset() {
-	*x = BaseResponse{}
-	mi := &file_customer_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BaseResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BaseResponse) ProtoMessage() {}
-
-func (x *BaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BaseResponse.ProtoReflect.Descriptor instead.
-func (*BaseResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *BaseResponse) GetUpstream() string {
-	if x != nil {
-		return x.Upstream
-	}
-	return ""
-}
-
-func (x *BaseResponse) GetRequestId() string {
-	if x != nil {
-		return x.RequestId
-	}
-	return ""
-}
-
-func (x *BaseResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
 type XDiff struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Field         string                 `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
@@ -887,7 +775,7 @@ type XDiff struct {
 
 func (x *XDiff) Reset() {
 	*x = XDiff{}
-	mi := &file_customer_proto_msgTypes[11]
+	mi := &file_customer_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -899,7 +787,7 @@ func (x *XDiff) String() string {
 func (*XDiff) ProtoMessage() {}
 
 func (x *XDiff) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[11]
+	mi := &file_customer_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -912,7 +800,7 @@ func (x *XDiff) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use XDiff.ProtoReflect.Descriptor instead.
 func (*XDiff) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{11}
+	return file_customer_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *XDiff) GetField() string {
@@ -946,7 +834,7 @@ type DeleteCustomerRequest struct {
 
 func (x *DeleteCustomerRequest) Reset() {
 	*x = DeleteCustomerRequest{}
-	mi := &file_customer_proto_msgTypes[12]
+	mi := &file_customer_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -958,7 +846,7 @@ func (x *DeleteCustomerRequest) String() string {
 func (*DeleteCustomerRequest) ProtoMessage() {}
 
 func (x *DeleteCustomerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[12]
+	mi := &file_customer_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -971,7 +859,7 @@ func (x *DeleteCustomerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCustomerRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCustomerRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{12}
+	return file_customer_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteCustomerRequest) GetId() string {
@@ -999,7 +887,7 @@ type DeleteCustomerResponse struct {
 
 func (x *DeleteCustomerResponse) Reset() {
 	*x = DeleteCustomerResponse{}
-	mi := &file_customer_proto_msgTypes[13]
+	mi := &file_customer_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1011,7 +899,7 @@ func (x *DeleteCustomerResponse) String() string {
 func (*DeleteCustomerResponse) ProtoMessage() {}
 
 func (x *DeleteCustomerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[13]
+	mi := &file_customer_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1024,7 +912,7 @@ func (x *DeleteCustomerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCustomerResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCustomerResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{13}
+	return file_customer_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteCustomerResponse) GetSuccess() bool {
@@ -1058,7 +946,7 @@ type ArchiveCustomerRequest struct {
 
 func (x *ArchiveCustomerRequest) Reset() {
 	*x = ArchiveCustomerRequest{}
-	mi := &file_customer_proto_msgTypes[14]
+	mi := &file_customer_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1070,7 +958,7 @@ func (x *ArchiveCustomerRequest) String() string {
 func (*ArchiveCustomerRequest) ProtoMessage() {}
 
 func (x *ArchiveCustomerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[14]
+	mi := &file_customer_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1083,7 +971,7 @@ func (x *ArchiveCustomerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArchiveCustomerRequest.ProtoReflect.Descriptor instead.
 func (*ArchiveCustomerRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{14}
+	return file_customer_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ArchiveCustomerRequest) GetId() string {
@@ -1110,7 +998,7 @@ type ArchiveCustomerResponse struct {
 
 func (x *ArchiveCustomerResponse) Reset() {
 	*x = ArchiveCustomerResponse{}
-	mi := &file_customer_proto_msgTypes[15]
+	mi := &file_customer_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1122,7 +1010,7 @@ func (x *ArchiveCustomerResponse) String() string {
 func (*ArchiveCustomerResponse) ProtoMessage() {}
 
 func (x *ArchiveCustomerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[15]
+	mi := &file_customer_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1135,7 +1023,7 @@ func (x *ArchiveCustomerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArchiveCustomerResponse.ProtoReflect.Descriptor instead.
 func (*ArchiveCustomerResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{15}
+	return file_customer_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ArchiveCustomerResponse) GetMessage() string {
@@ -1162,7 +1050,7 @@ type GetCustomerHistoryRequest struct {
 
 func (x *GetCustomerHistoryRequest) Reset() {
 	*x = GetCustomerHistoryRequest{}
-	mi := &file_customer_proto_msgTypes[16]
+	mi := &file_customer_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1174,7 +1062,7 @@ func (x *GetCustomerHistoryRequest) String() string {
 func (*GetCustomerHistoryRequest) ProtoMessage() {}
 
 func (x *GetCustomerHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[16]
+	mi := &file_customer_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1187,7 +1075,7 @@ func (x *GetCustomerHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCustomerHistoryRequest.ProtoReflect.Descriptor instead.
 func (*GetCustomerHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{16}
+	return file_customer_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetCustomerHistoryRequest) GetCustomerId() string {
@@ -1214,7 +1102,7 @@ type GetCustomerHistoryResponse struct {
 
 func (x *GetCustomerHistoryResponse) Reset() {
 	*x = GetCustomerHistoryResponse{}
-	mi := &file_customer_proto_msgTypes[17]
+	mi := &file_customer_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1226,7 +1114,7 @@ func (x *GetCustomerHistoryResponse) String() string {
 func (*GetCustomerHistoryResponse) ProtoMessage() {}
 
 func (x *GetCustomerHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[17]
+	mi := &file_customer_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1239,7 +1127,7 @@ func (x *GetCustomerHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCustomerHistoryResponse.ProtoReflect.Descriptor instead.
 func (*GetCustomerHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{17}
+	return file_customer_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetCustomerHistoryResponse) GetInteractions() []*Interaction {
@@ -1270,7 +1158,7 @@ type Interaction struct {
 
 func (x *Interaction) Reset() {
 	*x = Interaction{}
-	mi := &file_customer_proto_msgTypes[18]
+	mi := &file_customer_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1282,7 +1170,7 @@ func (x *Interaction) String() string {
 func (*Interaction) ProtoMessage() {}
 
 func (x *Interaction) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[18]
+	mi := &file_customer_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1295,7 +1183,7 @@ func (x *Interaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Interaction.ProtoReflect.Descriptor instead.
 func (*Interaction) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{18}
+	return file_customer_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Interaction) GetId() string {
@@ -1351,7 +1239,7 @@ type AddCustomerNoteRequest struct {
 
 func (x *AddCustomerNoteRequest) Reset() {
 	*x = AddCustomerNoteRequest{}
-	mi := &file_customer_proto_msgTypes[19]
+	mi := &file_customer_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1363,7 +1251,7 @@ func (x *AddCustomerNoteRequest) String() string {
 func (*AddCustomerNoteRequest) ProtoMessage() {}
 
 func (x *AddCustomerNoteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[19]
+	mi := &file_customer_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1376,7 +1264,7 @@ func (x *AddCustomerNoteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCustomerNoteRequest.ProtoReflect.Descriptor instead.
 func (*AddCustomerNoteRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{19}
+	return file_customer_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *AddCustomerNoteRequest) GetCustomerId() string {
@@ -1410,7 +1298,7 @@ type AddCustomerNoteResponse struct {
 
 func (x *AddCustomerNoteResponse) Reset() {
 	*x = AddCustomerNoteResponse{}
-	mi := &file_customer_proto_msgTypes[20]
+	mi := &file_customer_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1310,7 @@ func (x *AddCustomerNoteResponse) String() string {
 func (*AddCustomerNoteResponse) ProtoMessage() {}
 
 func (x *AddCustomerNoteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[20]
+	mi := &file_customer_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1323,7 @@ func (x *AddCustomerNoteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCustomerNoteResponse.ProtoReflect.Descriptor instead.
 func (*AddCustomerNoteResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{20}
+	return file_customer_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *AddCustomerNoteResponse) GetMessage() string {
@@ -1462,7 +1350,7 @@ type SearchCustomersRequest struct {
 
 func (x *SearchCustomersRequest) Reset() {
 	*x = SearchCustomersRequest{}
-	mi := &file_customer_proto_msgTypes[21]
+	mi := &file_customer_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1474,7 +1362,7 @@ func (x *SearchCustomersRequest) String() string {
 func (*SearchCustomersRequest) ProtoMessage() {}
 
 func (x *SearchCustomersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[21]
+	mi := &file_customer_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1487,7 +1375,7 @@ func (x *SearchCustomersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchCustomersRequest.ProtoReflect.Descriptor instead.
 func (*SearchCustomersRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{21}
+	return file_customer_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SearchCustomersRequest) GetQuery() string {
@@ -1514,7 +1402,7 @@ type SearchCustomersResponse struct {
 
 func (x *SearchCustomersResponse) Reset() {
 	*x = SearchCustomersResponse{}
-	mi := &file_customer_proto_msgTypes[22]
+	mi := &file_customer_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1526,7 +1414,7 @@ func (x *SearchCustomersResponse) String() string {
 func (*SearchCustomersResponse) ProtoMessage() {}
 
 func (x *SearchCustomersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[22]
+	mi := &file_customer_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1539,7 +1427,7 @@ func (x *SearchCustomersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchCustomersResponse.ProtoReflect.Descriptor instead.
 func (*SearchCustomersResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{22}
+	return file_customer_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *SearchCustomersResponse) GetCustomers() []*Customer {
@@ -1568,7 +1456,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_customer_proto_msgTypes[23]
+	mi := &file_customer_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1580,7 +1468,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[23]
+	mi := &file_customer_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1593,7 +1481,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{23}
+	return file_customer_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *LoginRequest) GetUsername() string {
@@ -1635,7 +1523,7 @@ type LoginResponse struct {
 
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
-	mi := &file_customer_proto_msgTypes[24]
+	mi := &file_customer_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1647,7 +1535,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[24]
+	mi := &file_customer_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1660,7 +1548,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{24}
+	return file_customer_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *LoginResponse) GetToken() string {
@@ -1692,7 +1580,7 @@ type NilReq struct {
 
 func (x *NilReq) Reset() {
 	*x = NilReq{}
-	mi := &file_customer_proto_msgTypes[25]
+	mi := &file_customer_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1704,7 +1592,7 @@ func (x *NilReq) String() string {
 func (*NilReq) ProtoMessage() {}
 
 func (x *NilReq) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[25]
+	mi := &file_customer_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +1605,7 @@ func (x *NilReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NilReq.ProtoReflect.Descriptor instead.
 func (*NilReq) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{25}
+	return file_customer_proto_rawDescGZIP(), []int{23}
 }
 
 type NilRes struct {
@@ -1728,7 +1616,7 @@ type NilRes struct {
 
 func (x *NilRes) Reset() {
 	*x = NilRes{}
-	mi := &file_customer_proto_msgTypes[26]
+	mi := &file_customer_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1740,7 +1628,7 @@ func (x *NilRes) String() string {
 func (*NilRes) ProtoMessage() {}
 
 func (x *NilRes) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[26]
+	mi := &file_customer_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1753,7 +1641,7 @@ func (x *NilRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NilRes.ProtoReflect.Descriptor instead.
 func (*NilRes) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{26}
+	return file_customer_proto_rawDescGZIP(), []int{24}
 }
 
 type ChangePasswordRequest struct {
@@ -1768,7 +1656,7 @@ type ChangePasswordRequest struct {
 
 func (x *ChangePasswordRequest) Reset() {
 	*x = ChangePasswordRequest{}
-	mi := &file_customer_proto_msgTypes[27]
+	mi := &file_customer_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1780,7 +1668,7 @@ func (x *ChangePasswordRequest) String() string {
 func (*ChangePasswordRequest) ProtoMessage() {}
 
 func (x *ChangePasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[27]
+	mi := &file_customer_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1793,7 +1681,7 @@ func (x *ChangePasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePasswordRequest.ProtoReflect.Descriptor instead.
 func (*ChangePasswordRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{27}
+	return file_customer_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ChangePasswordRequest) GetUsername() string {
@@ -1834,7 +1722,7 @@ type ChangePasswordResponse struct {
 
 func (x *ChangePasswordResponse) Reset() {
 	*x = ChangePasswordResponse{}
-	mi := &file_customer_proto_msgTypes[28]
+	mi := &file_customer_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1846,7 +1734,7 @@ func (x *ChangePasswordResponse) String() string {
 func (*ChangePasswordResponse) ProtoMessage() {}
 
 func (x *ChangePasswordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[28]
+	mi := &file_customer_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1859,7 +1747,7 @@ func (x *ChangePasswordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePasswordResponse.ProtoReflect.Descriptor instead.
 func (*ChangePasswordResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{28}
+	return file_customer_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ChangePasswordResponse) GetMessage() string {
@@ -1888,7 +1776,7 @@ type ChangeEmailRequest struct {
 
 func (x *ChangeEmailRequest) Reset() {
 	*x = ChangeEmailRequest{}
-	mi := &file_customer_proto_msgTypes[29]
+	mi := &file_customer_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1900,7 +1788,7 @@ func (x *ChangeEmailRequest) String() string {
 func (*ChangeEmailRequest) ProtoMessage() {}
 
 func (x *ChangeEmailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[29]
+	mi := &file_customer_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1913,7 +1801,7 @@ func (x *ChangeEmailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeEmailRequest.ProtoReflect.Descriptor instead.
 func (*ChangeEmailRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{29}
+	return file_customer_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ChangeEmailRequest) GetUsername() string {
@@ -1954,7 +1842,7 @@ type ChangeEmailResponse struct {
 
 func (x *ChangeEmailResponse) Reset() {
 	*x = ChangeEmailResponse{}
-	mi := &file_customer_proto_msgTypes[30]
+	mi := &file_customer_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1966,7 +1854,7 @@ func (x *ChangeEmailResponse) String() string {
 func (*ChangeEmailResponse) ProtoMessage() {}
 
 func (x *ChangeEmailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[30]
+	mi := &file_customer_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1979,7 +1867,7 @@ func (x *ChangeEmailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeEmailResponse.ProtoReflect.Descriptor instead.
 func (*ChangeEmailResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{30}
+	return file_customer_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ChangeEmailResponse) GetMessage() string {
@@ -2013,7 +1901,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_customer_proto_msgTypes[31]
+	mi := &file_customer_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2025,7 +1913,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[31]
+	mi := &file_customer_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2038,7 +1926,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{31}
+	return file_customer_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *User) GetId() string {
@@ -2119,7 +2007,7 @@ type RegisterRequest struct {
 
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
-	mi := &file_customer_proto_msgTypes[32]
+	mi := &file_customer_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2131,7 +2019,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[32]
+	mi := &file_customer_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2144,7 +2032,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{32}
+	return file_customer_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RegisterRequest) GetUsername() string {
@@ -2206,7 +2094,7 @@ type RegisterResponse struct {
 
 func (x *RegisterResponse) Reset() {
 	*x = RegisterResponse{}
-	mi := &file_customer_proto_msgTypes[33]
+	mi := &file_customer_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2218,7 +2106,7 @@ func (x *RegisterResponse) String() string {
 func (*RegisterResponse) ProtoMessage() {}
 
 func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[33]
+	mi := &file_customer_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2231,7 +2119,7 @@ func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
 func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{33}
+	return file_customer_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *RegisterResponse) GetMessage() string {
@@ -2258,7 +2146,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_customer_proto_msgTypes[34]
+	mi := &file_customer_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2270,7 +2158,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[34]
+	mi := &file_customer_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2283,7 +2171,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{34}
+	return file_customer_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *UpdateUserRequest) GetUser() *User {
@@ -2310,7 +2198,7 @@ type UpdateUserResponse struct {
 
 func (x *UpdateUserResponse) Reset() {
 	*x = UpdateUserResponse{}
-	mi := &file_customer_proto_msgTypes[35]
+	mi := &file_customer_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2322,7 +2210,7 @@ func (x *UpdateUserResponse) String() string {
 func (*UpdateUserResponse) ProtoMessage() {}
 
 func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[35]
+	mi := &file_customer_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2335,7 +2223,7 @@ func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{35}
+	return file_customer_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *UpdateUserResponse) GetMessage() string {
@@ -2352,29 +2240,30 @@ func (x *UpdateUserResponse) GetResponse() *BaseResponse {
 	return nil
 }
 
-type RefreshTokenRequest struct {
+type BaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	Request       *BaseRequest           `protobuf:"bytes,100,opt,name=request,proto3" json:"request,omitempty"`
+	Downstream    string                 `protobuf:"bytes,998,opt,name=downstream,proto3" json:"downstream,omitempty"`
+	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	TraceId       string                 `protobuf:"bytes,1000,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RefreshTokenRequest) Reset() {
-	*x = RefreshTokenRequest{}
-	mi := &file_customer_proto_msgTypes[36]
+func (x *BaseRequest) Reset() {
+	*x = BaseRequest{}
+	mi := &file_customer_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RefreshTokenRequest) String() string {
+func (x *BaseRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RefreshTokenRequest) ProtoMessage() {}
+func (*BaseRequest) ProtoMessage() {}
 
-func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[36]
+func (x *BaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_customer_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2385,49 +2274,58 @@ func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
-func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{36}
+// Deprecated: Use BaseRequest.ProtoReflect.Descriptor instead.
+func (*BaseRequest) Descriptor() ([]byte, []int) {
+	return file_customer_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *RefreshTokenRequest) GetRefreshToken() string {
+func (x *BaseRequest) GetDownstream() string {
 	if x != nil {
-		return x.RefreshToken
+		return x.Downstream
 	}
 	return ""
 }
 
-func (x *RefreshTokenRequest) GetRequest() *BaseRequest {
+func (x *BaseRequest) GetRequestId() string {
 	if x != nil {
-		return x.Request
+		return x.RequestId
 	}
-	return nil
+	return ""
 }
 
-type TokenResponse struct {
+func (x *BaseRequest) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+type BaseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
-	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
-	Response      *BaseResponse          `protobuf:"bytes,100,opt,name=response,proto3" json:"response,omitempty"`
+	Success       bool                   `protobuf:"varint,997,opt,name=success,proto3" json:"success,omitempty"`
+	Upstream      string                 `protobuf:"bytes,998,opt,name=upstream,proto3" json:"upstream,omitempty"`
+	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	Status        string                 `protobuf:"bytes,1000,opt,name=status,proto3" json:"status,omitempty"`
+	TraceId       string                 `protobuf:"bytes,9999,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *TokenResponse) Reset() {
-	*x = TokenResponse{}
-	mi := &file_customer_proto_msgTypes[37]
+func (x *BaseResponse) Reset() {
+	*x = BaseResponse{}
+	mi := &file_customer_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TokenResponse) String() string {
+func (x *BaseResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TokenResponse) ProtoMessage() {}
+func (*BaseResponse) ProtoMessage() {}
 
-func (x *TokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_customer_proto_msgTypes[37]
+func (x *BaseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_customer_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2438,30 +2336,44 @@ func (x *TokenResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TokenResponse.ProtoReflect.Descriptor instead.
-func (*TokenResponse) Descriptor() ([]byte, []int) {
-	return file_customer_proto_rawDescGZIP(), []int{37}
+// Deprecated: Use BaseResponse.ProtoReflect.Descriptor instead.
+func (*BaseResponse) Descriptor() ([]byte, []int) {
+	return file_customer_proto_rawDescGZIP(), []int{35}
 }
 
-func (x *TokenResponse) GetAccessToken() string {
+func (x *BaseResponse) GetSuccess() bool {
 	if x != nil {
-		return x.AccessToken
+		return x.Success
+	}
+	return false
+}
+
+func (x *BaseResponse) GetUpstream() string {
+	if x != nil {
+		return x.Upstream
 	}
 	return ""
 }
 
-func (x *TokenResponse) GetRefreshToken() string {
+func (x *BaseResponse) GetRequestId() string {
 	if x != nil {
-		return x.RefreshToken
+		return x.RequestId
 	}
 	return ""
 }
 
-func (x *TokenResponse) GetResponse() *BaseResponse {
+func (x *BaseResponse) GetStatus() string {
 	if x != nil {
-		return x.Response
+		return x.Status
 	}
-	return nil
+	return ""
+}
+
+func (x *BaseResponse) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
 }
 
 var File_customer_proto protoreflect.FileDescriptor
@@ -2526,18 +2438,7 @@ const file_customer_proto_rawDesc = "" +
 	"\tlast_name\x18\x0e \x01(\tR\blastName\x12\x1a\n" +
 	"\bbirthday\x18\x0f \x01(\tR\bbirthday\x12\x1f\n" +
 	"\vis_archived\x18\x10 \x01(\bR\n" +
-	"isArchived\"N\n" +
-	"\vBaseRequest\x12\x1f\n" +
-	"\n" +
-	"downstream\x18\xe6\a \x01(\tR\n" +
-	"downstream\x12\x1e\n" +
-	"\n" +
-	"request_id\x18\xe7\a \x01(\tR\trequestId\"d\n" +
-	"\fBaseResponse\x12\x1b\n" +
-	"\bupstream\x18\xe6\a \x01(\tR\bupstream\x12\x1e\n" +
-	"\n" +
-	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x17\n" +
-	"\x06status\x18\xe8\a \x01(\tR\x06status\"W\n" +
+	"isArchived\"W\n" +
 	"\x05XDiff\x12\x14\n" +
 	"\x05field\x18\x01 \x01(\tR\x05field\x12\x1b\n" +
 	"\told_value\x18\x02 \x01(\tR\boldValue\x12\x1b\n" +
@@ -2647,14 +2548,21 @@ const file_customer_proto_rawDesc = "" +
 	"\arequest\x18d \x01(\v2\x1b.inkMe.customer.BaseRequestR\arequest\"h\n" +
 	"\x12UpdateUserResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x128\n" +
-	"\bresponse\x18d \x01(\v2\x1c.inkMe.customer.BaseResponseR\bresponse\"q\n" +
-	"\x13RefreshTokenRequest\x12#\n" +
-	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\x125\n" +
-	"\arequest\x18d \x01(\v2\x1b.inkMe.customer.BaseRequestR\arequest\"\x91\x01\n" +
-	"\rTokenResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x128\n" +
-	"\bresponse\x18d \x01(\v2\x1c.inkMe.customer.BaseResponseR\bresponse*:\n" +
+	"\bresponse\x18d \x01(\v2\x1c.inkMe.customer.BaseResponseR\bresponse\"j\n" +
+	"\vBaseRequest\x12\x1f\n" +
+	"\n" +
+	"downstream\x18\xe6\a \x01(\tR\n" +
+	"downstream\x12\x1e\n" +
+	"\n" +
+	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x1a\n" +
+	"\btrace_id\x18\xe8\a \x01(\tR\atraceId\"\x9b\x01\n" +
+	"\fBaseResponse\x12\x19\n" +
+	"\asuccess\x18\xe5\a \x01(\bR\asuccess\x12\x1b\n" +
+	"\bupstream\x18\xe6\a \x01(\tR\bupstream\x12\x1e\n" +
+	"\n" +
+	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x17\n" +
+	"\x06status\x18\xe8\a \x01(\tR\x06status\x12\x1a\n" +
+	"\btrace_id\x18\x8fN \x01(\tR\atraceId*:\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aSUCCESS\x10\x01\x12\v\n" +
@@ -2668,13 +2576,12 @@ const file_customer_proto_rawDesc = "" +
 	"\x0fArchiveCustomer\x12&.inkMe.customer.ArchiveCustomerRequest\x1a'.inkMe.customer.ArchiveCustomerResponse\x12k\n" +
 	"\x12GetCustomerHistory\x12).inkMe.customer.GetCustomerHistoryRequest\x1a*.inkMe.customer.GetCustomerHistoryResponse\x12b\n" +
 	"\x0fAddCustomerNote\x12&.inkMe.customer.AddCustomerNoteRequest\x1a'.inkMe.customer.AddCustomerNoteResponse\x12b\n" +
-	"\x0fSearchCustomers\x12&.inkMe.customer.SearchCustomersRequest\x1a'.inkMe.customer.SearchCustomersResponse2\xbf\x04\n" +
+	"\x0fSearchCustomers\x12&.inkMe.customer.SearchCustomersRequest\x1a'.inkMe.customer.SearchCustomersResponse2\xeb\x03\n" +
 	"\fCustomerAuth\x12D\n" +
 	"\x05Login\x12\x1c.inkMe.customer.LoginRequest\x1a\x1d.inkMe.customer.LoginResponse\x128\n" +
 	"\x06Logout\x12\x16.inkMe.customer.NilReq\x1a\x16.inkMe.customer.NilRes\x12_\n" +
 	"\x0eChangePassword\x12%.inkMe.customer.ChangePasswordRequest\x1a&.inkMe.customer.ChangePasswordResponse\x12V\n" +
-	"\vChangeEmail\x12\".inkMe.customer.ChangeEmailRequest\x1a#.inkMe.customer.ChangeEmailResponse\x12R\n" +
-	"\fRefreshToken\x12#.inkMe.customer.RefreshTokenRequest\x1a\x1d.inkMe.customer.TokenResponse\x12M\n" +
+	"\vChangeEmail\x12\".inkMe.customer.ChangeEmailRequest\x1a#.inkMe.customer.ChangeEmailResponse\x12M\n" +
 	"\bRegister\x12\x1f.inkMe.customer.RegisterRequest\x1a .inkMe.customer.RegisterResponse\x12S\n" +
 	"\n" +
 	"UpdateUser\x12!.inkMe.customer.UpdateUserRequest\x1a\".inkMe.customer.UpdateUserResponseBIZGgithub.com/FACorreiaa/ink-app-backend-protos/modules/customer/generatedb\x06proto3"
@@ -2692,7 +2599,7 @@ func file_customer_proto_rawDescGZIP() []byte {
 }
 
 var file_customer_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_customer_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_customer_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_customer_proto_goTypes = []any{
 	(Status)(0),                        // 0: inkMe.customer.Status
 	(User_Role)(0),                     // 1: inkMe.customer.User.Role
@@ -2705,119 +2612,113 @@ var file_customer_proto_goTypes = []any{
 	(*UpdateCustomerRequest)(nil),      // 8: inkMe.customer.UpdateCustomerRequest
 	(*UpdateCustomerResponse)(nil),     // 9: inkMe.customer.UpdateCustomerResponse
 	(*Customer)(nil),                   // 10: inkMe.customer.Customer
-	(*BaseRequest)(nil),                // 11: inkMe.customer.BaseRequest
-	(*BaseResponse)(nil),               // 12: inkMe.customer.BaseResponse
-	(*XDiff)(nil),                      // 13: inkMe.customer.XDiff
-	(*DeleteCustomerRequest)(nil),      // 14: inkMe.customer.DeleteCustomerRequest
-	(*DeleteCustomerResponse)(nil),     // 15: inkMe.customer.DeleteCustomerResponse
-	(*ArchiveCustomerRequest)(nil),     // 16: inkMe.customer.ArchiveCustomerRequest
-	(*ArchiveCustomerResponse)(nil),    // 17: inkMe.customer.ArchiveCustomerResponse
-	(*GetCustomerHistoryRequest)(nil),  // 18: inkMe.customer.GetCustomerHistoryRequest
-	(*GetCustomerHistoryResponse)(nil), // 19: inkMe.customer.GetCustomerHistoryResponse
-	(*Interaction)(nil),                // 20: inkMe.customer.Interaction
-	(*AddCustomerNoteRequest)(nil),     // 21: inkMe.customer.AddCustomerNoteRequest
-	(*AddCustomerNoteResponse)(nil),    // 22: inkMe.customer.AddCustomerNoteResponse
-	(*SearchCustomersRequest)(nil),     // 23: inkMe.customer.SearchCustomersRequest
-	(*SearchCustomersResponse)(nil),    // 24: inkMe.customer.SearchCustomersResponse
-	(*LoginRequest)(nil),               // 25: inkMe.customer.LoginRequest
-	(*LoginResponse)(nil),              // 26: inkMe.customer.LoginResponse
-	(*NilReq)(nil),                     // 27: inkMe.customer.NilReq
-	(*NilRes)(nil),                     // 28: inkMe.customer.NilRes
-	(*ChangePasswordRequest)(nil),      // 29: inkMe.customer.ChangePasswordRequest
-	(*ChangePasswordResponse)(nil),     // 30: inkMe.customer.ChangePasswordResponse
-	(*ChangeEmailRequest)(nil),         // 31: inkMe.customer.ChangeEmailRequest
-	(*ChangeEmailResponse)(nil),        // 32: inkMe.customer.ChangeEmailResponse
-	(*User)(nil),                       // 33: inkMe.customer.User
-	(*RegisterRequest)(nil),            // 34: inkMe.customer.RegisterRequest
-	(*RegisterResponse)(nil),           // 35: inkMe.customer.RegisterResponse
-	(*UpdateUserRequest)(nil),          // 36: inkMe.customer.UpdateUserRequest
-	(*UpdateUserResponse)(nil),         // 37: inkMe.customer.UpdateUserResponse
-	(*RefreshTokenRequest)(nil),        // 38: inkMe.customer.RefreshTokenRequest
-	(*TokenResponse)(nil),              // 39: inkMe.customer.TokenResponse
-	(*timestamppb.Timestamp)(nil),      // 40: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),      // 41: google.protobuf.FieldMask
+	(*XDiff)(nil),                      // 11: inkMe.customer.XDiff
+	(*DeleteCustomerRequest)(nil),      // 12: inkMe.customer.DeleteCustomerRequest
+	(*DeleteCustomerResponse)(nil),     // 13: inkMe.customer.DeleteCustomerResponse
+	(*ArchiveCustomerRequest)(nil),     // 14: inkMe.customer.ArchiveCustomerRequest
+	(*ArchiveCustomerResponse)(nil),    // 15: inkMe.customer.ArchiveCustomerResponse
+	(*GetCustomerHistoryRequest)(nil),  // 16: inkMe.customer.GetCustomerHistoryRequest
+	(*GetCustomerHistoryResponse)(nil), // 17: inkMe.customer.GetCustomerHistoryResponse
+	(*Interaction)(nil),                // 18: inkMe.customer.Interaction
+	(*AddCustomerNoteRequest)(nil),     // 19: inkMe.customer.AddCustomerNoteRequest
+	(*AddCustomerNoteResponse)(nil),    // 20: inkMe.customer.AddCustomerNoteResponse
+	(*SearchCustomersRequest)(nil),     // 21: inkMe.customer.SearchCustomersRequest
+	(*SearchCustomersResponse)(nil),    // 22: inkMe.customer.SearchCustomersResponse
+	(*LoginRequest)(nil),               // 23: inkMe.customer.LoginRequest
+	(*LoginResponse)(nil),              // 24: inkMe.customer.LoginResponse
+	(*NilReq)(nil),                     // 25: inkMe.customer.NilReq
+	(*NilRes)(nil),                     // 26: inkMe.customer.NilRes
+	(*ChangePasswordRequest)(nil),      // 27: inkMe.customer.ChangePasswordRequest
+	(*ChangePasswordResponse)(nil),     // 28: inkMe.customer.ChangePasswordResponse
+	(*ChangeEmailRequest)(nil),         // 29: inkMe.customer.ChangeEmailRequest
+	(*ChangeEmailResponse)(nil),        // 30: inkMe.customer.ChangeEmailResponse
+	(*User)(nil),                       // 31: inkMe.customer.User
+	(*RegisterRequest)(nil),            // 32: inkMe.customer.RegisterRequest
+	(*RegisterResponse)(nil),           // 33: inkMe.customer.RegisterResponse
+	(*UpdateUserRequest)(nil),          // 34: inkMe.customer.UpdateUserRequest
+	(*UpdateUserResponse)(nil),         // 35: inkMe.customer.UpdateUserResponse
+	(*BaseRequest)(nil),                // 36: inkMe.customer.BaseRequest
+	(*BaseResponse)(nil),               // 37: inkMe.customer.BaseResponse
+	(*timestamppb.Timestamp)(nil),      // 38: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),      // 39: google.protobuf.FieldMask
 }
 var file_customer_proto_depIdxs = []int32{
 	10, // 0: inkMe.customer.CreateCustomerRequest.customer:type_name -> inkMe.customer.Customer
-	40, // 1: inkMe.customer.CreateCustomerRequest.created_at:type_name -> google.protobuf.Timestamp
-	11, // 2: inkMe.customer.CreateCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 3: inkMe.customer.CreateCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 4: inkMe.customer.GetCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
+	38, // 1: inkMe.customer.CreateCustomerRequest.created_at:type_name -> google.protobuf.Timestamp
+	36, // 2: inkMe.customer.CreateCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 3: inkMe.customer.CreateCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 4: inkMe.customer.GetCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
 	10, // 5: inkMe.customer.GetCustomerResponse.customer:type_name -> inkMe.customer.Customer
-	12, // 6: inkMe.customer.GetCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 7: inkMe.customer.ListCustomersRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 6: inkMe.customer.GetCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 7: inkMe.customer.ListCustomersRequest.request:type_name -> inkMe.customer.BaseRequest
 	10, // 8: inkMe.customer.ListCustomersResponse.customers:type_name -> inkMe.customer.Customer
-	12, // 9: inkMe.customer.ListCustomersResponse.response:type_name -> inkMe.customer.BaseResponse
+	37, // 9: inkMe.customer.ListCustomersResponse.response:type_name -> inkMe.customer.BaseResponse
 	10, // 10: inkMe.customer.UpdateCustomerRequest.customer:type_name -> inkMe.customer.Customer
-	41, // 11: inkMe.customer.UpdateCustomerRequest.update_mask:type_name -> google.protobuf.FieldMask
-	40, // 12: inkMe.customer.UpdateCustomerRequest.updated_at:type_name -> google.protobuf.Timestamp
-	11, // 13: inkMe.customer.UpdateCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
+	39, // 11: inkMe.customer.UpdateCustomerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	38, // 12: inkMe.customer.UpdateCustomerRequest.updated_at:type_name -> google.protobuf.Timestamp
+	36, // 13: inkMe.customer.UpdateCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
 	10, // 14: inkMe.customer.UpdateCustomerResponse.customer:type_name -> inkMe.customer.Customer
-	12, // 15: inkMe.customer.UpdateCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 16: inkMe.customer.DeleteCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 17: inkMe.customer.DeleteCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 18: inkMe.customer.ArchiveCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 19: inkMe.customer.ArchiveCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 20: inkMe.customer.GetCustomerHistoryRequest.request:type_name -> inkMe.customer.BaseRequest
-	20, // 21: inkMe.customer.GetCustomerHistoryResponse.interactions:type_name -> inkMe.customer.Interaction
-	12, // 22: inkMe.customer.GetCustomerHistoryResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 23: inkMe.customer.AddCustomerNoteRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 24: inkMe.customer.AddCustomerNoteResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 25: inkMe.customer.SearchCustomersRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 15: inkMe.customer.UpdateCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 16: inkMe.customer.DeleteCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 17: inkMe.customer.DeleteCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 18: inkMe.customer.ArchiveCustomerRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 19: inkMe.customer.ArchiveCustomerResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 20: inkMe.customer.GetCustomerHistoryRequest.request:type_name -> inkMe.customer.BaseRequest
+	18, // 21: inkMe.customer.GetCustomerHistoryResponse.interactions:type_name -> inkMe.customer.Interaction
+	37, // 22: inkMe.customer.GetCustomerHistoryResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 23: inkMe.customer.AddCustomerNoteRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 24: inkMe.customer.AddCustomerNoteResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 25: inkMe.customer.SearchCustomersRequest.request:type_name -> inkMe.customer.BaseRequest
 	10, // 26: inkMe.customer.SearchCustomersResponse.customers:type_name -> inkMe.customer.Customer
-	12, // 27: inkMe.customer.SearchCustomersResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 28: inkMe.customer.LoginRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 29: inkMe.customer.LoginResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 30: inkMe.customer.ChangePasswordRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 31: inkMe.customer.ChangePasswordResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 32: inkMe.customer.ChangeEmailRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 33: inkMe.customer.ChangeEmailResponse.response:type_name -> inkMe.customer.BaseResponse
+	37, // 27: inkMe.customer.SearchCustomersResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 28: inkMe.customer.LoginRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 29: inkMe.customer.LoginResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 30: inkMe.customer.ChangePasswordRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 31: inkMe.customer.ChangePasswordResponse.response:type_name -> inkMe.customer.BaseResponse
+	36, // 32: inkMe.customer.ChangeEmailRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 33: inkMe.customer.ChangeEmailResponse.response:type_name -> inkMe.customer.BaseResponse
 	1,  // 34: inkMe.customer.User.role:type_name -> inkMe.customer.User.Role
-	40, // 35: inkMe.customer.RegisterRequest.created_at:type_name -> google.protobuf.Timestamp
-	11, // 36: inkMe.customer.RegisterRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 37: inkMe.customer.RegisterResponse.response:type_name -> inkMe.customer.BaseResponse
-	33, // 38: inkMe.customer.UpdateUserRequest.user:type_name -> inkMe.customer.User
-	11, // 39: inkMe.customer.UpdateUserRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 40: inkMe.customer.UpdateUserResponse.response:type_name -> inkMe.customer.BaseResponse
-	11, // 41: inkMe.customer.RefreshTokenRequest.request:type_name -> inkMe.customer.BaseRequest
-	12, // 42: inkMe.customer.TokenResponse.response:type_name -> inkMe.customer.BaseResponse
-	2,  // 43: inkMe.customer.CustomerService.CreateCustomer:input_type -> inkMe.customer.CreateCustomerRequest
-	4,  // 44: inkMe.customer.CustomerService.GetCustomer:input_type -> inkMe.customer.GetCustomerRequest
-	6,  // 45: inkMe.customer.CustomerService.ListCustomers:input_type -> inkMe.customer.ListCustomersRequest
-	8,  // 46: inkMe.customer.CustomerService.UpdateCustomer:input_type -> inkMe.customer.UpdateCustomerRequest
-	14, // 47: inkMe.customer.CustomerService.DeleteCustomer:input_type -> inkMe.customer.DeleteCustomerRequest
-	16, // 48: inkMe.customer.CustomerService.ArchiveCustomer:input_type -> inkMe.customer.ArchiveCustomerRequest
-	18, // 49: inkMe.customer.CustomerService.GetCustomerHistory:input_type -> inkMe.customer.GetCustomerHistoryRequest
-	21, // 50: inkMe.customer.CustomerService.AddCustomerNote:input_type -> inkMe.customer.AddCustomerNoteRequest
-	23, // 51: inkMe.customer.CustomerService.SearchCustomers:input_type -> inkMe.customer.SearchCustomersRequest
-	25, // 52: inkMe.customer.CustomerAuth.Login:input_type -> inkMe.customer.LoginRequest
-	27, // 53: inkMe.customer.CustomerAuth.Logout:input_type -> inkMe.customer.NilReq
-	29, // 54: inkMe.customer.CustomerAuth.ChangePassword:input_type -> inkMe.customer.ChangePasswordRequest
-	31, // 55: inkMe.customer.CustomerAuth.ChangeEmail:input_type -> inkMe.customer.ChangeEmailRequest
-	38, // 56: inkMe.customer.CustomerAuth.RefreshToken:input_type -> inkMe.customer.RefreshTokenRequest
-	34, // 57: inkMe.customer.CustomerAuth.Register:input_type -> inkMe.customer.RegisterRequest
-	36, // 58: inkMe.customer.CustomerAuth.UpdateUser:input_type -> inkMe.customer.UpdateUserRequest
-	3,  // 59: inkMe.customer.CustomerService.CreateCustomer:output_type -> inkMe.customer.CreateCustomerResponse
-	5,  // 60: inkMe.customer.CustomerService.GetCustomer:output_type -> inkMe.customer.GetCustomerResponse
-	7,  // 61: inkMe.customer.CustomerService.ListCustomers:output_type -> inkMe.customer.ListCustomersResponse
-	9,  // 62: inkMe.customer.CustomerService.UpdateCustomer:output_type -> inkMe.customer.UpdateCustomerResponse
-	15, // 63: inkMe.customer.CustomerService.DeleteCustomer:output_type -> inkMe.customer.DeleteCustomerResponse
-	17, // 64: inkMe.customer.CustomerService.ArchiveCustomer:output_type -> inkMe.customer.ArchiveCustomerResponse
-	19, // 65: inkMe.customer.CustomerService.GetCustomerHistory:output_type -> inkMe.customer.GetCustomerHistoryResponse
-	22, // 66: inkMe.customer.CustomerService.AddCustomerNote:output_type -> inkMe.customer.AddCustomerNoteResponse
-	24, // 67: inkMe.customer.CustomerService.SearchCustomers:output_type -> inkMe.customer.SearchCustomersResponse
-	26, // 68: inkMe.customer.CustomerAuth.Login:output_type -> inkMe.customer.LoginResponse
-	28, // 69: inkMe.customer.CustomerAuth.Logout:output_type -> inkMe.customer.NilRes
-	30, // 70: inkMe.customer.CustomerAuth.ChangePassword:output_type -> inkMe.customer.ChangePasswordResponse
-	32, // 71: inkMe.customer.CustomerAuth.ChangeEmail:output_type -> inkMe.customer.ChangeEmailResponse
-	39, // 72: inkMe.customer.CustomerAuth.RefreshToken:output_type -> inkMe.customer.TokenResponse
-	35, // 73: inkMe.customer.CustomerAuth.Register:output_type -> inkMe.customer.RegisterResponse
-	37, // 74: inkMe.customer.CustomerAuth.UpdateUser:output_type -> inkMe.customer.UpdateUserResponse
-	59, // [59:75] is the sub-list for method output_type
-	43, // [43:59] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	38, // 35: inkMe.customer.RegisterRequest.created_at:type_name -> google.protobuf.Timestamp
+	36, // 36: inkMe.customer.RegisterRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 37: inkMe.customer.RegisterResponse.response:type_name -> inkMe.customer.BaseResponse
+	31, // 38: inkMe.customer.UpdateUserRequest.user:type_name -> inkMe.customer.User
+	36, // 39: inkMe.customer.UpdateUserRequest.request:type_name -> inkMe.customer.BaseRequest
+	37, // 40: inkMe.customer.UpdateUserResponse.response:type_name -> inkMe.customer.BaseResponse
+	2,  // 41: inkMe.customer.CustomerService.CreateCustomer:input_type -> inkMe.customer.CreateCustomerRequest
+	4,  // 42: inkMe.customer.CustomerService.GetCustomer:input_type -> inkMe.customer.GetCustomerRequest
+	6,  // 43: inkMe.customer.CustomerService.ListCustomers:input_type -> inkMe.customer.ListCustomersRequest
+	8,  // 44: inkMe.customer.CustomerService.UpdateCustomer:input_type -> inkMe.customer.UpdateCustomerRequest
+	12, // 45: inkMe.customer.CustomerService.DeleteCustomer:input_type -> inkMe.customer.DeleteCustomerRequest
+	14, // 46: inkMe.customer.CustomerService.ArchiveCustomer:input_type -> inkMe.customer.ArchiveCustomerRequest
+	16, // 47: inkMe.customer.CustomerService.GetCustomerHistory:input_type -> inkMe.customer.GetCustomerHistoryRequest
+	19, // 48: inkMe.customer.CustomerService.AddCustomerNote:input_type -> inkMe.customer.AddCustomerNoteRequest
+	21, // 49: inkMe.customer.CustomerService.SearchCustomers:input_type -> inkMe.customer.SearchCustomersRequest
+	23, // 50: inkMe.customer.CustomerAuth.Login:input_type -> inkMe.customer.LoginRequest
+	25, // 51: inkMe.customer.CustomerAuth.Logout:input_type -> inkMe.customer.NilReq
+	27, // 52: inkMe.customer.CustomerAuth.ChangePassword:input_type -> inkMe.customer.ChangePasswordRequest
+	29, // 53: inkMe.customer.CustomerAuth.ChangeEmail:input_type -> inkMe.customer.ChangeEmailRequest
+	32, // 54: inkMe.customer.CustomerAuth.Register:input_type -> inkMe.customer.RegisterRequest
+	34, // 55: inkMe.customer.CustomerAuth.UpdateUser:input_type -> inkMe.customer.UpdateUserRequest
+	3,  // 56: inkMe.customer.CustomerService.CreateCustomer:output_type -> inkMe.customer.CreateCustomerResponse
+	5,  // 57: inkMe.customer.CustomerService.GetCustomer:output_type -> inkMe.customer.GetCustomerResponse
+	7,  // 58: inkMe.customer.CustomerService.ListCustomers:output_type -> inkMe.customer.ListCustomersResponse
+	9,  // 59: inkMe.customer.CustomerService.UpdateCustomer:output_type -> inkMe.customer.UpdateCustomerResponse
+	13, // 60: inkMe.customer.CustomerService.DeleteCustomer:output_type -> inkMe.customer.DeleteCustomerResponse
+	15, // 61: inkMe.customer.CustomerService.ArchiveCustomer:output_type -> inkMe.customer.ArchiveCustomerResponse
+	17, // 62: inkMe.customer.CustomerService.GetCustomerHistory:output_type -> inkMe.customer.GetCustomerHistoryResponse
+	20, // 63: inkMe.customer.CustomerService.AddCustomerNote:output_type -> inkMe.customer.AddCustomerNoteResponse
+	22, // 64: inkMe.customer.CustomerService.SearchCustomers:output_type -> inkMe.customer.SearchCustomersResponse
+	24, // 65: inkMe.customer.CustomerAuth.Login:output_type -> inkMe.customer.LoginResponse
+	26, // 66: inkMe.customer.CustomerAuth.Logout:output_type -> inkMe.customer.NilRes
+	28, // 67: inkMe.customer.CustomerAuth.ChangePassword:output_type -> inkMe.customer.ChangePasswordResponse
+	30, // 68: inkMe.customer.CustomerAuth.ChangeEmail:output_type -> inkMe.customer.ChangeEmailResponse
+	33, // 69: inkMe.customer.CustomerAuth.Register:output_type -> inkMe.customer.RegisterResponse
+	35, // 70: inkMe.customer.CustomerAuth.UpdateUser:output_type -> inkMe.customer.UpdateUserResponse
+	56, // [56:71] is the sub-list for method output_type
+	41, // [41:56] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_customer_proto_init() }
@@ -2831,7 +2732,7 @@ func file_customer_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_customer_proto_rawDesc), len(file_customer_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   38,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   2,
 		},

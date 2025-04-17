@@ -967,6 +967,7 @@ func (x *BaseRequest) GetTraceId() string {
 
 type BaseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,997,opt,name=success,proto3" json:"success,omitempty"`
 	Upstream      string                 `protobuf:"bytes,998,opt,name=upstream,proto3" json:"upstream,omitempty"`
 	RequestId     string                 `protobuf:"bytes,999,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Status        string                 `protobuf:"bytes,1000,opt,name=status,proto3" json:"status,omitempty"`
@@ -1003,6 +1004,13 @@ func (x *BaseResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use BaseResponse.ProtoReflect.Descriptor instead.
 func (*BaseResponse) Descriptor() ([]byte, []int) {
 	return file_user_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *BaseResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
 }
 
 func (x *BaseResponse) GetUpstream() string {
@@ -1105,8 +1113,9 @@ const file_user_proto_rawDesc = "" +
 	"downstream\x12\x1e\n" +
 	"\n" +
 	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x1a\n" +
-	"\btrace_id\x18\xe8\a \x01(\tR\atraceId\"\x80\x01\n" +
-	"\fBaseResponse\x12\x1b\n" +
+	"\btrace_id\x18\xe8\a \x01(\tR\atraceId\"\x9b\x01\n" +
+	"\fBaseResponse\x12\x19\n" +
+	"\asuccess\x18\xe5\a \x01(\bR\asuccess\x12\x1b\n" +
 	"\bupstream\x18\xe6\a \x01(\tR\bupstream\x12\x1e\n" +
 	"\n" +
 	"request_id\x18\xe7\a \x01(\tR\trequestId\x12\x17\n" +
