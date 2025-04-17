@@ -240,19 +240,23 @@ message ValidateSessionResponse {
 message ChangeOwnPasswordRequest {
   string old_password = 1;
   string new_password = 2;
+  BaseRequest request = 100;
 }
 
 message ChangeOwnPasswordResponse {
   string message = 1;
+  BaseResponse response = 100;
 }
 
 message AdminResetUserPasswordRequest {
   string target_user_id = 1;
   string new_password = 2;
+  BaseRequest request = 100;
 }
 
 message AdminResetUserPasswordResponse {
   string message = 1;
+  BaseResponse response = 100;
 }
 
 

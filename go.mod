@@ -3,7 +3,7 @@ module github.com/FACorreiaa/ink-app-backend-protos
 go 1.24.1
 
 require (
-	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250405200216-fa92304afe79
+	github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250416161156-09e9bd96fe6f
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.22.0
 	go.opentelemetry.io/otel/trace v1.35.0

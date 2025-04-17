@@ -8,6 +8,8 @@ github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250318093450-d461f0e609df h1
 github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250318093450-d461f0e609df/go.mod h1:6QkiAmDMnNZkTpW/Nj2on9H7Ei6riukXFj4qMbsQcEo=
 github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250405200216-fa92304afe79 h1:dHWN55StyOQ6Gjc8JpisK1uwwSzydUidYFeC5Di823E=
 github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250405200216-fa92304afe79/go.mod h1:a/opRxi4uym13eOmDQZRI5AR6GrILw1ybitW5Asm82o=
+github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250416161156-09e9bd96fe6f h1:RLLgtGNsn0Ufb7vD4N6PxNyre3EdhdcAXkBPaRQzRwY=
+github.com/FACorreiaa/ink-app-backend-grpc v0.0.0-20250416161156-09e9bd96fe6f/go.mod h1:A/FeuaRAaaJpjXLofKKsboHGjv+KP0WXRm4YdcBVdfw=
 github.com/benbjohnson/clock v1.1.0/go.mod h1:J11/hYXuz8f4ySSvYwY0FKfm+ezbsZBKZxNJlLklBHA=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
