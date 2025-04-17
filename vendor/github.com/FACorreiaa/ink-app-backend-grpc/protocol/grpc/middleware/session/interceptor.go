@@ -43,7 +43,6 @@ func InterceptorSession() grpc.UnaryServerInterceptor {
 		//}
 		//
 		//tokenString := authHeader[0][7:]
-		println(authHeader)
 		if len(authHeader) == 0 {
 			return nil, status.Error(codes.Unauthenticated, "missing or invalid auth token")
 		}
@@ -54,17 +53,15 @@ func InterceptorSession() grpc.UnaryServerInterceptor {
 		token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 			return domain.JwtSecretKey, nil
 		})
+
 		if err != nil || !token.Valid {
 			return nil, status.Error(codes.Unauthenticated, "invalid or expired token")
 		}
 
-		ctx = context.WithValue(ctx, "userID", claims.UserID)
-		ctx = context.WithValue(ctx, "role", claims.Role)
-		// change this to studioID
-		ctx = context.WithValue(ctx, "studioID", claims.StudioID)
-		ctx = context.WithValue(ctx, "scope", claims.Scope)
+		newCtx := context.WithValue(ctx, domain.UserIDKey, claims.UserID)
+		newCtx = context.WithValue(newCtx, domain.RoleKey, claims.Role)
 
-		return handler(ctx, req)
+		return handler(newCtx, req)
 	}
 }
 

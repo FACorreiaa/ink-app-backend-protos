@@ -58,31 +58,31 @@ func (b *Broker) GetUsers(ctx context.Context, in *generated.GetUsersReq, opts .
 }
 
 // GetUserByID implements generated.Studioclient
-func (b *Broker) GetUserByID(ctx context.Context, in *generated.GetUserByIDRequest, opts ...grpc.CallOption) (*generated.GetUserByIDResponse, error) {
+func (b *Broker) GetUserByID(ctx context.Context, in *generated.GetUserByIDReq, opts ...grpc.CallOption) (*generated.GetUserByIDRes, error) {
 	return b.client.GetUserByID(ctx, in, opts...)
 }
 
 // DeleteUser implements generated.Studioclient
-func (b *Broker) DeleteUser(ctx context.Context, in *generated.DeleteUserRequest, opts ...grpc.CallOption) (*generated.DeleteUserResponse, error) {
+func (b *Broker) DeleteUser(ctx context.Context, in *generated.DeleteUserReq, opts ...grpc.CallOption) (*generated.DeleteUserRes, error) {
 	return b.client.DeleteUser(ctx, in, opts...)
 }
 
 // UpdateUser implements generated.Studioclient
-func (b *Broker) UpdateUser(ctx context.Context, in *generated.UpdateUserRequest, opts ...grpc.CallOption) (*generated.UpdateUserResponse, error) {
+func (b *Broker) UpdateUser(ctx context.Context, in *generated.UpdateUserReq, opts ...grpc.CallOption) (*generated.UpdateUserRes, error) {
 	return b.client.UpdateUser(ctx, in, opts...)
 }
 
 // InsertUser implements generated.Studioclient
-func (b *Broker) InsertUser(ctx context.Context, in *generated.InsertUserRequest, opts ...grpc.CallOption) (*generated.InsertUserResponse, error) {
+func (b *Broker) InsertUser(ctx context.Context, in *generated.InsertUserReq, opts ...grpc.CallOption) (*generated.InsertUserRes, error) {
 	return b.client.InsertUser(ctx, in, opts...)
 }
 
 // GetUserByEmail implements generated.Studioclient
-func (b *Broker) GetUserByEmail(ctx context.Context, in *generated.GetUserByEmailRequest, opts ...grpc.CallOption) (*generated.GetUserByEmailResponse, error) {
+func (b *Broker) GetUserByEmail(ctx context.Context, in *generated.GetUserByEmailReq, opts ...grpc.CallOption) (*generated.GetUserByEmailRes, error) {
 	return b.client.GetUserByEmail(ctx, in, opts...)
 }
 
 // GetUserByUsername implements generated.Studioclient
-func (b *Broker) GetUserByUsername(ctx context.Context, in *generated.GetUserByUsernameRequest, opts ...grpc.CallOption) (*generated.GetUserByUsernameResponse, error) {
+func (b *Broker) GetUserByUsername(ctx context.Context, in *generated.GetUserByUsernameReq, opts ...grpc.CallOption) (*generated.GetUserByUsernameRes, error) {
 	return b.client.GetUserByUsername(ctx, in, opts...)
 }

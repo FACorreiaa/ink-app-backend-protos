@@ -8,30 +8,30 @@ service UserService {
 
   // New user-related services
   rpc GetUsers(GetUsersReq) returns (GetUsersRes);
-  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
-  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
-  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
-  rpc InsertUser(InsertUserRequest) returns (InsertUserResponse);
-  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
-  rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserByUsernameResponse);
+  rpc GetUserByID(GetUserByIDReq) returns (GetUserByIDRes);
+  rpc DeleteUser(DeleteUserReq) returns (DeleteUserRes);
+  rpc UpdateUser(UpdateUserReq) returns (UpdateUserRes);
+  rpc InsertUser(InsertUserReq) returns (InsertUserRes);
+  rpc GetUserByEmail(GetUserByEmailReq) returns (GetUserByEmailRes);
+  rpc GetUserByUsername(GetUserByUsernameReq) returns (GetUserByUsernameRes);
 }
 
-message GetUserByEmailRequest {
+message GetUserByEmailReq {
   string email = 1;
   BaseRequest request = 100;
 }
 
-message GetUserByUsernameRequest {
+message GetUserByUsernameReq {
   string username = 1;
   BaseRequest request = 100;
 }
 
-message GetUserByUsernameResponse {
+message GetUserByUsernameRes {
   User user = 1;
   BaseResponse response = 100;
 }
 
-message GetUserByEmailResponse {
+message GetUserByEmailRes {
   User user = 1;
   BaseResponse response = 100;
 }
@@ -69,43 +69,43 @@ message GetUsersRes {
   BaseResponse response = 100;
 }
 
-message GetUserByIDRequest {
+message GetUserByIDReq {
   string user_id = 1;
   BaseRequest request = 100;
 }
 
-message GetUserByIDResponse {
+message GetUserByIDRes {
   User user = 1;
   BaseResponse response = 100;
 }
 
-message DeleteUserRequest {
+message DeleteUserReq {
   string user_id = 1;
   BaseRequest request = 100;
 }
 
-message DeleteUserResponse {
+message DeleteUserRes {
   string message = 1;
   BaseResponse response = 100;
 }
 
-message UpdateUserRequest {
+message UpdateUserReq {
   User user = 1;
   BaseRequest request = 100;
 }
 
-message UpdateUserResponse {
+message UpdateUserRes {
   string message = 1;
   BaseResponse response = 100;
 }
 
-message InsertUserRequest {
+message InsertUserReq {
   User user = 1;
   BaseRequest request = 100;
 
 }
 
-message InsertUserResponse {
+message InsertUserRes {
   string message = 1;
   BaseResponse response = 100;
 }
